@@ -1,0 +1,68 @@
+{
+  "name": "GSTBillingInc-Offline",
+  "private": true,
+  "version": "1.2.0",
+  "description": "Gstbillinginc Software",
+  "keywords": [],
+  "dependencies": {
+    "barcode-scanner": "0.0.1",
+    "bcrypt-nodejs": "0.0.3",
+    "ejs": "2.5.7",
+    "grunt": "1.0.1",
+    "grunt-contrib-clean": "1.1.0",
+    "grunt-contrib-coffee": "1.0.0",
+    "grunt-contrib-concat": "1.0.1",
+    "grunt-contrib-copy": "1.0.0",
+    "grunt-contrib-cssmin": "2.2.1",
+    "grunt-contrib-jst": "1.0.0",
+    "grunt-contrib-less": "1.4.1",
+    "grunt-contrib-uglify": "3.0.1",
+    "grunt-contrib-watch": "1.0.0",
+    "grunt-sails-linker": "~1.0.4",
+    "grunt-sync": "0.6.2",
+    "include-all": "^4.0.3",
+    "pad-start": "^1.0.2",
+    "rc": "1.2.1",
+    "sails": "^0.12.13",
+    "sails-disk": "~0.10.9",
+    "sails-mongo": "^0.12.2",
+    "sails.io.js": "^1.1.12",
+    "socket.io-client": "^2.0.3"
+  },
+  "devDependencies": {
+    "electron": "^1.7.5",
+    "electron-builder": "^19.29.1",
+    "electron-packager": "^8.6.0",
+    "electron-winstaller": "^2.2.0",
+    "rimraf": "^2.5.2"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "electron .",
+    "package:win": "electron-packager . --asar --prune=true --overwrite --platform=win32 --arch=ia32 --out=out --icon=pos/assets/icon.ico",
+    "package:installer": "node ./installer.js",
+    "dist": "build"
+  },
+  "main": "main.js",
+  "build": {
+    "appId": "com.gstbilling",
+    "icon": "C:/Users/udhayakumar/Desktop/pos/assets/icon.ico",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sat/pointofsale.git"
+  },
+  "author": "GST",
+  "license": ""
+}

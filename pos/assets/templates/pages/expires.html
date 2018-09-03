@@ -1,0 +1,38 @@
+<div class="page-signin">
+
+  <div class="signin-header">
+    <section class="logo">
+      <a href="#/">
+        <md-button class="md-icon-button md-icon-button--small" aria-label="More">
+          <md-icon class="md-primary" md-svg-src="/img/icons/ic_email_48px.svg"></md-icon>
+        </md-button>
+      </a>
+    </section>
+  </div>
+
+  <div class="signin-form md-whiteframe-z1">
+
+    <md-toolbar class="md-accent md-theme-default">
+      <div class="md-toolbar-tools">
+        <h3>Renew Licence</h3>
+        <span class="flex"></span>
+      </div>
+    </md-toolbar>
+    <md-content>
+      <div class="md-content__body extra-padding" style="padding-bottom:15px" align="center">
+        <p style="text-align:center; font-size: 20px;">Your Software licence expired on " <span style="color: red;">{{$root.myexpire|date:"dd/MM/yyyy"}}</span> "</p>
+        <p style="text-align:center; font-size: 20px; color: green; padding-bottom: 10px;">Please Contact Administrator For The Renewal</p>
+        <img src="../img/ree.png" style="width:100px;height:100px;">
+        <p style="text-align:center; font-size: 15px; color: green; padding-top: 10px;">If already renewed connect your device with internet and click on renew button </p>
+
+        <md-button class="btn-width-medium md-raised md-primary" ng-click="renew()" style="margin:10px;">Renew</md-button>
+      </div>
+    </md-content>
+  </div>
+
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
+</div>

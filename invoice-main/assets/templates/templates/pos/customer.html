@@ -1,0 +1,303 @@
+<style>
+  p{
+    margin-top: 0px;
+    margin-bottom: 1px;
+    font-size: 8pt;
+  }
+  .w3-border-right {
+    border: 1px solid #000!important;
+    border-right: 0px solid #fff!important;
+    border-bottom: 0px solid #fff!important;
+  }
+  .w3-border-left {
+    border: 1px solid #000!important;
+    border-left: 0px solid #fff!important;
+    border-bottom: 0px solid #fff!important;
+  }
+
+  .w3-border-right-left {
+    border: 1px solid #000!important;
+    border-right: 0px solid #fff!important;
+    border-bottom: 0px solid #fff!important;
+    border-left: 0px solid #fff!important;
+  }
+  .w3-border-bottom {
+    border: 1px solid #000!important;
+    border-right: 0px solid #fff!important;
+    border-top: 0px solid #fff!important;
+  }
+  .w3-border {
+    border: 1px solid #000!important;
+    border-bottom: 0px solid #fff!important;
+  }
+  .w3-border-top {
+    border-top: 1px solid #000!important;
+  }
+
+  .w3-border-full {
+    border: 1px solid #000!important;
+    border-bottom: 0px solid #fff!important;
+  }
+  table, th {
+    font-size: 8pt;
+    border: 1px solid #000!important;
+  }
+
+  .no-border tr td, .no-border tr th {
+    border: none !important;
+  }
+
+  td{
+    font-size: 8pt;
+    border-right: 1px solid #000!important;
+  }
+  th, td {
+    padding: 3px;
+    text-align:right;
+    color: black;
+  }
+  .pag p{
+    margin-bottom: -3px;
+  }
+  h6{
+    font-size:8pt;
+    margin-bottom: 0px;
+  }
+</style>
+<section>
+  <div class="col-md-12" style="padding: 0px;">
+    <div class="card-content">
+      <div class="row" style="margin: 0px;">
+        <div style="width: 30%;padding-bottom: 10px;" class="w3-border-right logo" align="center">
+
+        </div>
+        <div style="width: 40%;padding: 10px;" class="w3-border-right-left" align="center">
+          <p style="color: black;font-size: 14px" ><b>{{mainuser.company}}</b></p>
+          <p>{{mainuser.address}}</p>
+          <p>{{mainuser.address1}},{{mainuser.city}}- {{mainuser.postalcode}}</p>
+          <p>Mobile:{{mainuser.phoneno}} {{mainuser.mobileno}}</p>
+          <p ng-if="mainuser.gstin"><b>GSTIN : {{mainuser.gstin}}</b></p>
+        </div>
+        <div style="width: 30%;padding: 10px;" class="w3-border-left">
+        </div>
+      </div>
+
+      <div class="row" style="margin: 0px;">
+        <div style="width: 33.3%;padding: 10px;" class="w3-border-right" align="center">
+          <h6 style="color: black;margin-bottom: 4px;">Invoice No: {{pos.posid}}</h6>
+        </div>
+        <div style="width: 33.3%;padding: 10px;" class="w3-border" align="center">
+          <h6 style="color: black;margin-bottom: 4px;">{{config.header}}</h6>
+        </div>
+        <div style="width: 33.4%;padding: 10px;border-left: 0px solid #fff!important;" class="w3-border" align="center">
+          <h6 style="color: black;margin-bottom: 4px;">Invoice Date : {{pos.invoicedate|date:'dd/MM/yyyy'}}</h6>
+        </div>
+      </div>
+
+      <div class="row" style="margin: 0px;">
+        <div style="width: 50%;padding: 10px;" class="w3-border-right">
+          <div>
+            <h6 style="color: black;font-size: 12px;margin-bottom: 5px;"><b>Bill To</b></h6>
+            <h6 style="color: black;margin-bottom: 5px;"><b>{{pos.user.company}}</b></h6>
+            <h6 style="color: black;margin-bottom: 5px;"><b>{{pos.user.firstname}} {{pos.user.lastname}}</b></h6>
+            <h6 style="margin-bottom: 5px;" ng-if="!pos.user.address.address1">{{pos.user.address}}</h6>
+            <div ng-if="pos.user.address.address1">
+              <h6 style="margin-bottom: 5px;"><span>{{pos.user.address.address1}}</span>,<span ng-if="pos.user.address.address2">{{pos.user.address.address2}}</span></h6>
+              <h6 style="margin-bottom: 5px;"><span>{{pos.user.address.city}}</span><span ng-if="pos.user.address.state">,{{pos.user.address.state}}</span><span ng-if="pos.user.address.zipcode"> - {{pos.user.address.zipcode}}</span></h6>
+            </div>
+            <h6 style="margin-bottom: 5px;" ng-if="pos.user.gstin">GSTIN : {{pos.user.gstin}}</h6>
+            <h6 style="margin-bottom: 5px;" ng-if="pos.user.pannumber">PAN : {{pos.user.pannumber}}</h6>
+          </div>
+          <div style="margin-top: 5px;" ng-if="pos.user.shippingAddress">
+            <h6 style="color: black;font-size: 12px;margin-bottom: 5px;"><b><u>Shipping Address</u></b></h6>
+            <h6 style="margin-bottom: 5px;"><span>{{pos.user.shippingAddress.address1}}</span>,<span ng-if="pos.user.shippingAddress.address2">{{pos.user.shippingAddress.address2}}</span></h6>
+            <h6 style="margin-bottom: 5px;"><span>{{pos.user.shippingAddress.city}}</span><span ng-if="pos.user.shippingAddress.state">,{{pos.user.shippingAddress.state}}</span><span ng-if="pos.user.shippingAddress.zipcode"> - {{pos.user.shippingAddress.zipcode}}</span></h6>
+          </div>
+        </div>
+        <div style="width: 50%;padding: 10px;" class="w3-border">
+          <h6 style="color: black;margin-bottom: 4px;" ng-if="pos.transportmode">Transport Mode  : {{pos.transportmode}}</h6>
+          <h6 style="color: black;margin-bottom: 4px;" ng-if="pos.vehicleno">Vehicle No : {{pos.vehicleno}}</h6>
+          <h6 style="color: black;margin-bottom: 4px;" ng-if="pos.paymentmode">Payment Mode  : {{pos.paymentmode}}</h6>
+          <h6 style="color: black;margin-bottom: 4px;" ng-if="pos.duedate">Due Date : {{pos.duedate|date:'dd/MM/yyyy'}}</h6>
+          <h6 style="color: black;margin-bottom: 4px;" ng-if="pos.orderno">Order No  : {{pos.orderno}}</h6>
+          <h6 style="color: black;margin-bottom: 4px;" ng-if="pos.orderdate">Order Date  : {{pos.orderdate|date:'dd/MM/yyyy'}}</h6>
+          <h6 style="color: black;margin-bottom: 4px;" ng-if="pos.user.plos">Place of Supply : {{pos.user.plos}}</h6>
+        </div>
+      </div>
+      <div class="row" style="margin: 0px;">
+        <table style="width:100%;">
+          <thead>
+          <tr>
+            <th rowspan="2" style="width: 10px;text-align: center;"><h6><b>S.No</b></h6></th>
+            <th rowspan="2" style="width: 250px;text-align: center;"><h6><b>Description</b></h6></th>
+            <th rowspan="2" style="text-align: center;"><h6><b>HSN</b></h6></th>
+            <th rowspan="2" style="text-align: center;"><h6><b>Qty</b></h6></th>
+            <th rowspan="2" style="text-align: center;"><h6><b>Rate</b></h6></th>
+            <th rowspan="2" style="text-align: center;"><h6><b>Subtotal</b></h6></th>
+            <th colspan="2" ng-if="tcgst" style="text-align: center;"><h6><b>CGST</b></h6></th>
+            <th colspan="2" ng-if="tsgst" style="text-align: center;"><h6><b>SGST</b></h6></th>
+            <th colspan="2" ng-if="tigst" style="text-align: center;"><h6><b>IGST</b></h6></th>
+            <th colspan="2" ng-if="tcess" style="text-align: center;"><h6><b>CESS</b></h6></th>
+            <th rowspan="2"><h6><b>Total</b></h6></th>
+          </tr>
+          <tr>
+            <th ng-if="tcgst"><h6><b>Rate Per Tax%</b></h6></th>
+            <th ng-if="tcgst"><h6><b>Amount</b></h6></th>
+            <th ng-if="tsgst"><h6><b>Rate Per Tax%</b></h6></th>
+            <th ng-if="tsgst"><h6><b>Amount</b></h6></th>
+            <th ng-if="tigst"><h6><b>Rate Per Tax%</b></h6></th>
+            <th ng-if="tigst"><h6><b>Amount</b></h6></th>
+            <th ng-if="tcess"><h6><b>Rate Per Tax%</b></h6></th>
+            <th ng-if="tcess"><h6><b>Amount</b></h6></th>
+          </tr>
+
+          </thead>
+          <tbody>
+          <tr ng-repeat="product in pos.products">
+            <td>
+              <h6>{{$index+1}}</h6>
+            </td>
+            <td style="text-align: left;">
+              <h6>{{product.selectedItem.productname}}</h6>
+            </td>
+            <td>
+              <h6>{{product.selectedItem.hsn}}</h6>
+            </td>
+            <td style="text-align:right;">
+              <h6>{{product.quantity}} {{product.unit}}</h6>
+            </td>
+            <td style="text-align:right;">
+              <h6>{{product.rate|number:2}}</h6>
+            </td>
+            <td style="text-align:right;">
+              <h6>{{product.sales|number:2}}</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tcgst">
+              <h6>{{product.cgst}}%</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tcgst">
+              <h6>{{product.singlecgst}}</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tsgst">
+              <h6>{{product.sgst}}%</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tsgst">
+              <h6>{{product.singlesgst}}</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tigst">
+              <h6>{{product.igst}}%</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tigst">
+              <h6>{{product.singleigst}}</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tcess">
+              <h6>{{product.cess}}%</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tcess">
+              <h6>{{product.singlecess}}</h6>
+            </td>
+            <td style="text-align:right;">
+              <h6>{{product.subtotal|number:2}}</h6>
+            </td>
+          </tr>
+          </tbody>
+          <tbody class="w3-border-top">
+          <td colspan="3" style="text-align: center;">
+            <h6><b>Total</b></h6>
+          </td>
+          <td><h6></h6></td>
+          <td><h6></h6></td>
+          <td><h6></h6></td>
+          <td ng-if="tcgst"><h6></h6></td>
+          <td ng-if="tcgst"><h6>{{pos.totalcgst|number:2}}</h6></td>
+          <td ng-if="tsgst"><h6></h6></td>
+          <td ng-if="tsgst"><h6>{{pos.totalsgst|number:2}}</h6></td>
+          <td ng-if="tigst"><h6></h6></td>
+          <td ng-if="tigst"><h6>{{pos.totaligst|number:2}}</h6></td>
+          <td ng-if="tcess"><h6></h6></td>
+          <td ng-if="tcess"><h6>{{pos.totalcess|number:2}}</h6></td>
+          <td><h6>{{pos.maintotal|number:2}}</h6></td>
+          </tbody>
+        </table>
+      </div>
+      <div class="row pag" style="margin: 0px;">
+
+        <div style="width: 40%;padding:5px;" class="w3-border-bottom">
+          <h6 style="margin-bottom: 10px;"><b>Bank Details :</b></h6>
+          <h6 style="margin-bottom: 5px;">Account Name: {{bank.accountname}}</h6>
+          <h6 style="margin-bottom: 5px;">Account No: {{bank.accountno}}</h6>
+          <h6 style="margin-bottom: 5px;">Bank Name: {{bank.bankname}}</h6>
+          <h6 style="margin-bottom: 5px;">Branch Name: {{bank.branchname}}</h6>
+          <h6 style="margin-bottom: 5px;">IFSC Code: {{bank.ifsccode}}</h6>
+        </div>
+        <div style="width: 60%;padding:5px;border-right: 1px solid #000!important;" class="w3-border-bottom">
+
+          <table style="width: 100%;border: none !important;">
+            <tbody>
+            <tr>
+              <th style="text-align: left;"><h6>Subtotal</h6></th>
+              <th><h6>{{pos.totalsub|number:2}}</h6></th>
+            </tr>
+            <tr ng-if="pos.totalcgst">
+              <th style="text-align: left;"><h6>Add:CGST</h6></th>
+              <th><h6>{{pos.totalcgst|number:2}}</h6></th>
+            </tr>
+            <tr ng-if="pos.totalsgst">
+              <th style="text-align: left;"><h6>Add:SGST</h6></th>
+              <th><h6>{{pos.totalsgst|number:2}}</h6></th>
+            </tr>
+            <tr ng-if="pos.totaligst">
+              <th style="text-align: left;"><h6>Add:IGST</h6></th>
+              <th><h6>{{pos.totaligst|number:2}}</h6></th>
+            </tr>
+            <tr ng-if="pos.totalcess">
+              <th style="text-align: left;"><h6>Add:CESS</h6></th>
+              <th><h6>{{pos.totalcess|number:2}}</h6></th>
+            </tr>
+            <tr ng-if="totaltax>=1">
+              <th style="text-align: left;"><h6>Total TAX Amount</h6></th>
+              <th><h6>{{totaltax}}</h6></th>
+            </tr>
+            <tr>
+              <th style="text-align: left;"><h6>Round Off[+/-]</h6></th>
+              <th><h6 ng-if="pos.adjustment">{{pos.adjustment|number:2}}</h6><h6 ng-if="pos.adjustment>=1">0.00</h6></th>
+            </tr>
+            <tr ng-if="pos.discount!=0">
+              <th style="text-align: left;"><h6>Discount</h6></th>
+              <th><h6>{{pos.discount|number:2}}</h6></th>
+            </tr>
+            <tr ng-if="pos.discount!=0">
+              <th style="text-align: left;"><h6>Discount</h6></th>
+              <th><h6>{{pos.Discount|number:2}}</h6></th>
+            </tr>
+            <!--<tr ng-if="pos.shipping">
+              <td style="text-align: left;"><h6>Shipping</h6></td>
+              <td><h6>{{pos.shipping|number:2}}</h6></td>
+            </tr>-->
+            <tr>
+              <th style="text-align: left;"><h6><b>Net Amount</b></h6></th>
+              <th><h6><b>{{pos.maintotal|number:2}}</b></h6></th>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row pag" style="margin: 0px;">
+        <div style="width: 70%;" class="w3-border-bottom">
+          <div style="clear:both;width:100%;border-bottom: 1px solid #000!important;">
+            <p style="padding:5px;"><b>Amount In words : {{amount2text}}</b></p>
+          </div>
+          <div style="clear:both;width:100%;padding:5px;" >
+            <div><p><b>Terms &amp; Conditions</b></p></div>
+            <div style="white-space: pre-wrap;word-wrap: break-word;"><p>{{config.terms}}</p></div>
+          </div>
+        </div>
+        <div style="width: 30%;padding:5px;border-right: 1px solid #000!important;" align="center" class="w3-border-bottom">
+          <p><span style="font-size: 8pt">For </span><b>{{mainuser.company}}</b></p>
+          <p style="font-size: 8pt;margin-top: 50px;">Authorised Signature</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

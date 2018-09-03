@@ -1,0 +1,97 @@
+<section class="page-padding">
+        <div>
+            <div class="md-whiteframe-z1">
+
+                <md-toolbar style="background:white;color:#D81B60">
+                    <div class="md-toolbar-tools">
+                        <h3>{{mainHeading}}</h3>
+                        <span class="flex"></span>
+                        <md-button ng-if="type!='payables'" aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="invoice" style="margin-right:20px"><md-icon class="md-primary" md-svg-src="/img/icons/ic_add_24px.svg"></md-icon>New Invoice</md-button>
+                        <md-button ng-if="type!='payables'" aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="pos" style="margin-right:20px"><md-icon class="md-primary" md-svg-src="/img/icons/ic_add_24px.svg"></md-icon>New POS Bill</md-button>
+                        <md-button ng-if="type=='payables'" aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="newpurchasebill" style="margin-right:20px"><md-icon class="md-primary" md-svg-src="/img/icons/ic_add_24px.svg"></md-icon>New Purchase Bill</md-button>
+                                                      
+                    </div>
+                </md-toolbar>
+                <md-content>
+                    <div class="md-content__body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span>Show
+                                    <md-input-container>
+                                        <md-select ng-model="rows" ng-change="changevalue()">
+                                            <md-option value="20" ng-selected="true">20</md-option>
+                                            <md-option value="30">30</md-option>
+                                            <md-option value="40">40</md-option>
+                                            <md-option value="50">50</md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    entries per page</span>
+                            </div>
+                            <div class="col-md-3">
+                                    <span>Status
+                                      <md-input-container>
+                                         <md-select ng-model="statustype" ng-change="changevalue()">
+                                           <md-option value="All" ng-selected="true">All</md-option>
+                                           <md-option value="Draft">Draft</md-option>
+                                           <md-option value="Partially Paid">Partially Paid</md-option>
+                                         </md-select>
+                                       </md-input-container>
+                                    </span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="table-filters">
+                                    <md-input-container class="md-accent" style="width:100%">
+                                        <label>Search {{searchHeading}}</label>
+                                        <input type="text"
+                                        placeholder="Enter {{searchPlaceholder}} "
+                                        class="form-control"
+                                        ng-model="searchtext"
+                                        ng-change="search(searchtext)">
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </div>
+                          <div class="table-responsive">
+                            <table class="table table-striped table-bordered" align="center">
+                              <thead>
+                              <tr>
+                                <th ng-repeat="name in tableheading">{{name}}</th>
+                                <!-- <th>Bill No</th>
+                                <th>Customer</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Balance detail</th>
+                                <th>detail Date</th> -->
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr ng-repeat="detail in details">
+                                <!-- <td ng-repeat="rec in receivable track by $index" ng-style="setcolor(rec)" ng-if="$index <receivable.length-1" ng-click="receivable()">{{rec}}</td>                 -->
+                                <td>{{detail.date?detail.date:detail.purchasedate |date:'dd/MM/yyyy'}}</td>
+                                <td ng-if="type!='payables'"><a ui-sref="{{detail.type=='pos' ? 'singlepos({posid:detail.posid})' : 'invoicesingle({posid:detail.posid})'}}">{{detail.posid}}</a></td>
+                                <td ng-if="type=='payables'" ><a ui-sref="billsingle({pid:detail.purchaseid})">{{detail.purchaseid}}</a></td>
+                                <td><a ui-sref="singlecontact({id:detail.user.id})">{{detail.user.firstname}}</a></td>
+                                <td>{{detail.user.company}}</td>
+                                <td><span ng-if="detail.status=='Draft'" style="color: orange">{{detail.status}}</span>
+                                  <span ng-if="detail.status=='Partially Paid'" style="color: red">{{detail.status}}</span>
+                                  <span ng-if="detail.status=='Paid'" style="color: green">{{detail.status}}</span></td>            
+                                <td style="text-align:right">₹ {{detail.maintotal|number:2}}</td>
+                                <td ng-if="type!='todaysale'" style="text-align:right">₹ {{detail.balance|number:2}}</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                            <footer class="table-footer">
+                                <div class="row">
+                                  <div class="col-md-12 text-right pagination-container">
+                                    <cl-paging flex cl-pages="totalpages" , cl-steps="6" , cl-page-changed="more()" , cl-align="center center" , cl-current-page="currentpage"></cl-paging>
+                                  </div>
+                                </div>
+                        </footer>
+                          </div>
+                          
+                    </div>
+                </md-content>
+            </div>
+        </div>
+    </section>
+    

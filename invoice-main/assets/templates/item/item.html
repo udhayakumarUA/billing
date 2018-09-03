@@ -1,0 +1,84 @@
+<section class="page-padding">
+  <div>
+    <div class="md-whiteframe-z1">
+      <md-toolbar style="background:white;color:#D81B60">
+        <div class="md-toolbar-tools">
+          <h3>Items</h3>
+          <span class="flex"></span>
+          <md-button aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="additem" style="margin-right:20px"><md-icon class="md-primary" md-svg-src="/img/icons/ic_add_24px.svg"></md-icon>Add New Item</md-button>
+        </div>
+      </md-toolbar>
+      <md-content>
+        <div class="md-content__body">
+        <div class="row">
+         <div class="col-md-5">
+           <span>Show
+             <md-input-container>
+                <md-select ng-model="rows" ng-change="changevalue()">
+                  <md-option value="20" ng-selected="true">20</md-option>
+                  <md-option value="30">30</md-option>
+                  <md-option value="40">40</md-option>
+                  <md-option value="50">50</md-option>
+                </md-select>
+              </md-input-container>
+              entries per page</span>
+          </div>
+          <div class="col-md-3">
+          <md-select ng-model="exporrval" ng-change="exportAction(exporrval)" placeholder="Export as" style="width:100%">
+            <md-option value="pdf">PDF</md-option>
+            <md-option value="excel">XLS(Microsoft Excel)</md-option>
+            <md-option value="csv">CSV (Comma Seperated Value)</md-option>
+          </md-select>
+        </div>
+          <div class="col-md-4">
+           <div class="table-filters">
+            <md-input-container class="md-accent" style="width:100%">
+              <label>Search Items</label>
+              <input type="text"
+                     class="form-control"
+                     placeholder="Enter Item Name or SKU"
+                     ng-model="searchtext"
+                     ng-change="search(searchtext)">
+            </md-input-container>
+          </div>
+          </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered export-table" align="center">
+              <thead>
+              <tr>
+                <th>Image</th>
+                <th>Item Name</th>
+                <th>Category</th>
+                <th>SKU</th>
+                <th>Selling Price</th>
+                <th>Stock in hand</th>
+                <th>HSN / SAC</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="product in products">
+                <td><img src="{{product.imageurl}}" style="width:25px;height:25px"></td>
+                <td><a ui-sref="singleitem({id:product.id})">{{product.productname}}</a></td>
+                <td>{{product.collection.collectiontitle}}</td>
+                <td>{{product.sku}}</td>
+                <td ng-if="product.prices"><span ng-repeat="rate in product.prices">₹ {{rate.salesrate|number:2}}<span ng-if="$index+1 <product.prices.length">, </span></span></td>
+                <td ng-if="!product.prices">₹{{product.salesrate|number:2}}</td>
+                <td><span ng-if="product.trackinventary==true">{{product.stockinhand}}</span></td>
+                <td>{{product.hsn}}</td>
+              </tr>
+             </tbody>
+            </table>
+            <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-12 text-right pagination-container">
+              <cl-paging flex cl-pages="totalpages" , cl-steps="6" , cl-page-changed="more()" , cl-align="center center" , cl-current-page="currentpage"></cl-paging>
+              </div>
+            </div>
+           </footer>
+          </div>
+        </div>
+      </md-content>
+    </div>
+  </div>
+</section>

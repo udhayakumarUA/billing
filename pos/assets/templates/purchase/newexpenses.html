@@ -1,0 +1,104 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools" style="height:50px">
+            New Expenses
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="md-content__body">
+            <form name="expenseform" ng-submit="addexpense()&&expenseform.$valid">
+              <div layout="row">
+                <md-input-container flex="80">
+                  <label>Expense Type</label>
+                  <md-select ng-model="expensetype" required>
+                    <md-option value="Advance Tax" ng-selected="true">Advance Tax</md-option>
+                    <md-option value="Employee Advance">Employee Advance</md-option>
+                    <md-option value="Sales to Customers(Cash)">Sales to Customers(Cash)</md-option>
+                    <md-option value="Furniture and Equipment">Furniture and Equipment</md-option>
+                    <md-option value="GST payable">GST payable</md-option>
+                    <md-option value="Employee Reimbursements">Employee Reimbursements</md-option>
+                    <md-option value="IGST payable">IGST payable</md-option>
+                    <md-option value="SGST payable">SGST payable</md-option>
+                    <md-option value="Tax Payable">Tax Payable</md-option>
+                    <md-option value="Advertising And Marketing">Advertising And Marketing</md-option>
+                    <md-option value="Automobile Expense">Automobile Expense</md-option>
+                    <md-option value="Bank Fees and Charges">Bank Fees and Charges</md-option>
+                    <md-option value="Consultant Expense">Consultant Expense</md-option>
+                    <md-option value="Credit Card Charges">Credit Card Charges</md-option>
+                    <md-option value="IT and Internet Expenses">IT and Internet Expenses</md-option>
+                    <md-option value="Meals and Entertainment">Meals and Entertainment</md-option>
+                    <md-option value="office Supplies">Office Supplies</md-option>
+                    <md-option value="Cost of Goods Sold">Cost of Goods Sold</md-option>
+                    <md-option ng-repeat="exp in expensetype track by exp.type" value={{exp.type}}>{{exp.type}}</md-option>
+                  </md-select>
+                </md-input-container>
+                <div flex="20" style="margin-top: 15px;color: #4caf50;">
+                  <md-button ng-click="add($event)" style="width: 100px;" class="md-icon-button" aria-label="More">
+                    + New Type
+                  </md-button>
+                </div>
+              </div>
+              <div layout="row">
+                <md-input-container flex="50">
+                  <label>Amount</label>
+                  <input  ng-model="amount" type="number" step="any" required>
+                </md-input-container>
+                <md-input-container flex="50">
+                  <label>Amount With tax</label>
+                  <input  ng-model="tax" type="number" step="any" required>
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <md-input-container flex="20">
+                  <md-datepicker flex ng-model="date" md-placeholder="Payment Date" requireds></md-datepicker>
+                </md-input-container>
+                <md-input-container flex="80">
+                  <label>Payment Mode</label>
+                  <md-select ng-model="paymentmode" required ng-change="check()">
+                    <md-option value="Cash" ng-selected="true">Cash</md-option>
+                    <md-option value="Bank Transfer">Bank Transfer</md-option>
+                    <md-option value="Cheque">Cheque</md-option>
+                    <md-option value="Credit Card">Credit Card</md-option>
+                    <md-option value="Debit Card">Debit Card</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <md-autocomplete flex="50" style="margin-top:18px"
+                    ng-disabled="isDisabled"
+                    md-no-cache="noCache"
+                    md-selected-item="selectedcustomer"
+                    md-search-text="searchtext"
+                    md-items="item in search(searchtext)"
+                    md-item-text="item.firstname"
+                    md-min-length="0"
+                    md-floating-label="Customer/vendor">
+                <md-item-template>
+                  <span md-highlight-text="searchtext" md-highlight-flags="^i">{{item.firstname}} {{item.lastname}}</span>
+                </md-item-template>
+                <md-not-found>
+                  No states matching "{{searchtext}}" were found.
+                  <a ui-sref="addcontact">Create a new one!</a>
+                </md-not-found>
+              </md-autocomplete>
+              <!--<md-input-container flex="50">
+                <label>Expense Id</label>
+                <input  ng-model="expensesid" disabled>
+              </md-input-container>-->
+              </div>
+              <div layout="row">
+                <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="float:right">Save</md-button>
+                <a ui-sref="expensebill"><md-button class="btn-width-medium md-raised md-primary" style="float:right">Cancel</md-button></a>
+              </div>
+            </form>
+          </div>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>
+

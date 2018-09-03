@@ -1,0 +1,75 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools" style="height:50px">
+            Payment Received
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="md-content__body">
+            <form name="payform" ng-submit="addpayment()&&payform.$valid">
+              <div layout="row">
+                <md-autocomplete required
+                  ng-disabled="isDisabled"
+                  md-no-cache="noCache"
+                  md-selected-item="selectedcustomer"
+                  md-search-text="searchtext"
+                  md-items="item in search(searchtext)"
+                  md-item-text="item.firstname"
+                  md-min-length="0"
+                  placeholder="Search Customer">
+                  <md-item-template>
+                    <span md-highlight-text="searchtext" md-highlight-flags="^i">{{item.firstname}}</span>
+                  </md-item-template>
+                  <md-not-found>
+                    No states matching "{{searchtext}}" were found.
+                    <a ng-click="ctrl.newState(searchtext)">Create a new one!</a>
+                  </md-not-found>
+                </md-autocomplete>
+              </div>
+              <div layout="row" style="margin-top: 20px;">
+                <md-input-container flex="50">
+                  <label>Bill No</label>
+                  <md-select ng-model="billid" ng-change="getpos(billid)" required>
+                    <md-option ng-repeat="pos in selectedcustomer.pos" value="{{pos.posid}}">{{pos.posid}}</md-option>
+                  </md-select>
+                </md-input-container>
+                <md-input-container flex="50">
+                  <label>Amount</label>
+                  <input  ng-model="amount" type="number" step="any" required>
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <md-input-container flex="20">
+                  <md-datepicker flex ng-model="date" md-placeholder="Payment Date" required></md-datepicker>
+                </md-input-container>
+                <md-input-container flex="30">
+                  <label>Payment Mode</label>
+                  <md-select ng-model="paymentmode" required>
+                    <md-option value="Cash" ng-selected="true">Cash</md-option>
+                    <md-option value="Bank Transfer">Bank Transfer</md-option>
+                    <md-option value="Cheque">Cheque</md-option>
+                    <md-option value="Credit Card">Credit Card</md-option>
+                    <md-option value="Debit Card">Debit Card</md-option>
+                  </md-select>
+                </md-input-container>
+                <md-input-container flex="50">
+                  <label>Notes</label>
+                  <input  ng-model="notes" type="text" step="any" >
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <md-button class="btn-width-medium md-raised md-primary" type="submit" style="float:right">Save</md-button>
+                <md-button class="btn-width-medium md-raised md-primary" ui-sref="paymentrecive" style="float:right">Cancel</md-button>
+              </div>
+            </form>
+          </div>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>
+

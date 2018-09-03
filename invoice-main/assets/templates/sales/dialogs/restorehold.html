@@ -1,0 +1,22 @@
+<section class="page-padding">
+  <div class="col-md-12" align="center">
+    <h3 style="margin-bottom:15px;color:#D81B60">Restore Hold Bills</h3>
+  </div>
+  <md-content style="width: 500px;">
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-4" style="padding: 5px;" ng-repeat="hold in holds">
+        <md-card ng-click="restore(hold.id)">
+          <div style="padding: 10px;">
+            <div style="display:flex;">
+              <div style="width: 100%;">
+                <p style="font-size: 12px;margin: 0px;"><b>{{hold.user.firstname}}</b></p>
+                <p style="font-size: 12px;margin: 0px;"><b>No of item: {{hold.items}}</b></p>
+                <p style="font-size: 12px;margin: 0px;"><b>Amount: ₹{{hold.maintotal|number:2}}</b></p>
+              </div>
+            </div>
+          </div>
+        </md-card>
+      </div>
+    </div>
+  </md-content>
+</section>

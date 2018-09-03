@@ -1,0 +1,163 @@
+<style>
+  p{
+    margin-top: 0px;
+    margin-bottom: 1px;
+    font-size: 8pt;
+  }
+  .w3-border-right {
+    border: 1px solid #000!important;
+    border-right: 0px solid #fff!important;
+    border-bottom: 0px solid #fff!important;
+  }
+  .w3-border {
+    border: 1px solid #000!important;
+    border-bottom: 0px solid #fff!important;
+  }
+  .w3-border-top {
+    border-top: 1px solid #000!important;
+  }
+  .w3-border-bottom {
+    border: 1px solid #000!important;
+    border-right: 0px solid #fff!important;
+    border-top: 0px solid #fff!important;
+  }
+  table, th {
+    font-size: 8pt;
+    border: 1px solid #000!important;
+  }
+  td{
+    font-size: 8pt;
+    border-right: 1px solid #000!important;
+  }
+  th, td {
+    padding: 3px;
+    text-align:right;
+    color: black;
+  }
+  .pag p{
+    margin-bottom: -3px;
+  }
+</style>
+<section class="page-padding">
+  <div class="col-md-12">
+    <div align="center">
+      <h5><u>Purchase Order</u></h5>
+    </div>
+    <div class="card-content">
+      <div class="row" style="margin: 0px;">
+        <div style="width: 50%;padding: 10px;" class="w3-border-right">
+          <p style="color: black;font-size: 14px" ><b>{{mainuser.company}}</b></p>
+          <p>{{mainuser.address}}</p>
+          <p>{{mainuser.city}} - {{mainuser.postalcode}}</p>
+        </div>
+        <div style="width: 50%;padding: 10px;" class="w3-border">
+          <p ng-if="mainuser.phoneno">Phone : {{mainuser.phoneno}}</p>
+          <p ng-if="mainuser.email">Email : {{mainuser.email}}</p>
+          <p ng-if="mainuser.gstin">GSTIN : {{mainuser.gstin}}</p>
+        </div>
+        <div style="width: 50%;padding: 10px;" class="w3-border-right">
+          <p style="color: black;font-size: 14px"><b>Purchase Order</b></p>
+          <p style="color: black"><b>{{details.user.company}}</b></p>
+          <p style="color: black"><b>{{details.user.firstname}} {{details.user.lastname}}</b></p>
+          <p>{{details.user.address}}</p>
+          <p ng-if="details.user.gstin">GSTIN : {{details.user.gstin}}</p>
+        </div>
+        <div style="width: 50%;padding: 10px;" class="w3-border">
+          <p style="color: black">Purchase Order No: {{details.purchaseorderid}}</p>
+          <p style="color: black">Purchase Order Date : {{details.purchasedate|date:'dd/MM/yyyy'}}</p>
+          <p style="color: black">Source of Supply : {{purchase.sourceofsuply}}</p>
+        </div>
+        <table style="width:100%;">
+          <thead>
+          <tr>
+            <th style="width: 10px;">#</th>
+            <th style="text-align: center;">Item</th>
+            <th>HSN/SAC</th>
+            <th>Qty</th>
+            <th>Rate</th>
+            <th ng-if="tcgst">CGST</th>
+            <th ng-if="tsgst">SGST</th>
+            <th ng-if="tigst">IGST</th>
+            <th ng-if="tcess">CESS</th>s
+            <th>Total</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="product in details.purchase">
+            <td >
+              {{$index+1}}
+            </td>
+            <td>
+              {{product.selectedItem.productname}}
+            </td>
+            <td>
+              {{product.selectedItem.hsn}}
+            </td>
+            <td style="text-align:right;">
+              {{product.quantity}} {{product.unit}}
+            </td>
+            <td style="text-align:right;">
+              {{product.rate|number:2}}
+            </td>
+            <td style="text-align:right;" ng-if="tcgst">
+              {{product.cgst}}%
+            </td>
+            <td style="text-align:right;" ng-if="tsgst">
+              {{product.sgst}}%
+            </td>
+            <td style="text-align:right;" ng-if="tigst">
+              {{product.igst}}%
+            </td>
+            <td style="text-align:right;" ng-if="tcess">
+              {{product.cess}}%
+            </td>
+            <td style="text-align:right;">
+              {{product.subtotal|number:2}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="margin: 0px;">
+        <div style="width: 60%;padding:5px;" class="w3-border-bottom">
+
+          <div style="clear:both;width:100%;" >
+            <p style="width:100%;">Amount In words</p>
+            <p><b>{{amount2text}}</b></p>
+          </div>
+        </div>
+        <div style="width: 40%;padding:5px;border-right: 1px solid #000!important;" align="center" class="w3-border-bottom">
+          <table style="width: 100%;border: 0px solid #000!important;">
+            <tbody>
+            <tr>
+              <td style="border: 0px solid #000!important;">Subtotal</td>
+              <td style="width: 140px;border: 0px solid #000!important;">{{details.subtotal|number:2}}</td>
+            </tr>
+            <tr ng-if="details.cgstprice">
+              <td style="border: 0px solid #000!important;">CGST</td>
+              <td style="border: 0px solid #000!important;">{{details.cgstprice|number:2}}</td>
+            </tr>
+            <tr ng-if="details.sgstprice">
+              <td style="border: 0px solid #000!important;">SGST</td>
+              <td style="border: 0px solid #000!important;">{{details.sgstprice|number:2}}</td>
+            </tr>
+            <tr ng-if="details.igstprice">
+              <td style="border: 0px solid #000!important;">IGST</td>
+              <td style="border: 0px solid #000!important;">{{details.igstprice|number:2}}</td>
+            </tr>
+            <tr ng-if="details.cessprice">
+              <td style="border: 0px solid #000!important;">CESS</td>
+              <td style="border: 0px solid #000!important;">{{details.cessprice|number:2}}</td>
+            </tr>
+            <tr>
+              <td style="border: 0px solid #000!important;"><b>Grand Total</b></td>
+              <td style="border: 0px solid #000!important;"><b>₹ {{details.maintotal|number:2}}</b></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

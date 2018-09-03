@@ -1,0 +1,131 @@
+<section class="page-padding" style="width: 550px;">
+  <div class="col-md-12">
+    <md-content>
+      <div class="md-content__body">
+        <div align="center">
+          <h3 style="margin-bottom:15px;color:#D81B60">Add item</h3>
+        </div>
+
+        <form ng-submit="addproduct()">
+          <div class="form-group">
+            <div layout="row">
+              <md-input-container flex="75" style="margin: 0px;">
+                <label>Name of the Product/service</label>
+                <input required name="productname" ng-model="productname">
+              </md-input-container>
+              <md-input-container flex="25" style="margin: 0px;">
+                <label>Unit</label>
+                <md-select ng-model="unit" required>
+                  <md-optgroup label="Default">
+                    <md-option ng-repeat="uom in uoms1" value="{{uom.uomcode}}">{{uom.uomcode}}</md-option>
+                  </md-optgroup>
+                  <md-optgroup label="Custom">
+                    <md-option ng-repeat="uom in uoms" value="{{uom.uomcode}}">{{uom.uomcode}}</md-option>
+                  </md-optgroup>
+                </md-select>
+              </md-input-container>
+            </div>
+            <div layout="row">
+              <div ng-submit="$event.preventDefault()" flex="75">
+                <md-autocomplete   required
+                                   md-input-name="autocompleteField"
+                                   md-input-minlength="2"
+                                   md-input-maxlength="18"
+                                   md-no-cache="noCache"
+                                   md-selected-item="selectedcollection"
+                                   md-selected-item-change="getsku(selectedcollection.collectioncode,selectedcollection.id)"
+                                   md-search-text="searchText"
+                                   md-items="item in searchcollection(searchText)"
+                                   md-item-text="item.collectiontitle"
+                                   md-require-match
+                                   md-floating-label="Select Collection">
+                  <md-item-template>
+                    <span md-highlight-text="searchText">{{item.collectiontitle}}</span>
+                  </md-item-template>
+                  <div ng-messages="productform.autocompleteField.$error" ng-if="productform.autocompleteField.$touched">
+                    <div ng-message="required">You <b>must</b> have a collection.</div>
+                    <div ng-message="md-require-match">Please select an existing collection.</div>
+                    <div ng-message="minlength">Your entry is not long enough.</div>
+                    <div ng-message="maxlength">Your entry is too long.</div>
+                  </div>
+                </md-autocomplete>
+              </div>
+              <md-input-container flex="25" style="margin: 0px;">
+                <label>SKU</label>
+                <input  ng-model="sku" disabled>
+              </md-input-container>
+            </div>
+            <div layout="row">
+              <md-input-container flex="50" style="margin: 0px;">
+                <label>Sales Rate</label>
+                <input  type="number" step="any" ng-change="salesrates=salesrate;cal()" ng-model="salesrate" required>
+              </md-input-container>
+              <md-input-container flex="50" style="margin: 0px;">
+                <label>Purchase Rate</label>
+                <input type="number"  step="any" ng-model="purchaserate">
+              </md-input-container>
+            </div>
+            <div layout="row">
+              <p flex="30">Tax Preference : </p>
+              <p>
+                <md-radio-group ng-model="taxpreference" required>
+                  <md-radio-button flex="30" class="md-primary" value="Taxable">Taxable</md-radio-button>
+                  <md-radio-button flex="30" class="md-primary" value="Non-Taxable">Non-Taxable</md-radio-button>
+                </md-radio-group>
+              </p>
+            </div>
+            <div layout="row" ng-if="taxpreference == 'Taxable'">
+              <div layout="row">
+                <p flex="25"><md-tooltip md-direction="top" style="height:auto;">Intra state tax rate can be used<br/>transaction raised for contacts<br/> within your home state</md-tooltip>Intra State Tax : </p>
+                <md-input-container flex="30" style="margin-top:0px;">
+                  <label>SGST</label>
+                  <md-select ng-change="cal()" ng-model="$parent.sgst" required>
+                    <md-option  value="0">0%</md-option>
+                    <md-option ng-repeat="sgst in sgsts" value="{{sgst.rate}}">{{sgst.name}}[{{sgst.rate}}]%</md-option>
+                  </md-select>
+                </md-input-container>
+                <md-input-container flex="30" style="margin-right:35px;margin-top:0px;">
+                  <label>CGST</label>
+                  <md-select ng-change="cal()" ng-model="$parent.cgst" required>
+                    <md-option  value="0">0%</md-option>
+                    <md-option ng-repeat="cgst in cgsts" value="{{cgst.rate}}">{{cgst.name}}[{{cgst.rate}}]%</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <p flex="25"><md-tooltip md-direction="top" style="height:auto;">Inter state tax rate can be used<br/>transaction raised for contacts<br/> outside your home state</md-tooltip>Inter State Tax : </p>
+
+                <md-input-container flex="25" style="margin-right:0px;margin-top:0px;">
+                  <label>IGST</label>
+                  <md-select ng-change="cal()" ng-model="$parent.igst" required>
+                    <md-option  value="0">0%</md-option>
+                    <md-option ng-repeat="igst in igsts" value="{{igst.rate}}">{{igst.name}}[{{igst.rate}}]%</md-option>
+                  </md-select>
+                </md-input-container>
+                <p flex="20">Other Tax :</p>
+                <md-input-container flex="25" style="margin-right:15px;margin-top:0px;">
+                  <label>CESS</label>
+                  <md-select ng-change="cal()" ng-model="$parent.cess">
+                    <md-option  value="0">0%</md-option>
+                    <md-option ng-repeat="cess in cesss" value="{{cess.rate}}">{{cess.name}}[{{cess.rate}}]%</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <div flex="50">
+                  <md-checkbox ng-model="$parent.inclusive" ng-true-value="true" ng-false-value="false">Inclusive tax (Sales Rate)</md-checkbox>
+                </div>
+                <div flex="50">
+                  <md-checkbox ng-model="$parent.purchaseinclusive" ng-true-value="true" ng-false-value="false">Inclusive tax (Purchase Rate)</md-checkbox>
+                </div>
+              </div>
+            </div>
+
+            <md-button class="btn-width-medium md-raised md-primary" type="submit" style="float:right">Submit</md-button>
+            <md-button class="btn-width-medium md-raised md-primary" ng-click="cancel()" style="float:right">Cancel</md-button>
+          </div>
+        </form>
+      </div>
+    </md-content>
+  </div>
+</section>

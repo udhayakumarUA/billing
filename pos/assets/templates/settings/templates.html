@@ -1,0 +1,461 @@
+<section class="page-padding">
+  <md-content>
+    <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+      <md-tab label="Sale Bill" layout="row" layout-align="center">
+        <md-content class="md-padding">
+          <md-toolbar style="background:white;color:#D81B60">
+            <div class="md-toolbar-tools">
+              <h3>Sale Bill Templates</h3>
+              <span class="flex"></span>
+            </div>
+          </md-toolbar>
+
+          <div class="md-content__body">
+            <div class="row">
+              <div class="col-md-3" align="center">
+                <h6>Thermal Printer 2 Inch - Standard</h6>
+                <div class="thumbnail" >
+                  <div class="triangle-bottomleft" ng-if="possize=='pos2inch'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/pos/pos_2.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/pos/pos_pdf_2.pdf" download="pos_pdf_2.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="possize=='pos2inch'" ng-click="setposdefault('http://localhost:1349/pos2inch/%23','pos2inch','pos')" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" >Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center">
+                <h6>Thermal Printer 2 Inch - Advance</h6>
+                <div class="thumbnail" >
+                  <div class="triangle-bottomleft" ng-if="possize=='pos2inch1'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/pos/pos_2.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/pos/pos_pdf_2.pdf" download="pos_pdf_2.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="possize=='pos2inch1'" ng-click="setposdefault('http://localhost:1349/pos2inch1/%23','pos2inch1','pos')" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" >Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+                 <div class="col-md-3" align="center">
+                <h6>Thermal Printer 3 Inch</h6>
+                <div class="thumbnail">
+                <div class="triangle-bottomleft" ng-if="possize=='posstandard'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/pos/pos_3.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/pos/pos_pdf_3.pdf" download="pos_pdf_3.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="possize=='posstandard'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;"  ng-click="setposdefault('http://localhost:1349/pos3inch/%23','posstandard','pos')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+                 <div class="col-md-3" align="center">
+                <h6>Thermal Printer 4 Inch</h6>
+                <div class="thumbnail">
+                   <div class="triangle-bottomleft" ng-if="possize=='pos3inch'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/pos/pos_4.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/pos/pos_pdf_4.pdf" download="pos_pdf_4.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-hide="possize=='pos3inch'" ng-click="setposdefault('http://localhost:1349/posstandard/%23','pos3inch','pos')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center" style="margin-top: 15px">
+                <h6>A4 Size - Standard</h6>
+                <div class="thumbnail">
+                 <div class="triangle-bottomleft" ng-if="possize=='posa4'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/pos/pos_a4.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/pos/pos_pdf_a4.pdf" download="pos_pdf_a4.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="possize=='posa4'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setposdefault('http://localhost:1349/posa4/%23','posa4','pos')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center" style="margin-top: 15px">
+                <h6>A4 Size - Spread Sheet</h6>
+                <div class="thumbnail">
+                  <div class="triangle-bottomleft" ng-if="possize=='posa4spreadtheet'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/pos/pos_pdf_a4_Sheet.JPG" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/pos/pos_pdf_a4_Sheet.pdf" download="pos_pdf_a4_Sheet.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="possize=='posa4spreadtheet'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setposdefault('http://localhost:1349/posa4spreadtheet/%23','posa4spreadtheet','pos')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center" style="margin-top: 15px">
+                <h6>A4 Size - Lite</h6>
+                <div class="thumbnail">
+                  <div class="triangle-bottomleft" ng-if="possize=='posa4lite'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/pos/pos_pdf_a4_lite.JPG" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/pos/pos_pdf_a4_lite.pdf" download="pos_pdf_a4_lite.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="possize=='posa4lite'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setposdefault('http://localhost:1349/posa4lite/%23','posa4lite','pos')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center" style="margin-top: 15px">
+                <h6>A4 Size - Advance</h6>
+                <div class="thumbnail">
+                  <div class="triangle-bottomleft" ng-if="possize=='posa4ad'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/pos/pos_pdf_a4_Advance.JPG" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/pos/pos_pdf_a4_Advance.pdf" download="pos_pdf_a4_Advance.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="possize=='posa4ad'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setposdefault('http://localhost:1349/posa4lite1/%23','posa4ad','pos')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Estimate" layout="row" layout-align="center">
+        <md-content class="md-padding">
+          <md-toolbar style="background:white;color:#D81B60">
+            <div class="md-toolbar-tools">
+              <h3>Estimate Templates</h3>
+              <span class="flex"></span>
+            </div>
+          </md-toolbar>
+          <div class="md-content__body">
+            <div class="row">
+              <div class="col-md-3" align="center">
+                <h6>Thermal Printer 2 Inch</h6>
+                <div class="thumbnail">
+                  <div class="triangle-bottomleft" ng-if="estimatesize=='est2inch'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/estimate/est_2.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/estimate/est_pdf_2.pdf" download="est_pdf_2.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="estimatesize=='est2inch'" ng-click="setestimatedefault('http://localhost:1349/est2inch/','est2inch','estimate')"  style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center">
+                <h6>Thermal Printer 3 Inch</h6>
+                <div class="thumbnail">
+                   <div class="triangle-bottomleft" ng-if="estimatesize=='est3inch'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/estimate/est_3.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/estimate/est_pdf_3.pdf" download="est_pdf_3.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="estimatesize=='est3inch'" ng-click="setestimatedefault('http://localhost:1349/est3inch/','est3inch','estimate')"  style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center">
+                <h6>Thermal Printer 4 Inch</h6>
+                <div class="thumbnail">
+                 <div ng-if="estimatesize=='est4inch'" class="triangle-bottomleft">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/estimate/est_4.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/estimate/est_pdf_4.pdf" download="est_pdf_4.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="estimatesize=='est4inch'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setestimatedefault('http://localhost:1349/est4inch/','est4inch','estimate')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center">
+                <h6>A4 Size - Standard</h6>
+                <div class="thumbnail">
+                 <div ng-if="estimatesize=='estimatea4'" class="triangle-bottomleft">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/estimate/est_a4.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/estimate/est_pdf_a4.pdf" download="est_pdf_a4.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="estimatesize=='estimatea4'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setestimatedefault('http://localhost:1349/estimatea4/','estimatea4','estimate')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3" align="center" style="margin-top: 15px">
+                <h6>A4 Size - Spread Sheet</h6>
+                <div class="thumbnail">
+                  <div ng-if="estimatesize=='esta4spreadsheet'" class="triangle-bottomleft">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/estimate/est_pdf_a4_Sheet.JPG" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/estimate/est_pdf_a4_Sheet.pdf" download="est_pdf_a4_Sheet.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="estimatesize=='esta4spreadsheet'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setestimatedefault('http://localhost:1349/esta4spreadtheet/','esta4spreadsheet','estimate')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3" align="center" style="margin-top: 15px">
+                <h6>A4 Size - Lite</h6>
+                <div class="thumbnail">
+                  <div ng-if="estimatesize=='esta4lite'" class="triangle-bottomleft">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/estimate/est_pdf_a4_lite.JPG" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/estimate/est_pdf_a4_lite.pdf" download="est_pdf_a4_lite.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="estimatesize=='esta4lite'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setestimatedefault('http://localhost:1349/esta4lite/','esta4lite','estimate')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Purchase Bill" layout="row" layout-align="center">
+        <md-content class="md-padding">
+          <md-toolbar style="background:white;color:#D81B60">
+            <div class="md-toolbar-tools">
+              <h3>Purchase Bills Templates</h3>
+              <span class="flex"></span>
+            </div>
+          </md-toolbar>
+          <div class="md-content__body">
+            <div class="row">
+              <div class="col-md-3" align="center">
+                <h6>Thermal 2 Inch</h6>
+                <div class="thumbnail">
+                  <div class="triangle-bottomleft" ng-if="purchasesize=='purchasea2inch'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/purchase/pur_2.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/purchase/pur_pdf_2.pdf" download="pur_pdf_2.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="purchasesize=='purchasea2inch'" ng-click="setpurchasedefault('http://localhost:1349/purchasea2inch/','purchasea2inch','purchase')" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+            <div class="col-md-3" align="center">
+                <h6>Thermal 3 Inch</h6>
+                <div class="thumbnail">
+                 <div ng-if="purchasesize=='purchasea3inch'" class="triangle-bottomleft">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/purchase/pur_3.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/purchase/pur_pdf_3.pdf" download="pur_pdf_3.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="purchasesize=='purchasea3inch'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setpurchasedefault('http://localhost:1349/purchasea3inch/','purchasea3inch','purchase')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center">
+                <h6>Thermal 4 Inch</h6>
+                <div class="thumbnail">
+                  <div class="triangle-bottomleft" ng-if="purchasesize=='purchasea4inch'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/purchase/pur_4.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/purchase/pur_pdf_4.pdf" download="pur_pdf_4.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="purchasesize=='purchasea4inch'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setpurchasedefault('http://localhost:1349/purchasea4inch/','purchasea4inch','purchase')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center">
+                <h6>A4 Size - Standard</h6>
+                <div class="thumbnail">
+                 <div class="triangle-bottomleft" ng-if="purchasesize=='purchasea4'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/purchase/pur_a4.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/purchase/pur_pdf_a4.pdf" download="pur_pdf_a4.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="purchasesize=='purchasea4'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setpurchasedefault('http://localhost:1349/purchasea4/','purchasea4','purchase')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3" align="center" style="margin-top: 15px">
+                <h6>A4 Size - Spread Sheet</h6>
+                <div class="thumbnail">
+                  <div class="triangle-bottomleft" ng-if="purchasesize=='pura2spreadsheet'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/purchase/pur_pdf_a4_Spread.JPG" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/purchase/pur_pdf_a4_Spread.pdf" download="pur_pdf_a4_Spread.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="purchasesize=='pura2spreadsheet'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setpurchasedefault('http://localhost:1349/pura2spreadtheet/','pura2spreadsheet','purchase')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3" align="center" style="margin-top: 15px">
+                <h6>A4 Size - Lite</h6>
+                <div class="thumbnail">
+                  <div class="triangle-bottomleft" ng-if="purchasesize=='pura2lite'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/purchase/pur_pdf_a4_lite.JPG" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/purchase/pur_pdf_a4_lite.pdf" download="pur_pdf_a4_Spread.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="purchasesize=='pura2lite'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setpurchasedefault('http://localhost:1349/pura2lite/','pura2lite','purchase')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Purchase Order" layout="row" layout-align="center">
+        <md-content class="md-padding">
+          <md-toolbar style="background:white;color:#D81B60">
+            <div class="md-toolbar-tools">
+              <h3>Purchase Order Templates</h3>
+              <span class="flex"></span>
+            </div>
+          </md-toolbar>
+          <div class="md-content__body">
+            <div class="row">
+              <div class="col-md-3" align="center">
+                <h6>Thermal 2 Inch</h6>
+                <div class="thumbnail">
+                  <div class="triangle-bottomleft" ng-if="purchaseorderdesize=='purordera2inch'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/purchase/pur_2.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/purchase_order/po_pdf_2.pdf" download="po_pdf_2.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="purchaseorderdesize=='purordera2inch'" ng-click="setpurchaseorderdefault('http://localhost:1349/purordera2inch/','purordera2inch','purchaseorder')" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3" align="center">
+                <h6>Thermal 3 Inch</h6>
+                <div class="thumbnail">
+                  <div ng-if="purchaseorderdesize=='purordera3inch'" class="triangle-bottomleft">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/purchase/pur_3.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/purchase_order/po_pdf_3.pdf" download="po_pdf_3.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="purchaseorderdesize=='purordera3inch'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setpurchaseorderdefault('http://localhost:1349/purordera3inch/','purordera3inch','purchaseorder')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center">
+                <h6>Thermal 4 Inch</h6>
+                <div class="thumbnail">
+                  <div class="triangle-bottomleft" ng-if="purchaseorderdesize=='purordera4inch'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/purchase/pur_4.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/purchase_order/po_pdf_4.pdf" download="po_pdf_4.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="purchaseorderdesize=='purordera4inch'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setpurchaseorderdefault('http://localhost:1349/purordera4inch/','purordera4inch','purchaseorder')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center">
+                <h6>A4 Size - Standard</h6>
+                <div class="thumbnail">
+                  <div class="triangle-bottomleft" ng-if="purchaseorderdesize=='purordera4'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/purchase/pur_a4.png" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/purchase_order/po_pdf_a4.pdf" download="po_pdf_a4.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="purchaseorderdesize=='purordera4'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setpurchaseorderdefault('http://localhost:1349/purordera4/','purordera4','purchaseorder')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center" style="margin-top: 15px">
+                <h6>A4 Size - Spread Sheet</h6>
+                <div class="thumbnail">
+                  <div class="triangle-bottomleft" ng-if="purchaseorderdesize=='purorderspreadstheet'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/purchase/pur_pdf_a4_Spread.JPG" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/purchase/pur_pdf_a4_Spread.pdf" download="pos_pdf_a4.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="purchaseorderdesize=='purorderspreadstheet'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setpurchaseorderdefault('http://localhost:1349/purorderspreadstheet/','purorderspreadstheet','purchaseorder')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center" style="margin-top: 15px">
+                <h6>A4 Size - Lite</h6>
+                <div class="thumbnail">
+                  <div class="triangle-bottomleft" ng-if="purchaseorderdesize=='purorderlite'">
+                    <md-icon class="marker" md-svg-icon="/img/icons/ic_star_rate_18px.svg"></md-icon>
+                  </div>
+                  <div style="height: 90%">
+                    <img src="../../img/templates/purchase/pur_pdf_a4_Spread.JPG" style="width: 100%;height:100%;">
+                  </div>
+                  <div class="bt-actions">
+                    <a target="_self" href="img/templates/pos/pos_pdf_a4_Advance.JPG" download="pos_pdf_a4.pdf"><md-button style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;">Preview</md-button></a>
+                    <md-button ng-hide="purchaseorderdesize=='purorderlite'" style="color:#ffffff;background-color: #0097a7;margin: 0px;height: 34px;" ng-click="setpurchaseorderdefault('http://localhost:1349/purorderlite/','purorderlite','purchaseorder')">Set As Default</md-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</section>

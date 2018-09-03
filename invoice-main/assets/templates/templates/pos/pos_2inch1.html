@@ -1,0 +1,143 @@
+<style>
+  @page {
+    /*size: 2.0in 11in;  !* width height *!*/
+    margin: 0px;
+  }
+  p{
+    margin: 0px;
+    height: 15px;
+    color: black;
+  }
+  table {
+    width: 100%;
+    display: table;
+  }
+  table.bordered>tbody>tr, table.bordered>thead>tr {
+    border-bottom: 1px solid #E0E0E0;
+  }
+  thead {
+    border-bottom: 1px solid #d0d0d0;
+  }
+  tr,tb{
+    height: 15px;
+  }
+  h6{
+    font-size:6pt;
+    margin-bottom: 0px;
+  }
+</style>
+<section style="color: black;font-family: Arial, Helvetica, sans-serif;margin-left: -3px;width: 1.8in;float: left;">
+  <div class="col-md-12" style="padding: 0px;">
+    <div class="card-content" style="padding: 0px;">
+      <div class="row" style="margin:0px">
+        <div align="center" style="width: 100%;border-bottom:dashed 1px;">
+          <h5 style="font-size:16px;margin:0px">{{mainuser.company}}</h5>
+          <h6 style="margin-bottom: 5px;">{{mainuser.address}}</h6>
+          <h6 style="margin-bottom: 5px;">{{mainuser.city}}-{{mainuser.postalcode}},</h6>
+          <h6 style="margin-bottom: 5px;">{{mainuser.phoneno}}</h6>
+          <h6 ng-if="mainuser.gstin" style="margin-bottom: 5px;">GSTIN : {{mainuser.gstin}}</h6>
+        </div>
+      </div>
+      <div class="row" style="margin:0px">
+        <table class="bordered" style="font-size: 6pt;">
+          <tbody>
+          <tr style="border-bottom:dashed 1px;">
+            <td style="padding:2px"><p><b>Bill : </b>{{pos.posid}}</p></td>
+            <td style="text-align:right;padding:2px"><p>{{pos.createdAt|date:'dd/MM/yyyy'}} | {{pos.createdAt|date:'h:mm a'}} </p></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="margin: 5px 0px 0px;">
+        <table style="font-size:6pt;">
+          <thead>
+          <tr style="text-align:right;border-bottom: dashed 1px #000;">
+            <th style="padding:2px;">Item Name</th>
+            <th style="padding:2px;text-align:right">Rate</th>
+            <th style="padding:2px;text-align:right;">Qty</th>
+            <th style="padding:2px;text-align:right">Amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="product in pos.products">
+            <td style="padding:2px"><h6 style="word-break: break-all;">{{product.selectedItem.productname}}</h6></td>
+            <td style="padding:2px;text-align:right"><h6>{{product.rate|number:2}}</h6></td>
+            <td style="padding:2px;text-align:right;"><h6>{{product.quantity}} {{product.unit}}</h6></td>
+            <td style="padding:2px;text-align:right"><h6>{{product.subtotal|number:2}}</h6></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr style="border-top:dashed 1px;margin: 3px 0px;">
+      <div class="row" style="margin:0px;" >
+        <table style="font-size:6pt;">
+          <tbody>
+          <tr>
+            <td style="padding:2px"><h6><b>Subtotal : </b></h6></td>
+            <td style="text-align:right;padding:2px"><h6><b>{{pos.totalsub|number:2}}</h6></b></td>
+          </tr>
+          <tr ng-if="totcgst5">
+            <td style="padding:2px;"><h6>CGST(2.5%) :</h6> </td>
+            <td style="text-align:right;padding:2px;"><h6>{{totcgst5|number:2}}</h6></td>
+          </tr>
+          <tr ng-if="totsgst5">
+            <td style="padding:2px;"><h6>SGST(2.5%):</h6> </td>
+            <td style="text-align:right;padding:2px;"><h6>{{totsgst5|number:2}}</h6></td>
+          </tr>
+          <tr ng-if="totigst5">
+            <td style="padding:2px;"><h6>IGST(5%):</h6> </td>
+            <td style="text-align:right;padding:2px;"><h6>{{totigst5|number:2}}</h6></td>
+          </tr>
+          <tr ng-if="totcgst12">
+            <td style="padding:2px;"><h6>CGST(6%) :</h6> </td>
+            <td style="text-align:right;padding:2px;"><h6>{{totcgst12|number:2}}</h6></td>
+          </tr>
+          <tr ng-if="totsgst12">
+            <td style="padding:2px;"><h6>SGST(6%):</h6> </td>
+            <td style="text-align:right;padding:2px;"><h6>{{totsgst12|number:2}}</h6></td>
+          </tr>
+          <tr ng-if="totigst12">
+            <td style="padding:2px;"><h6>IGST(12%):</h6> </td>
+            <td style="text-align:right;padding:2px;"><h6>{{totigst12|number:2}}</h6></td>
+          </tr>
+          <tr ng-if="totcgst18">
+            <td style="padding:2px;"><h6>CGST(9%) :</h6> </td>
+            <td style="text-align:right;padding:2px;"><h6>{{totcgst18|number:2}}</h6></td>
+          </tr>
+          <tr ng-if="totsgst18">
+            <td style="padding:2px;"><h6>SGST(9%):</h6> </td>
+            <td style="text-align:right;padding:2px;"><h6>{{totsgst18|number:2}}</h6></td>
+          </tr>
+          <tr ng-if="totigst18">
+            <td style="padding:2px;"><h6>IGST(18%):</h6> </td>
+            <td style="text-align:right;padding:2px;"><h6>{{totigst18|number:2}}</h6></td>
+          </tr>
+          <tr ng-if="totcgst28">
+            <td style="padding:2px;"><h6>CGST(14%) :</h6> </td>
+            <td style="text-align:right;padding:2px;"><h6>{{totcgst28|number:2}}</h6></td>
+          </tr>
+          <tr ng-if="totsgst28">
+            <td style="padding:2px;"><h6>SGST(14%):</h6> </td>
+            <td style="text-align:right;padding:2px;"><h6>{{totsgst28|number:2}}</h6></td>
+          </tr>
+          <tr ng-if="totigst28">
+            <td style="padding:2px;"><h6>IGST(28%):</h6> </td>
+            <td style="text-align:right;padding:2px;"><h6>{{totigst28|number:2}}</h6></td>
+          </tr>
+
+          <tr>
+            <td style="border-bottom:dashed 1px;font-size:6pt;padding:3px"><h6><b>Grand Total</b></h6></td>
+            <td style="border-bottom:dashed 1px;font-size:6pt;text-align:right;padding:3px"><h6><b>₹ {{pos.maintotal|number:2}}</b></h6></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="margin:0px">
+        <div style="width: 100%;margin-bottom: 20px;" align="center">
+          <p style="font-size:13pt;margin-top: 10px;"><b>Rs.{{pos.maintotal|number:2}}</b></p>
+          <p style="font-size:6pt">{{config.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+

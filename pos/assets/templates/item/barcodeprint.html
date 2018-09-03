@@ -1,0 +1,162 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools" style="height:50px">
+            Barcode Print
+          </div>
+        </md-toolbar>
+        <md-content>
+          <div class="md-content__body">
+            <form name="printForm" class="form-horizontal" ng-submit="print()" style="margin-top:10px">
+             <div class="form-group">
+              <div layout-gt-sm="row">
+                <div style="width:100%;">
+                  <md-autocomplete
+                    required
+                    ng-keyup="enterkey($event)"
+                    ng-disabled="isDisabled"
+                    md-input-name="autocompleteField1"
+                    md-input-id="autoCompleteId1"
+                    md-no-cache="noCache"
+                    md-selected-item="selectedproduct1"
+                    md-selected-item-change="productchange(selectedproduct1.id)"
+                    md-search-text="searchtexts"
+                    md-items="item in searchproducts(searchtexts)"
+                    md-item-text="item.productname"
+                    md-min-length="0"
+                    placeholder="Search Products">
+                    <md-item-template>
+                      <span   md-highlight-text="searchtexts" md-highlight-flags="^i">{{item.productname}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                      No states matching "{{searchtexts}}" were found.
+                    </md-not-found>
+                  </md-autocomplete>
+                </div>
+                 <div style="width:100%;">
+                  <md-input-container class="md-accent" style="width:100%;margin:8px">
+                  <input ng-model="bc.txt" type="text" placeholder="Barcode" Name="barcode" required>
+                   <div ng-messages="printForm.txt.$error">
+                   <div ng-message="required">Barcode id required</div>
+                   </div>
+                  </md-input-container>
+                </div>
+                <div style="width:100%;">
+                  <md-input-container style="width:100%;margin:8px">
+                    <label style="color:#D81B60">Select Price</label>
+                    <md-select aria-label="Test select" ng-model="bc.price" required style="width:100%">
+                      <md-option value="{{rate.salesrate|number:2}}" ng-selected="{{defaultvalue==rate[0].salesrate}}" ng-if="product.prices"  ng-repeat="rate in product.prices">₹ {{rate.salesrate|number:2}}</>
+                      <md-option ng-if="!product.prices">₹{{product.salesrate|number:2}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                </div>
+               </div>
+             </div>
+              <div class="form-group">
+                <div layout-gt-sm="row">
+                  <div style="width:100%;">
+                    <md-input-container class="md-accent" style="width:100%;margin:8px">
+                      <input ng-model="bc.pkd" placeholder="Packed Date" Name="label">
+                    </md-input-container>
+                  </div>
+                  <div style="width:100%;">
+                    <md-input-container class="md-accent" style="width:100%;margin:8px">
+                      <input ng-model="bc.best" placeholder="Best Before" Name="label">
+                    </md-input-container>
+                  </div>
+                </div>
+              </div>
+             <div class="form-group">
+              <div layout-gt-sm="row">
+              <div style="width:100%;">
+               <md-input-container class="md-accent" style="width:100%;margin:8px">
+                <input ng-model="bc.labelnumber" type="number" placeholder="Number of Label" Name="label" required>
+                 <div ng-messages="printForm.label.$error">
+                 <div ng-message="required">Please enter number of labels</div>
+                 </div>
+                </md-input-container>
+                </div>
+                 <div style="width:100%;">
+                 <md-input-container style="width:100%;margin:8px">
+                 <label style="color:#D81B60">Company Name</label>
+                   <input  ng-model="bc.company" maxlength="10" required>
+                  </md-input-container>
+                </div>
+               </div>
+             </div>
+             <div class="form-group">
+              <div layout-gt-sm="row">
+              <div style="width:100%;">
+               <md-input-container style="width:100%;margin:8px">
+                 <label style="color:#D81B60">Select Width</label>
+                <md-select aria-label="Test select" ng-model="bc.inc" required style="width:100%">
+                  <md-option value="1">1</md-option>
+                  <md-option value="2">2</md-option>
+                  <md-option value="3">3</md-option>
+                  <md-option value="4">4</md-option>
+                  <md-option value="5">5</md-option>
+                  <md-option value="6">6</md-option>
+                  <md-option value="7">7</md-option>
+                  <md-option value="8">8</md-option>
+                  <md-option value="9">9</md-option>
+                  <md-option value="10">10</md-option>
+                </md-select>
+                </md-input-container>
+                </div>
+                 <div style="width:100%;">
+                 <md-input-container style="width:100%;margin:8px">
+                 <label style="color:#D81B60">Select Height</label>
+                 <md-select aria-label="Test select" ng-model="bc.height" placeholder="Select Height" required>
+                   <md-option value="10">10</md-option>
+                   <md-option value="15">15</md-option>
+                   <md-option value="20">20</md-option>
+                   <md-option value="25">25</md-option>
+                   <md-option value="30">30</md-option>
+                   <md-option value="35">35</md-option>
+                   <md-option value="40">40</md-option>
+                   <md-option value="45">45</md-option>
+                   <md-option value="50">50</md-option>
+                   <md-option value="55">55</md-option>
+                   <md-option value="60">60</md-option>
+                   <md-option value="65">65</md-option>
+                   <md-option value="70">70</md-option>
+                   <md-option value="75">75</md-option>
+                   <md-option value="80">80</md-option>
+                   <md-option value="85">85</md-option>
+                   <md-option value="90">90</md-option>
+                   <md-option value="95">95</md-option>
+                   <md-option value="100">100</md-option>
+                </md-select>
+                </md-input-container>
+                </div>
+               </div>
+             </div>
+             <div class="form-group">
+              <div layout-gt-sm="row">
+                <div style="width:100%;">
+                  <md-input-container style="width:100%;margin:8px">
+                    <label style="color:#D81B60">Font Size</label>
+                    <md-select aria-label="Test select" ng-model="bc.fontSize" required>
+                      <md-option value="10">10</md-option>
+                      <md-option value="11">11</md-option>
+                      <md-option value="12">12</md-option>
+                      <md-option value="13">13</md-option>
+                      <md-option value="13">13</md-option>
+                      <md-option value="15">15</md-option>
+                    </md-select>
+                  </md-input-container>
+                </div>
+               </div>
+             </div>
+              <div class="form-group" align="center">
+              <md-button class="btn-width-medium btn-block btn md-primary md-raised" type="submit" style="width:30%">Show Label</md-button>
+             </div>
+          </form>
+          </div>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>

@@ -1,0 +1,79 @@
+<section class="page-padding">
+    <div>
+        <div class="md-whiteframe-z1">
+            <md-toolbar style="background:white;color:#D81B60">
+                <div class="md-toolbar-tools">
+                    <h3>Overdue Payments</h3>
+                    <span class="flex"></span>
+                </div>
+            </md-toolbar>
+            <md-content>
+                <div class="md-content__body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <span>Show
+                                <md-input-container>
+                                    <md-select ng-model="rows" ng-change="changevalue()">
+                                        <md-option value="20" ng-selected="true">20</md-option>
+                                        <md-option value="30">30</md-option>
+                                        <md-option value="40">40</md-option>
+                                        <md-option value="50">50</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                entries per page</span>
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-5">
+                            <div class="table-filters">
+                                <md-input-container class="md-accent" style="width:100%">
+                                    <label>Search Overdue Payments</label>
+                                    <input type="text"
+                                    placeholder="Enter Bill Number or Customer name "
+                                    class="form-control"
+                                    ng-model="searchtext"
+                                    ng-change="search(searchtext)">
+                                </md-input-container>
+                            </div>
+                        </div>
+                    </div>
+                      <div class="table-responsive">
+                        <table class="table table-striped table-bordered" align="center">
+                          <thead>
+                          <tr>
+                            <th>Date</th>
+                            <th>Bill No</th>
+                            <th>Customer</th>
+                            <th>Status</th>
+                            <th>Amount</th>
+                            <th>Balance Due</th>
+                            <th>Due Date</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr ng-repeat="due in overdues">
+                            <td>{{due.createdAt|date:'dd/MM/yyyy'}}</td>                
+                            <td><a ui-sref="invoicesingle({posid:due.posid})">{{due.posid}}</a></td>
+                            <td><a ui-sref="singlecontact({id:due.user.id})">{{due.user.firstname}}</a></td>
+                            <td><span ng-if="due.status=='Draft'" style="color: orange">{{due.status}}</span>
+                              <span ng-if="due.status=='Partially Paid'" style="color: red">{{due.status}}</span></td>            
+                            <td style="text-align:right">₹ {{due.maintotal|number:2}}</td>
+                            <td style="text-align:right">₹ {{due.balance|number:2}}</td>
+                            <td style="text-align:center">{{due.duedate|date:'dd/MM/yyyy'}}</td>
+                          </tr>
+                          </tbody>
+                        </table>
+                        <footer class="table-footer">
+                            <div class="row">
+                              <div class="col-md-12 text-right pagination-container">
+                                <cl-paging flex cl-pages="totalpages" , cl-steps="6" , cl-page-changed="more()" , cl-align="center center" , cl-current-page="currentpage"></cl-paging>
+                              </div>
+                            </div>
+                    </footer>
+                      </div>
+                      
+                </div>
+            </md-content>
+        </div>
+    </div>
+</section>

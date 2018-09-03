@@ -1,0 +1,368 @@
+<section class="page-padding">
+  <div class="row">
+    <div class="col-md-4">
+      <a ui-sref="saledetails({type:'receivables'})">
+        <div class="md-whiteframe-z1">
+          <div class="md-content__body" style="padding:0px">
+            <div class="small-box-icon" style="background:rgb(96,125,139);padding:2px">
+            <span class="box-icon">
+              <img src="../../images/receivables.svg" style="width:60px;height:60px;">
+            </span>
+              <div class="box-info">
+                <p class="h3" style="color:white">Total Receivables</p>
+                <p style="color:white;margin:8px" ng-if="bill.receivables[0].balance">₹ {{bill.receivables[0].balance|number:2}}</p>
+                <p style="color:white;margin:8px" ng-if="!bill.receivables[0].balance">₹ 0.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-4">
+      <a ui-sref="saledetails({type:'payables'})">
+        <div class="md-whiteframe-z1">
+          <div class="md-content__body" style="padding:0px">
+            <div class="small-box-icon bg-info" style="padding:2px">
+            <span class="box-icon">
+              <img src="../../images/payables.svg" style="width:60px;height:60px;">
+            </span>
+              <div class="box-info">
+                <p class="h3" style="color:white">Total Payables</p>
+                <p style="color:white;margin:8px" ng-if="bill.payables[0].balance">₹ {{bill.payables[0].balance|number:2}}</p>
+                <p style="color:white;margin:8px" ng-if="!bill.payables[0].balance">₹ 0.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-4">
+      <a ui-sref="saledetails({type:'todaysale'})">
+        <div class="md-whiteframe-z1">
+          <div class="md-content__body" style="padding:0px">
+            <div class="small-box-icon bg-warning" style="padding:2px">
+            <span class="box-icon">
+              <img src="../../images/sale.svg" style="width:60px;height:60px;">
+            </span>
+              <div class="box-info">
+                <p class="h3" style="color:white">Today's Sales</p>
+                <p style="color:white;margin:8px" ng-if="bill.todaysale[0].maintotal">₹ {{bill.todaysale[0].maintotal|number:2}}</p>
+                <p style="color:white;margin:8px" ng-if="!bill.todaysale[0].maintotal">₹ 0.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <!--<div class="divider"></div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools" >
+            <h3>
+              Sale Count
+            </h3>
+            <span class="flex"></span>
+             <md-input-container>
+                <md-select ng-model="row">
+                  <md-option value="10" ng-selected="true">10</md-option>
+                  <md-option value="20">20</md-option>
+                  <md-option value="30">30</md-option>
+                  <md-option value="50">50</md-option>
+                </md-select>
+              </md-input-container>
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div style="margin:20px;">
+            <canvas id="bar" class="chart chart-bar" chart-data="data" chart-series="series" chart-labels="labels" chart-colors="colors">
+            </canvas>
+          </div>
+        </md-content>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools">
+            <h3>
+              bar Chart
+            </h3>
+            <span class="flex"></span>
+            <md-input-container>
+              <md-select ng-model="row">
+                <md-option value="10" ng-selected="true">10</md-option>
+                <md-option value="20">20</md-option>
+                <md-option value="30">30</md-option>
+                <md-option value="50">50</md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div style="margin: 20px" >
+            <canvas id="pie" class="chart chart-pie"
+                    chart-data="data1" chart-labels="labels1" chart-series="series1">
+            </canvas>
+          </div>
+        </md-content>
+      </div>
+    </div>
+  </div>-->
+  <div class="divider"></div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools">
+            <a ui-sref="pointofsale">
+              <h3>
+                Sale Bills <md-icon md-svg-icon="/img/icons/ic_keyboard_arrow_right_48px.svg"></md-icon>
+              </h3>
+            </a>
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered" align="center">
+              <thead>
+              <tr>
+                <th>Date</th>
+                <th>Bill No</th>
+                <th>Customer</th>
+                <th>Status</th>
+                <th style="text-align: right;">Amount</th>
+                <th style="text-align: right;">Balance Due</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="pointofsales in pointofsale">
+                <td>{{pointofsales.createdAt|date:'dd/MM/yyyy'}}</td>
+                <td><a ui-sref="{{pointofsales.type=='pos' ? 'singlepos({posid:pointofsales.posid})' : 'invoicesingle({posid:pointofsales.posid})'}}">{{pointofsales.posid}}</a> </td>
+                <td><a ui-sref="singlecontact({id:pointofsales.user.id})">{{pointofsales.user.firstname}}</a></td>
+                <td><span ng-if="pointofsales.status=='Paid'" style="color: green">{{pointofsales.status}}</span>
+                  <span ng-if="pointofsales.status=='Draft'" style="color: orange">{{pointofsales.status}}</span>
+                  <span ng-if="pointofsales.status=='Partially Paid'" style="color: red">{{pointofsales.status}}</span></td>
+                <td style="text-align: right;">₹ {{pointofsales.maintotal|number:2}}</td>
+                <td style="text-align: right;">₹ {{pointofsales.balance|number:2}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </md-content>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools">
+            <a ui-sref="overduepayment">
+              <h3>
+                Overdue Payments <md-icon md-svg-icon="/img/icons/ic_keyboard_arrow_right_48px.svg"></md-icon>
+              </h3>
+            </a>
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered" align="center">
+              <thead>
+              <tr>
+                <th>Date</th>
+                <th>Bill No</th>
+                <th>Customer</th>
+                <th>Amount</th>
+                <th>Balance Due</th>
+                <th>Due Date</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="due in overdue" ng-if="$index<5">
+                <td>{{due.createdAt|date:'dd/MM/yyyy'}}</td>
+                <td><a ui-sref="invoicesingle({posid:due.posid})">{{due.posid}}</a></td>
+                <td>{{due.user.firstname}}</td>
+                <td style="text-align:right">₹ {{due.maintotal|number:2}}</td>
+                <td style="text-align:right">₹ {{due.balance|number:2}}</td>
+                <td>{{due.duedate|date:'dd/MM/yyyy'}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </md-content>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools">
+            <a ui-sref="purchasebill">
+              <h3>
+                Purchase Bills <md-icon md-svg-icon="/img/icons/ic_keyboard_arrow_right_48px.svg"></md-icon>
+              </h3>
+            </a>
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered" align="center">
+              <thead>
+              <tr>
+                <th>Date</th>
+                <th>Ref No</th>
+                <th>Vendor</th>
+                <th>Status</th>
+                <th style="text-align: right;">Amount</th>
+                <!--<th>Balance Due</th>-->
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="purchases in purchase">
+                <td>{{purchases.createdAt|date:'dd/MM/yyyy'}}</td>
+                <td><a ui-sref="billsingle({pid:purchases.purchaseid})">{{purchases.purchaseid}}</a> </td>
+                <td><a ui-sref="singlecontact({id:purchases.user.id})">{{purchases.user.firstname}}</a></td>
+                <td>
+                  <span ng-if="purchases.status=='Paid'" style="color: green">{{purchases.status}}</span>
+                  <span ng-if="purchases.status=='Draft'" style="color: orange">{{purchases.status}}</span>
+                  <span ng-if="purchases.status=='Partially Paid'" style="color: red">{{purchases.status}}</span>
+                <td style="text-align: right;">₹ {{purchases.maintotal |number:2}}</td>
+                <!--<td style="text-align: right;">₹{{purchases.balance|number:2}}</td>-->
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </md-content>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools">
+            <a ui-sref="expensebill">
+              <h3>
+                Expenses <md-icon md-svg-icon="/img/icons/ic_keyboard_arrow_right_48px.svg"></md-icon>
+              </h3>
+            </a>
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered" align="center">
+              <thead>
+              <tr>
+                <th>Date</th>
+                <th>Expense Type</th>
+                <th>Expense ID</th>
+                <!--<th>Customer/Vendor</th>
+                <th>Paid through</th>-->
+                <!--<th>Amount</th>-->
+                <th style="text-align: right;">Amount</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="expense in expenses">
+                <td>{{expense.date |date:'dd/MM/yyyy'}}</td>
+                <td>{{expense.expensetype}}</td>
+                <td><a ui-sref="singleexpenses({expid:expense.expensesid})"> {{expense.expensesid}}</a></td>
+                <!--<td>{{expense.name.firstname}} {{expense.name.lastname}}</td>
+                <td>{{expense.paymentmode}}</td>-->
+                <!-- <td style="text-align: right;">₹.{{expense.amount|number:2}}</td> -->
+                <td ng-if="expense.tax" style="text-align: right;">₹ {{expense.tax|number:2}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </md-content>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools">
+            <a ui-sref="itempage">
+              <h3>
+                Products with low stock <md-icon md-svg-icon="/img/icons/ic_keyboard_arrow_right_48px.svg"></md-icon>
+              </h3>
+            </a>
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered" align="center">
+              <thead>
+              <tr>
+                <th>Item Name</th>
+                <th width="80px">SKU</th>
+                <th>HSN</th>
+                <th>Quantity Available</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="inventory in inventory">
+                <td>{{inventory.productname}}</td>
+                <td>{{inventory.sku}}</td>
+                <td>{{inventory.hsn}}</td>
+                <td style="color: red;">{{inventory.stockinhand}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </md-content>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools">
+            <a ui-sref="stockalert">
+              <h3>
+                Stock alert <md-icon md-svg-icon="/img/icons/ic_keyboard_arrow_right_48px.svg"></md-icon>
+              </h3>
+            </a>
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered" align="center">
+              <thead>
+              <tr>
+                <th>Item Name</th>
+                <th width="80px">SKU</th>
+                <th>HSN</th>
+                <th>Stock Alert</th>
+                <th>Quantity Available</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="stock in stocks">
+                <td><a ui-sref="singleitem({id:stock._id})">{{stock.productname}}</a></td>
+                <td>{{stock.sku}}</td>
+                <td>{{stock.hsn}}</td>
+                <td>{{stock.inventoryalert}}</td>
+                <td style="color: red;">{{stock.stockinhand}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </md-content>
+      </div>
+    </div>
+  </div>
+</section>

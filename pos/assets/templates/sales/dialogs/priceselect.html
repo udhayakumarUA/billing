@@ -1,0 +1,28 @@
+<section class="page-padding">
+  <div class="col-md-12" align="center">
+    <h3 style="margin-bottom:15px;color:#D81B60">Select Sale Rate</h3>
+  </div>
+  <md-content style="width: 500px;">
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-4" style="padding: 5px;" ng-repeat="rate in pricerates" ng-class="{'selected':$index == selectedPrice}" ng-click="clickprice($index)">
+        <md-card ng-click="restore(hold.id)">
+          <div style="padding: 10px;">
+            <div style="display:flex;">
+              <div style="width: 100%;">
+                <!-- <p style="font-size: 12px;margin: 0px;"><b>{{hold.user.firstname}}</b></p>
+                  <p style="font-size: 12px;margin: 0px;"><b>No of item: {{hold.items}}</b></p> -->
+                <p style="font-size: 12px;margin: 0px;">
+                  <b>Amount: ₹{{rate.salesrate|number:2}}</b>
+                </p>
+              </div>
+            </div>
+          </div>
+        </md-card>
+      </div>
+    </div>
+  </md-content>
+  <div style="text-align: right;">
+    <md-button style="background:#db022d;color:white;" ng-click="cancel()">Cancel</md-button>
+    <md-button style="background:rgb(76,175,80);color:white;" ng-click="setprice()" >Submit</md-button>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+<section class="page-padding">
+<div class="col-md-12">
+   <md-content>
+       <div class="md-content__body">
+         <form name="userole" ng-submit="adduser()&&userole.$valid">
+           <h3 style="margin-bottom:15px;color:#D81B60">Add User</h3>
+           <div class="form-group">
+             <md-input-container style="width:100%">
+                  <label>User Name</label>
+                  <input type="text" class="form-control" required ng-model="username">
+             </md-input-container>
+             <md-input-container style="width:100%">
+                  <label>Password</label>
+                  <input type="Password" class="form-control" required ng-model="password">
+             </md-input-container>
+             <md-select aria-label="Test select" required ng-model="role" placeholder="Select Role" >
+                  <md-option value="A" ng-selected="true">Admin</md-option>
+                  <md-option value="S">Staff</md-option>
+                  <md-option value="B">Billers</md-option>
+                </md-select>
+                <md-button class="btn-width-medium md-raised md-primary" type="submit" style="float:right">Add User</md-button>
+                <md-button class="btn-width-medium md-raised md-primary" ng-click="cancel()" style="float:right">Cancel</md-button>
+           </div>
+           </form>
+        </div>
+     </md-content>
+ </div>
+</section>

@@ -1,0 +1,127 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools" style="height:50px">
+            Add New Contact
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="md-content__body">
+            <form name="contact" ng-submit="addcontact()&&contact.$valid">
+              <div layout="row">
+                <p flex="10">Contact Type</p>
+                <p>
+                  <md-radio-group ng-model="type.var" required>
+                    <md-radio-button flex="10" class="md-primary" value="Customer">Customer</md-radio-button>
+                    <md-radio-button flex="10" class="md-primary" value="Vendor">Vendor</md-radio-button>
+                  </md-radio-group>
+                </p>
+              </div>
+              <div layout="row">
+                <md-input-container flex="15">
+                  <label>Salutation</label>
+                  <md-select ng-model="salutation" required>
+                    <md-option value="Mr" ng-selected="true">Mr.</md-option>
+                    <md-option value="Mrs">Mrs.</md-option>
+                    <md-option value="Ms">Ms.</md-option>
+                    <md-option value="Miss">Miss.</md-option>
+                    <md-option value="Dr">Dr.</md-option>
+                  </md-select>
+                </md-input-container>
+                <md-input-container flex="42">
+                  <label>First Name</label>
+                  <input required ng-model="firstname">
+                </md-input-container>
+                <md-input-container flex="42">
+                  <label>Last Name</label>
+                  <input ng-model="lastname">
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <md-input-container flex="100">
+                  <label>Company Name</label>
+                  <input  ng-model="company">
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <md-input-container flex="33">
+                  <label>Contact Email</label>
+                  <input  ng-model="email">
+                </md-input-container>
+                <md-input-container flex="33">
+                  <label>Contact Phone</label>
+                  <input  type="number" ng-model="phone" required>
+                </md-input-container>
+                <md-input-container flex="33">
+                  <label>Mobile</label>
+                  <input  type="number" ng-model="mobile">
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <p flex="100"><b>Address Details</b></p>
+                <md-input-container flex="100">
+                  <label>Address</label>
+                  <textarea rows="3" ng-model="address"></textarea>
+                </md-input-container>
+              </div>
+              <div layout="row" >
+                <p><b>Other Details</b></p>
+              </div>
+              <div layout="row" >
+                <md-input-container flex="100">
+                  <label>Select a GST Treatment</label>
+                  <md-select ng-model="gsttype" required>
+                    <md-option value="Registered business" ng-selected="true">Registered Business</md-option>
+                    <md-option value="Unregistered business">Unregistered Business</md-option>
+                    <md-option value="Consumer">Consumer</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
+              <div layout="row" ng-if="gsttype == 'Registered business'">
+                <md-input-container flex="100">
+                  <label>GST Identification Number (GSTIN)</label>
+                  <input  ng-model="$parent.gstin" required>
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <p flex="15"><b>Select Tax Rates :</b></p>
+                <p>
+                <md-radio-group ng-model="taxrate.taxtype" required>
+                  <md-radio-button flex="20" class="md-primary" value="Intra State Tax Rate"><md-tooltip md-direction="top" style="height:auto;">Intra state tax rate to be used if<br/>contact is within your home state</md-tooltip>Intra State Tax Rate</md-radio-button>
+                  <md-radio-button flex="20" class="md-primary" value="Inter State Tax Rate"><md-tooltip md-direction="top" style="height:auto;">Inter state tax rate to be used if<br/>contact is outside your home state</md-tooltip>Inter State Tax Rate</md-radio-button>
+                </md-radio-group>
+              </p>
+              </div>
+              <div layout="row">
+                <md-input-container flex="33" ng-if="type.var == 'Customer'">
+                  <label >Place of Supply</label>
+                  <input  ng-model="$parent.pos">
+                </md-input-container>
+                <md-input-container flex="33" ng-if="type.var == 'Vendor'">
+                  <label >Source of Supply</label>
+                  <input  ng-model="$parent.sos">
+                </md-input-container>
+                <md-input-container flex="33">
+                  <label>State Code</label>
+                  <input  type="number" ng-model="statecode">
+                </md-input-container>
+                <md-input-container flex="33">
+                  <label>PAN Number</label>
+                  <input  ng-model="pannumber">
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="float:right">Save</md-button>
+                <md-button class="btn-width-medium md-raised md-primary" ui-sref="contactpage" style="float:right">Cancel</md-button>
+              </div>
+            </form>
+          </div>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>
+

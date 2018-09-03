@@ -1,0 +1,144 @@
+<div class="page-signin" style="background:white">
+
+    <div class="signin-header">
+      <section class="logo">
+        <a href="#/">
+          <md-button class="md-icon-button md-icon-button--small" aria-label="More">
+            <md-icon class="md-primary" md-svg-src="/img/icons/ic_email_48px.svg"></md-icon>
+          </md-button>
+        </a>
+      </section>
+    </div>
+
+    <div class="signup-form md-whiteframe-z1">
+     <md-toolbar class="md-accent md-theme-default">
+        <div class="md-toolbar-tools">
+          <h3>Create your account</h3>
+          <span class="flex"></span>
+          <button class="md-icon-button md-button " aria-label="View Source">
+            <md-icon md-svg-icon="/img/icons/ic_lock_outline_24px.svg"></md-icon>
+          </button>
+        </div>
+      </md-toolbar>
+      <md-content>
+        <div class="md-content__body extra-padding">
+          <form name="signupForm" class="form-horizontal">
+            <div class="form-group">
+             <div layout-gt-sm="row">
+              <md-input-container class="md-accent" md-no-float style="width:100%">
+                <md-icon md-svg-src="/img/icons/ic_person_24px.svg"></md-icon>
+                <input ng-model="users.name" type="text" placeholder="User Name" Name="name" required>
+                <div ng-messages="signupForm.name.$error">
+                 <div ng-message="required">User Name is required.</div>
+                 </div>
+                </md-input-container>
+                <md-input-container class="md-accent" md-no-float style="width:100%">
+                <md-icon md-svg-src="/img/icons/ic_email_24px.svg"></md-icon>
+                <input ng-model="user.email" type="email" placeholder="User email" Name="email" required>
+                <div ng-messages="signupForm.email.$error">
+                      <div ng-message="required">Give your current Email ID</div>
+                 </div>
+              </md-input-container>
+              </div>
+             </div>
+             <div class="form-group">
+              <div layout-gt-sm="row">
+               <md-input-container class="md-accent" md-no-float style="width:100%">
+                <md-icon md-svg-src="/img/icons/ic_language_24px.svg"></md-icon>
+                <input ng-model="users.organization" type="text" placeholder="Organization Name" Name="organization" required>
+                <div ng-messages="signupForm.organization.$error">
+                 <div ng-message="required">Organization Name is required.</div>
+                 </div>
+                </md-input-container>
+                <md-input-container class="md-accent" md-no-float style="width:100%">
+                <md-icon md-svg-src="/img/icons/ic_web_24px.svg"></md-icon>
+                <input ng-model="user.type" type="text" placeholder="Industry Type" Name="type">
+               </md-input-container>
+              </div>
+             </div>
+             <div class="form-group">
+              <div layout-gt-sm="row">
+               <md-input-container class="md-accent" md-no-float style="width:100%">
+                <md-icon md-svg-src="/img/icons/ic_lock_24px.svg"></md-icon>
+                <input ng-model="user.password" type="Password" placeholder="Password" name="password" required>
+                <div ng-messages="signupForm.password.$error">
+                 <div ng-message="required">Give your Password</div>
+                 </div>
+              </md-input-container>
+                <md-input-container class="md-accent" md-no-float style="width:100%">
+                <md-icon md-svg-src="/img/icons/ic_phone_24px.svg"></md-icon>
+                <input ng-model="user.phone" type="Number" placeholder="Phone Number" Name="phone" required>
+                <div ng-messages="signupForm.phone.$error">
+                 <div ng-message="required">Give your Phone Number</div>
+               </md-input-container>
+              </div>
+             </div>
+            <div class="form-group">
+              <div layout-gt-sm="row">
+               <md-input-container class="md-accent" md-no-float style="width:100%">
+                <md-icon md-svg-src="/img/icons/ic_looks_one_24px.svg"></md-icon>
+                <input ng-model="user.add1" type="text" placeholder="Company Address 1" name="add1" required>
+                <div ng-messages="signupForm.add1.$error">
+                 <div ng-message="required">This is required</div>
+                 </div>
+              </md-input-container>
+                <md-input-container class="md-accent" md-no-float style="width:100%">
+                <md-icon md-svg-src="/img/icons/ic_looks_two_24px.svg"></md-icon>
+                <input ng-model="user.add2" type="text" placeholder="Company Address 2" Name="add2">
+               </md-input-container>
+              </div>
+             </div>
+             <div class="form-group">
+              <div layout-gt-sm="row">
+               <md-input-container class="md-accent" md-no-float style="width:100%">
+                <md-icon md-svg-src="/img/icons/ic_screen_lock_landscape_24px.svg"></md-icon>
+                <input ng-model="user.gstin" type="text" placeholder="GST Identification Number (GSTIN)" name="gstin">
+                </md-input-container>
+                <div style="width:100%;margin-left:8px">
+                <md-select aria-label="Test select" ng-model="country" placeholder="Select Country" required >
+                 <md-option value="1">America</md-option>
+                  <md-option value="2" ng-selected="selected">Atlanta</md-option>
+                  <md-option value="3" ng-selected="selected">Africa</md-option>
+                  <md-option value="4" ng-selected="selected">China</md-option>
+                  <md-option value="4" ng-selected="selected">India</md-option>
+                </md-select>
+                </div>
+               </div>
+             </div>
+             <div class="form-group">
+               <div layout-gt-sm="row">
+               <md-input-container class="md-accent" md-no-float style="width:100%">
+                <md-icon md-svg-src="/img/icons/ic_location_on_24px.svg"></md-icon>
+                <input ng-model="user.city" type="text" placeholder="City/Town" Name="city" required>
+	             <div ng-messages="signupForm.city.$error">
+                 <div ng-message="required">This is required</div>
+                 </div>
+                </md-input-container>
+                <md-input-container class="md-accent" md-no-float style="width:100%">
+                <md-icon md-svg-src="/img/icons/ic_my_location_24px.svg"></md-icon>
+                <input ng-model="user.zipcode" type="text" placeholder="Zip Code" Name="zipcode" required>
+               <div ng-messages="signupForm.zipcode.$error">
+                 <div ng-message="required">This is required</div>
+                 </div>
+               </md-input-container>
+                <md-input-container class="md-accent" md-no-float style="width:100%">
+                <md-icon md-svg-src="/img/icons/ic_terrain_24px.svg"></md-icon>
+                <input ng-model="user.state" type="text" placeholder="State" Name="state" required>
+                <div ng-messages="signupForm.state.$error">
+                <div ng-message="required">This is required</div>
+                </div>
+               </md-input-container>
+               </div>
+              </div>
+              <div style="text-align:right;margin:10px">
+              <p style="font-size:13px;">Note: You can always change your preferences later in Settings.</p>
+              </div>
+            <div class="form-group" align="center">
+              <md-button class="btn-width-medium btn-block btn md-primary md-raised" type="submit" style="width:50%">Create account</md-button>
+              <p>Already have an Account?<a ui-sref="signin" style="cursor:pointer;color:#D81B60"> Login</a></p>
+            </div>
+          </form>
+         </div>
+      </md-content>
+    </div>
+  </div>

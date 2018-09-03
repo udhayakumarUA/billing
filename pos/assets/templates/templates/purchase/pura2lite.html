@@ -1,0 +1,206 @@
+<style>
+  p{
+    margin-top: 0px;
+    margin-bottom: 1px;
+    font-size: 8pt;
+  }
+  .w3-border-right {
+    border: 1px solid #000!important;
+    border-right: 0px solid #fff!important;
+    border-bottom: 0px solid #fff!important;
+  }
+  .w3-border {
+    border: 1px solid #000!important;
+    border-bottom: 0px solid #fff!important;
+  }
+  .w3-border-top {
+    border-top: 1px solid #000!important;
+  }
+
+  .w3-border-bottom {
+    border: 1px solid #000!important;
+    border-right: 0px solid #fff!important;
+    border-top: 0px solid #fff!important;
+  }
+  table, th {
+    font-size: 8pt;
+    border: 1px solid #000!important;
+  }
+  td{
+    font-size: 8pt;
+    border-right: 1px solid #000!important;
+  }
+  th, td {
+    padding: 3px;
+    text-align:right;
+    color: black;
+  }
+
+  .td td {
+    font-size: 8pt;
+    border-right: 1px solid #000!important;
+  }
+  .pag p{
+    margin-bottom: -3px;
+  }
+  h6{
+    font-size:8pt;
+    margin-bottom: 0px;
+  }
+</style>
+<section class="page-padding">
+  <div class="col-md-12">
+    <div align="center">
+      <h5><u>Purchase Bill</u></h5>
+    </div>
+    <div class="card-content">
+      <div class="row" style="margin: 0px;">
+        <div style="width: 50%;padding: 10px;" class="w3-border-right">
+          <p style="color: black;font-size: 14px" ><b>{{mainuser.company}}</b></p>
+          <p>{{mainuser.address}}</p>
+          <p>{{mainuser.city}} - {{mainuser.postalcode}}</p>
+        </div>
+        <div style="width: 50%;padding: 10px;" class="w3-border">
+          <p ng-if="mainuser.phoneno">Phone : {{mainuser.phoneno}}</p>
+          <p ng-if="mainuser.email">Email : {{mainuser.email}}</p>
+          <p ng-if="mainuser.gstin">GSTIN : {{mainuser.gstin}}</p>
+        </div>
+        <div style="width: 50%;padding: 10px;" class="w3-border-right">
+          <p style="color: black;font-size: 14px"><b>Bill From</b></p>
+          <p style="color: black"><b>{{purchase.user.company}}</b></p>
+          <p style="color: black"><b>{{purchase.user.firstname}} {{purchase.user.lastname}}</b></p>
+          <p>{{purchase.user.address}}</p>
+          <p ng-if="purchase.user.gstin">GSTIN : {{purchase.user.gstin}}</p>
+        </div>
+        <div style="width: 50%;padding: 10px;" class="w3-border">
+          <p style="color: black">Ref No: {{purchase.purchaseid}}</p>
+          <p style="color: black" ng-if="purchase.billid">Bill No: {{purchase.billid}}</p>
+          <p style="color: black">Purchase Date : {{purchase.purchasedate|date:'dd/MM/yyyy'}}</p>
+          <p style="color: black" ng-if="purchase.duedate">Due Date : {{purchase.duedate|date:'dd/MM/yyyy'}}</p>
+          <p style="color: black" ng-if="purchase.sourceofsuply">Source of Supply : {{purchase.sourceofsuply}}</p>
+        </div>
+        <table style="width:100%;">
+          <thead>
+          <tr>
+            <th rowspan="2" style="width: 10px;"><h6><b>#</b></h6></th>
+            <th rowspan="2" style="text-align: center;"><h6><b>Item</b></h6></th>
+            <th rowspan="2" style="text-align: center;"><h6><b>HSN/SAC</b></h6></th>
+            <th rowspan="2" style="text-align: center;"><h6><b>Qty</b></h6></th>
+            <th rowspan="2" style="text-align: center;"><h6><b>Rate</b></h6></th>
+            <th colspan="2" ng-if="tcgst" style="text-align: center;"><h6><b>CGST</b></h6></th>
+            <th colspan="2" ng-if="tsgst" style="text-align: center;"><h6><b>SGST</b></h6></th>
+            <th colspan="2" ng-if="tigst" style="text-align: center;"><h6><b>IGST</b></h6></th>
+            <th colspan="2" ng-if="tcess" style="text-align: center;"><h6><b>CESS</b></h6></th>
+            <th rowspan="2"><h6><b>Total</b></h6></th>
+          </tr>
+          <tr>
+            <th ng-if="tcgst"><h6><b>Rate</b></h6></th>
+            <th ng-if="tcgst"><h6><b>Amt</b></h6></th>
+            <th ng-if="tsgst"><h6><b>Rate</b></h6></th>
+            <th ng-if="tsgst"><h6><b>Amt</b></h6></th>
+            <th ng-if="tigst"><h6><b>Rate</b></h6></th>
+            <th ng-if="tigst"><h6><b>Amt</b></h6></th>
+            <th ng-if="tcess"><h6><b>Rate</b></h6></th>
+            <th ng-if="tcess"><h6><b>Amt</b></h6></th>
+          </tr>
+
+          </thead>
+          <tbody>
+          <tr ng-repeat="product in purchase.products">
+            <td>
+              <h6>{{$index+1}}</h6>
+            </td>
+            <td style="text-align: left;">
+              <h6>{{product.selectedItem.productname}}</h6>
+            </td>
+            <td>
+              <h6>{{product.selectedItem.hsn}}</h6>
+            </td>
+            <td style="text-align:right;">
+              <h6>{{product.quantity}} {{product.unit}}</h6>
+            </td>
+            <td style="text-align:right;">
+              <h6>{{product.rate|number:2}}</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tcgst">
+              <h6>{{product.cgst}}%</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tcgst">
+              <h6>{{product.singlecgst}}</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tsgst">
+              <h6>{{product.sgst}}%</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tsgst">
+              <h6>{{product.singlesgst}}</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tigst">
+              <h6>{{product.igst}}%</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tigst">
+              <h6>{{product.singleigst}}</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tcess">
+              <h6>{{product.cess}}%</h6>
+            </td>
+            <td style="text-align:right;" ng-if="tcess">
+              <h6>{{product.singlecess}}</h6>
+            </td>
+            <td style="text-align:right;">
+              <h6>{{product.subtotal|number:2}}</h6>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="margin: 0px;">
+        <div style="width: 60%;padding:5px;" class="w3-border-bottom">
+
+          <div style="clear:both;width:100%;" >
+            <p style="width:100%;">Amount In words</p>
+            <p><b>{{amount2text}}</b></p>
+          </div>
+        </div>
+        <div style="width: 40%;padding:5px;border-right: 1px solid #000!important;" align="center" class="w3-border-bottom">
+          <table style="width: 100%;border: 0px solid #000!important;">
+            <tbody>
+            <tr>
+              <td style="border: 0px solid #000!important;">Subtotal</td>
+              <td style="width: 140px;border: 0px solid #000!important;">{{purchase.totalsub|number:2}}</td>
+            </tr>
+            <tr ng-if="purchase.totalsgst">
+              <td style="border: 0px solid #000!important;">CGST</td>
+              <td style="border: 0px solid #000!important;">{{purchase.totalcgst|number:2}}</td>
+            </tr>
+            <tr ng-if="purchase.totalsgst">
+              <td style="border: 0px solid #000!important;">SGST</td>
+              <td style="border: 0px solid #000!important;">{{purchase.totalsgst|number:2}}</td>
+            </tr>
+            <tr ng-if="purchase.totaligst">
+              <td style="border: 0px solid #000!important;">IGST</td>
+              <td style="border: 0px solid #000!important;">{{purchase.totaligst|number:2}}</td>
+            </tr>
+            <tr ng-if="purchase.totalcess">
+              <td style="border: 0px solid #000!important;">CESS</td>
+              <td style="border: 0px solid #000!important;">{{pos.totalcess|number:2}}</td>
+            </tr>
+            <tr ng-if="purchase.discount">
+              <td style="border: 0px solid #000!important;">Discount</td>
+              <td style="border: 0px solid #000!important;">{{purchase.discount|number:2}}</td>
+            </tr>
+            <tr ng-if="purchase.adjustment">
+              <td style="border: 0px solid #000!important;">Adjustment</td>
+              <td style="border: 0px solid #000!important;">{{purchase.adjustment|number:2}}</td>
+            </tr>
+            <tr>
+              <td style="border: 0px solid #000!important;"><b>Grand Total</b></td>
+              <td style="border: 0px solid #000!important;"><b>₹ {{purchase.maintotal|number:2}}</b></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

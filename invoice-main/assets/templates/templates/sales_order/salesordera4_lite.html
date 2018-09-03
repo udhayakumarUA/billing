@@ -1,0 +1,229 @@
+<style>
+  p{
+    margin-top: 0px;
+    margin-bottom: 1px;
+    font-size: 8pt;
+  }
+  .w3-border-right {
+    border: 1px solid #000!important;
+    border-right: 0px solid #fff!important;
+    border-bottom: 0px solid #fff!important;
+  }
+  .w3-border-bottom {
+    border: 1px solid #000!important;
+    border-right: 0px solid #fff!important;
+    border-top: 0px solid #fff!important;
+  }
+  .w3-border {
+    border: 1px solid #000!important;
+    border-bottom: 0px solid #fff!important;
+  }
+  .w3-border-top {
+    border-top: 1px solid #000!important;
+  }
+
+  .w3-border-full {
+    border: 1px solid #000!important;
+    border-bottom: 0px solid #fff!important;
+  }
+  table, th {
+    font-size: 8pt;
+    border: 1px solid #000!important;
+  }
+
+  .no-border tr td, .no-border tr th {
+    border: none !important;
+  }
+
+  td{
+    font-size: 8pt;
+    border-right: 1px solid #000!important;
+  }
+  th, td {
+    padding: 3px;
+    text-align:right;
+    color: black;
+  }
+  .pag p{
+    margin-bottom: -3px;
+  }
+  h6{
+    font-size:8pt;
+    margin-bottom: 0px;
+  }
+</style>
+<section class="page-padding">
+  <div class="col-md-12">
+    <div align="center">
+      <h5><u>Sales Order</u></h5>
+    </div>
+    <div class="card-content">
+      <div class="row" style="margin: 0px;">
+        <div style="width: 50%;padding: 10px;" class="w3-border-right">
+          <h6 style="color: black;font-size: 14px;margin-bottom: 5px;" ><b>{{mainuser.company}}</b></h6>
+          <h6 style="margin-bottom: 5px;">{{mainuser.address}},</h6>
+          <h6 style="margin-bottom: 5px;">{{mainuser.city}}- {{mainuser.postalcode}}</h6>
+          <h6 style="margin-bottom: 5px;" ng-if="mainuser.phoneno">Mob:{{mainuser.phoneno}} {{mainuser.mobileno}},</h6>
+          <h6 style="margin-bottom: 5px;" ng-if="mainuser.email"> Email:{{mainuser.email}} </h6>
+          <h6 style="margin-bottom: 5px;" ng-if="mainuser.gstin">GSTIN : {{mainuser.gstin}}</h6>
+        </div>
+        <div style="width: 50%;padding: 10px;" class="w3-border">
+          <p style="color: black">Sales Order ID: {{details.salesorderid}}</p>
+          <p style="color: black">Sales Order Date : {{details.startdate|date:'dd/MM/yyyy'}}</p>
+          <p style="color: black">Place of Supply : {{details.user.placeofsuply}}</p>
+          <p style="color: black">State Code : {{details.user.statecode}}</p>
+        </div>
+        <div style="width: 50%;padding: 10px;" class="w3-border-right">
+          <div>
+            <h6 style="color: black;font-size: 12px;margin-bottom: 5px;"><b>Bill To</b></h6>
+            <h6 style="color: black;margin-bottom: 5px;"><b>{{details.user.company}}</b></h6>
+            <h6 style="color: black;margin-bottom: 5px;"><b>{{details.user.firstname}} {{details.user.lastname}}</b></h6>
+            <h6 style="margin-bottom: 5px;" ng-if="!details.user.address.address1">{{details.user.address}}</h6>
+            <div ng-if="details.user.address.address1">
+              <h6 style="margin-bottom: 5px;"><span>{{details.user.address.address1}}</span>,<span ng-if="details.user.address.address2">{{details.user.address.address2}}</span></h6>
+              <h6 style="margin-bottom: 5px;"><span>{{details.user.address.city}}</span><span ng-if="details.user.address.state">,{{details.user.address.state}}</span><span ng-if="details.user.address.zipcode"> - {{details.user.address.zipcode}}</span></h6>
+            </div>
+            <h6 style="margin-bottom: 5px;" ng-if="details.user.gstin">GSTIN : {{details.user.gstin}}</h6>
+            <h6 style="margin-bottom: 5px;" ng-if="details.user.pannumber">PAN : {{details.user.pannumber}}</h6>
+          </div>
+        </div>
+        <div style="width: 50%;padding: 10px;" class="w3-border">
+          <div ng-if="details.user.shippingAddress.address1">
+            <h6 style="color: black;font-size: 12px;margin-bottom: 5px;"><b>Shipping Address</b></h6>
+            <h6 style="color: black;margin-bottom: 5px;"><b>{{details.user.company}}</b></h6>
+            <h6 style="color: black;margin-bottom: 5px;"><b>{{details.user.firstname}} {{details.user.lastname}}</b></h6>
+            <h6 style="margin-bottom: 5px;"><span>{{details.user.shippingAddress.address1}}</span>,<span ng-if="details.user.shippingAddress.address2">{{details.user.shippingAddress.address2}}</span></h6>
+            <h6 style="margin-bottom: 5px;"><span>{{details.user.shippingAddress.city}}</span><span ng-if="details.user.shippingAddress.state">,{{details.user.shippingAddress.state}}</span><span ng-if="details.user.shippingAddress.zipcode"> - {{details.user.shippingAddress.zipcode}}</span></h6>
+          </div>
+        </div>
+        <table style="width:100%;">
+          <thead>
+          <tr>
+            <th rowspan="2" style="width: 10px;"><h6><b>#</b></h6></th>
+            <th rowspan="2" style="text-align: center;"><h6><b>Item</b></h6></th>
+            <th rowspan="2" style="text-align: center;"><h6><b>HSN/SAC</b></h6></th>
+            <th rowspan="2" style="text-align: center;"><h6><b>Qty</b></h6></th>
+            <th rowspan="2" style="text-align: center;"><h6><b>Rate</b></h6></th>
+            <th colspan="2"  style="text-align: center;" ng-if="details.user.taxtype!='Inter State Tax Rate'"><h6><b>CGST</b></h6></th>
+            <th colspan="2"  style="text-align: center;" ng-if="details.user.taxtype!='Inter State Tax Rate'"><h6><b>SGST</b></h6></th>
+            <th colspan="2" style="text-align: center;" ng-if="details.user.taxtype=='Inter State Tax Rate'"><h6><b>IGST</b></h6></th>
+            <th rowspan="2"><h6><b>Total</b></h6></th>
+          </tr>
+          <tr>
+            <th ng-if="details.user.taxtype!='Inter State Tax Rate'"><h6><b>Rate</b></h6></th>
+            <th ng-if="details.user.taxtype!='Inter State Tax Rate'"><h6><b>Amt</b></h6></th>
+            <th ng-if="details.user.taxtype!='Inter State Tax Rate'"><h6><b>Rate</b></h6></th>
+            <th ng-if="details.user.taxtype!='Inter State Tax Rate'"><h6><b>Amt</b></h6></th>
+            <th ng-if="details.user.taxtype=='Inter State Tax Rate'"><h6><b>Rate</b></h6></th>
+            <th ng-if="details.user.taxtype=='Inter State Tax Rate'"><h6><b>Amt</b></h6></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="salesorder in details.salesorder">
+            <td>
+              <h6>{{$index+1}}</h6>
+            </td>
+            <td style="text-align: left;">
+              <h6>{{salesorder.selectedItem.productname}}</h6>
+            </td>
+            <td>
+              <h6>{{salesorder.selectedItem.hsn}}</h6>
+            </td>
+            <td style="text-align:right;">
+              <h6>{{salesorder.quantity}} {{salesorder.unit}}</h6>
+            </td>
+            <td style="text-align:right;">
+              <h6>{{salesorder.rate|number:2}}</h6>
+            </td>
+            <td style="text-align:right;" ng-if="details.user.taxtype!='Inter State Tax Rate'">
+              <h6>{{salesorder.cgst}}%</h6>
+            </td>
+            <td style="text-align:right;" ng-if="details.user.taxtype!='Inter State Tax Rate'">
+              <h6>{{salesorder.singlecgst}}</h6>
+            </td>
+            <td style="text-align:right;" ng-if="details.user.taxtype!='Inter State Tax Rate'">
+              <h6>{{salesorder.sgst}}%</h6>
+            </td>
+            <td style="text-align:right;" ng-if="details.user.taxtype!='Inter State Tax Rate'">
+              <h6>{{salesorder.singlesgst}}</h6>
+            </td>
+            <td style="text-align:right;" ng-if="details.user.taxtype=='Inter State Tax Rate'">
+              <h6>{{salesorder.igst}}%</h6>
+            </td>
+            <td style="text-align:right;" ng-if="details.user.taxtype=='Inter State Tax Rate'">
+              <h6>{{salesorder.singleigst}}</h6>
+            </td>
+            <td style="text-align:right;">
+              <h6>{{salesorder.subtotal|number:2}}</h6>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row pag" style="margin: 0px;">
+
+        <div style="width: 60%;padding:5px;" class="w3-border-bottom">
+          <p style="width:100%;">Amount In words</p>
+          <p><b>{{amount2text}}</b></p>
+        </div>
+        <div style="width: 40%;padding:5px;border-right: 1px solid #000!important;" class="w3-border-bottom">
+
+
+          <table style="width: 100%;border: none !important;">
+            <tbody>
+            <tr>
+              <td style="border: none !important;">Subtotal</td>
+              <td style="width: 140px;border: none !important;">{{details.subtotal|number:2}}</td>
+            </tr>
+            <tr ng-if="details.cgstprice">
+              <td style="border: none !important;">CGST</td>
+              <td style="border: none !important;">{{details.cgstprice|number:2}}</td>
+            </tr>
+            <tr ng-if="details.sgstprice">
+              <td style="border: none !important;">SGST</td>
+              <td style="border: none !important;">{{details.sgstprice|number:2}}</td>
+            </tr>
+            <tr ng-if="details.igstprice">
+              <td style="border: none !important;">IGST</td>
+              <td style="border: none !important;">{{details.igstprice|number:2}}</td>
+            </tr>
+            <tr ng-if="details.cessprice">
+              <td style="border: none !important;">CESS</td>
+              <td style="border: none !important;">{{details.cessprice|number:2}}</td>
+            </tr>
+            <tr ng-if="details.discount">
+              <td style="border: none !important;">Discount</td>
+              <td style="border: none !important;">{{details.discount|number:2}}</td>
+            </tr>
+            <tr ng-if="details.shipping">
+              <td style="border: none !important;">Shipping</td>
+              <td style="border: none !important;">{{details.shipping|number:2}}</td>
+            </tr>
+            <tr ng-if="details.adjustment">
+              <td style="border: none !important;">Adjustment</td>
+              <td style="border: none !important;">{{details.adjustment|number:2}}</td>
+            </tr>
+
+            <tr>
+              <td style="border: none !important;"><b>Grand Total</b></td>
+              <td style="border: none !important;"><b>₹ {{details.maintotal|number:2}}</b></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row pag" style="margin: 0px;">
+        <div style="width: 65%;padding:5px;border:1px solid black;" align="center">
+          <p><u>Terms & Conditions</u></p>
+          <p>{{config.terms}}</p>
+        </div>
+
+        <div style="width: 35%;padding:5px;border:1px solid black;" align="center" >
+          <p><span style="font-size: 8pt">For </span><b>{{mainuser.company}}</b></p>
+          <p style="font-size: 8pt;margin-top: 50px;">Authorised Signature</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

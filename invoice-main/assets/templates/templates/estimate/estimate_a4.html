@@ -1,0 +1,215 @@
+<style>
+  p{
+    margin-top: 0px;
+    margin-bottom: 1px;
+    font-size: 8pt;
+  }
+  .td_h{
+    text-align:right;padding:0px 50px 0px 0px;font-weight: 700;font-size: 9pt;
+  }
+  .td_h_r{
+    text-align:right;font-weight: 700;font-size: 9pt;
+  }
+  .pcs-itemtable-header {
+    font-size: 9pt;
+    color: black;
+    background-color: white;
+    font-weight: normal;
+  }
+  .pcs-itemtable tbody > tr > td {
+    padding: 1px 5px;
+  }
+  .pcs-item-row {
+    font-size: 8pt;
+    border-bottom: 1px solid #9e9e9e;
+    background-color: #ffffff;
+    color: #000000;
+  }
+  .pcs-totals {
+    font-size: 8pt;
+    color: #000000;
+    background-color: #ffffff;
+  }
+  .pcs-totaltable tbody > tr > td {
+    padding: 4px 7px 0px;
+    text-align: right;
+  }
+</style>
+<section class="page-padding">
+  <div class="col-md-12">
+    <div class="card-content">
+      <div class="row" style="margin: 0px;">
+        <div class="card-title" style="width: 50%">
+          <p style="color: black;font-size: 14px" ><b>{{mainuser.company}}</b></p>
+          <p>{{mainuser.address}}</p>
+          <p>{{mainuser.city}} - {{mainuser.postalcode}}</p>
+          <p>{{mainuser.country}}</p>
+          <p>{{mainuser.phoneno}}</p>
+          <p ng-if="mainuser.gstin">GSTIN : {{mainuser.gstin}}</p>
+        </div>
+        <div class="right-align top" style="width: 50%">
+          <h3 style="font-size: 1.5rem;  margin: 0px 0px 3px;">ESTIMATE</h3>
+          <p style="font-weight: 700;font-size: 9pt;">{{details.estimateid}}</p>
+          <p style="margin-top:10px;color: green;font-weight: 700;font-size: 9pt;">Total Amount</p>
+          <p style="color: green;font-weight: 700;font-size: 9pt;">₹ {{details.maintotal|number:2}}</p>
+        </div>
+      </div>
+      <div class="row" style="margin: 0px 0px 20px;">
+        <div style="width: 60%">
+          <div style="width: 300px;">
+            <p style="color: black;font-size: 14px"><b>Estimate To</b></p>
+            <p style="color: black"><b>{{details.user.company}}</b></p>
+            <p style="color: black"><b>{{details.user.firstname}} {{details.user.lastname}}</b></p>
+            <p ng-if="!details.user.address.address1">{{details.user.address}}</p>
+            <div ng-if="details.user.address.address1">
+              <p><span>{{details.user.address.address1}}</span>,<span ng-if="details.user.address.address2">{{details.user.address.address2}}</span></p>
+              <p><span>{{details.user.address.city}}</span><span ng-if="details.user.address.state">,{{details.user.address.state}}</span><span ng-if="details.user.address.zipcode"> - {{details.user.address.zipcode}}</span></p>
+            </div>
+            <p>{{details.user.phonenumber}}</p>
+            <p ng-if="details.user.gstin">GSTIN - {{details.user.gstin}}</p>
+            <p ng-if="details.user.pannumber">PAN : {{details.user.pannumber}}</p>
+          </div>
+        </div>
+        <div style="width: 40%">
+          <div class="right">
+            <table>
+              <tbody>
+              <tr>
+                <td class="td_h">Estimate Date :</td>
+                <td class="td_h_r">{{details.startdate |date:'dd/MM/yyyy'}}</td>
+              </tr>
+
+              <tr>
+                <td class="td_h">Expiry Date :</td>
+                <td class="td_h_r">{{details.enddate|date:'dd/MM/yyyy'}}</td>
+              </tr>
+              <tr ng-if="details.placeofsuply">
+                <td class="td_h">Place of Supply :</td>
+                <td class="td_h_r">{{details.placeofsuply}}</td>
+              </tr>
+              <tr ng-if="details.user.statecode">
+                <td class="td_h">State Code :</td>
+                <td class="td_h_r">{{details.user.statecode}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin: 0px;">
+        <div style="width: 100%;">
+          <table style="width: 100%;table-layout:fixed;clear: both;" class="pcs-itemtable"  cellspacing="0" cellpadding="0" border="0">
+          <thead>
+              <tr style="height:17px;border-bottom: 1px solid #000!important;">
+                <th valign="bottom" style="padding:5px 5px 2px;word-wrap: break-word;width: 5%;text-align: center;" class="pcs-itemtable-header">
+                  <b>#</b>
+                </th>
+                <th valign="bottom" style="padding: 5px 7px 2px;word-wrap: break-word; width: 22%;" class="pcs-itemtable-header">
+                  <b>Item</b>
+                </th>
+                <th valign="bottom" style="padding: 5px 7px 2px;word-wrap: break-word; width: 11%;" class="pcs-itemtable-header">
+                  <b>HSN/SAC</b>
+                </th>
+                <th valign="bottom" style="padding: 5px 7px 2px;word-wrap: break-word; width: 7%;text-align:right;" class="pcs-itemtable-header">
+                  <b>Qty</b>
+                </th>
+                <th valign="bottom" style="padding: 5px 7px 2px;word-wrap: break-word; width: 12%;text-align:right;" class="pcs-itemtable-header">
+                  <b>Rate</b>
+                </th>
+                <th valign="bottom" style="padding: 5px 7px 2px;word-wrap: break-word; width: 7%;text-align:right;" ng-if="details.user.taxtype!='Inter State Tax Rate'" class="pcs-itemtable-header">
+                  <b>CGST</b>
+                </th>
+                <th valign="bottom" style="padding: 5px 7px 2px;word-wrap: break-word; width: 7%;text-align:right;" ng-if="details.user.taxtype!='Inter State Tax Rate'" class="pcs-itemtable-header">
+                  <b>SGST</b>
+                </th>
+                <th valign="bottom" style="padding: 5px 7px 2px;word-wrap: break-word; width: 7%;text-align:right;" ng-if="details.user.taxtype=='Inter State Tax Rate'" class="pcs-itemtable-header" >
+                  <b>IGST</b>
+                </th>
+                <th valign="bottom" style="padding: 5px 7px 2px;word-wrap: break-word; width: 7%;text-align:right;" ng-if="tcess" class="pcs-itemtable-header" >
+                  <b>CESS</b>
+                </th>
+                <th valign="bottom" style="padding: 5px 7px 2px;word-wrap: break-word; width: 15%;text-align:right;" class="pcs-itemtable-header">
+                  <b>Amount</b>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="itemBody">
+            <tr ng-repeat="estimate in details.estimate">
+              <td valign="top" style="text-align: center;" class="pcs-item-row">
+                {{$index+1}}
+              </td>
+              <td valign="top" class="pcs-item-row">
+                <span style="word-wrap: break-word;">{{estimate.selectedItem.productname}}</span>
+              </td>
+              <td valign="top" class="pcs-item-row">
+                <span style="word-wrap: break-word;">{{estimate.selectedItem.hsn}}</span>
+              </td>
+              <td valign="top" class="pcs-item-row" style="text-align:right;">
+                <span style="word-wrap: break-word;">{{estimate.quantity}} {{estimate.unit}}</span>
+              </td>
+              <td valign="top" class="pcs-item-row" style="text-align:right;">
+                <span style="word-wrap: break-word;">{{estimate.rate|number:2}}</span>
+              </td>
+              <td valign="top" class="pcs-item-row" ng-if="details.user.taxtype!='Inter State Tax Rate'" style="text-align:right;">
+                <span style="word-wrap: break-word;">{{estimate.cgst}}%</span>
+              </td>
+              <td valign="top" class="pcs-item-row" ng-if="details.user.taxtype!='Inter State Tax Rate'" style="text-align:right;">
+                <span style="word-wrap: break-word;">{{estimate.sgst}}%</span>
+              </td>
+              <td valign="top" class="pcs-item-row" ng-if="details.user.taxtype=='Inter State Tax Rate'" style="text-align:right;" >
+                <span style="word-wrap: break-word;">{{estimate.igst}}%</span>
+              </td>
+              <td valign="top" class="pcs-item-row" ng-if="tcess" style="text-align:right;" >
+                <span style="word-wrap: break-word;">{{estimate.cess}}%</span>
+              </td>
+              <td valign="top" class="pcs-item-row" style="text-align:right;">
+                <span style="word-wrap: break-word;">{{estimate.subtotal|number:2}}</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div style="width: 100%;">
+            <div style="width: 50%;padding: 4px 4px 3px 7px;float: left;">
+              <div style="clear:both;margin-top: 20px;width:100%;" ng-if="config.terms">
+                <div><p>Terms &amp; Conditions</p></div>
+                <div style="white-space: pre-wrap;word-wrap: break-word;"><p>{{config.terms}}</p></div>
+              </div>
+            </div>
+            <div style="width: 43.6%;float:right;" class="pcs-totals">
+              <table class="pcs-totaltable" cellspacing="0" border="0" width="100%">
+                <tbody>
+                <tr>
+                  <td valign="middle">Subtotal</td>
+                  <td id="tmp_subtotal" valign="middle" style="width:110px;">{{details.subtotal|number:2}}</td>
+                </tr>
+                <tr style="height:10px;" ng-if="details.cgstprice">
+                  <td valign="middle"  align="right">CGST </td>
+                  <td valign="middle" style="width:110px;">{{details.cgstprice|number:2}}</td>
+                </tr>
+                <tr style="height:10px;" ng-if="details.sgstprice">
+                  <td valign="middle"  align="right">SGST</td>
+                  <td valign="middle" style="width:110px;">{{details.sgstprice|number:2}}</td>
+                </tr>
+                <tr style="height:10px;" ng-if="details.igstprice">
+                  <td valign="middle" align="right">IGST</td>
+                  <td valign="middle" style="width:110px;">{{details.igstprice|number:2}}</td>
+                </tr>
+                <tr style="height:10px;" ng-if="details.cessprice">
+                  <td valign="middle" align="right">CESS</td>
+                  <td valign="middle" style="width:110px;">{{details.cessprice|number:2}}</td>
+                </tr>
+                <tr>
+                  <td valign="middle"><b>Grand Total</b></td>
+                  <td id="tmp_total" valign="middle" style="width:110px;"><b>₹ {{details.maintotal|number:2}}</b></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

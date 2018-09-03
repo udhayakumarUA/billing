@@ -1,0 +1,225 @@
+<style>
+  p{
+    margin-top: 0px;
+    margin-bottom: 1px;
+    font-size: 8pt;
+  }
+
+  .pcs-totaltable tbody > tr > td {
+    padding: 4px 7px 0px;
+    text-align: right;
+  }
+  table, th, td {
+    font-size: 8pt;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 3px;
+    text-align:right;
+    color: black;
+  }
+  h6{
+    font-size:8pt;
+    margin-bottom: 0px;
+  }
+</style>
+
+<section class="page-padding">
+  <div class="col-md-12">
+    <div class="card-content">
+      <div class="row" style="margin: 0px;">
+        <div style="width:25%;">
+          <p>{{mainuser.phoneno}}</p>
+          <p>{{mainuser.email}}</p>
+        </div>
+
+        <div style="border-left: 10px; width: 50%; text-align:center; font-size: 15pt">
+          <h6 style="color: black;margin-bottom:2px;font-size: 14px" ><b>{{mainuser.company}}</b></h6>
+          <h6 style="margin-bottom:2px;">{{mainuser.address}}</h6>
+          <h6 style="margin-bottom:2px;">{{mainuser.city}} - {{mainuser.postalcode}}</h6>
+          <h6 style="margin-bottom:2px;" ng-if="mainuser.gstin">GSTIN : {{mainuser.gstin}}</h6>
+        </div>
+
+        <div style="width: 25%;">
+          <div style="text-align:right; ">
+            <p> Original <input type="checkbox"></p>
+            <p> Duplicate <input type="checkbox"></p>
+            <p> Triplicate <input type="checkbox"></p>
+            <h3 style="font-size: 1.5rem;  margin: 0px 0px 3px;">Estimate</h3>
+            <h5>{{details.estimateid}}</h5>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="row" style="margin: 0px;">
+        <div style="padding-left: 0px;width: 40%">
+          <div style="width: 300px;">
+            <h6 style="color: black"><b>{{details.user.company}}</b></h6>
+            <h6 style="color: black"><b>{{details.user.firstname}} {{details.user.lastname}}</b></h6>
+            <h6>{{details.user.address}}</h6>
+            <h6 ng-if="details.user.gstin">GSTIN : {{details.user.gstin}}</h6>
+            <h6 ng-if="details.user.pannumber">PAN : {{details.user.pannumber}}</h6>
+          </div>
+        </div>
+        <div  style="display: flex; width:55%;padding-right: 0px;">
+          <div class="col-md-6">
+            <table style="border: 1px solid black;width: 100%;text-align: left;">
+              <tbody style="height:10px;">
+                <tr>
+                  <td><h6>Estimate Date</h6></td>
+                  <td><h6>{{details.startdate |date:'dd/MM/yyyy'}}</h6></td>
+                </tr>
+                <tr>
+                  <td><h6>Expiry Date</h6></td>
+                  <td><h6>{{details.enddate|date:'dd/MM/yyyy'}}</h6></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6" style="padding-right: 0px">
+            <table  style="border: 1px solid black;width: 100%;text-align: left;">
+              <tbody style="height:10px;">
+              <tr>
+                <td><h6>State Code</h6></td>
+                <td><h6>{{details.user.statecode}}</h6></td>
+              </tr>
+              <tr>
+                <td><h6>Place of Supply</h6></td>
+                <td><h6>{{details.user.plos}}</h6></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom: 5px;margin-top: 10px;">
+        <div class="col-md-12" style="padding-left: 5px;padding-right: 15px;">
+          <table style="width:100%;">
+            <thead>
+            <tr>
+              <th rowspan="2" style="width: 10px;"><h6><b>#</b></h6></th>
+              <th rowspan="2" style="text-align: center;"><h6><b>Item</b></h6></th>
+              <th rowspan="2" style="text-align: center;"><h6><b>HSN/SAC</b></h6></th>
+              <th rowspan="2" style="text-align: center;"><h6><b>Qty</b></h6></th>
+              <th rowspan="2" style="text-align: center;"><h6><b>Rate</b></h6></th>
+              <th colspan="2"  style="text-align: center;"><h6><b>CGST</b></h6></th>
+              <th colspan="2"  style="text-align: center;"><h6><b>SGST</b></h6></th>
+              <th colspan="2" style="text-align: center;"><h6><b>IGST</b></h6></th>
+
+              <th rowspan="2"><h6><b>Total</b></h6></th>
+            </tr>
+            <tr>
+              <th ><h6><b>Rate</b></h6></th>
+              <th ><h6><b>Amt</b></h6></th>
+              <th ><h6><b>Rate</b></h6></th>
+              <th ><h6><b>Amt</b></h6></th>
+              <th><h6><b>Rate</b></h6></th>
+              <th><h6><b>Amt</b></h6></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="estimate in details.estimate">
+              <td>
+                <h6>{{$index+1}}</h6>
+              </td>
+              <td style="text-align: left;">
+                <h6>{{estimate.selectedItem.productname}}</h6>
+              </td>
+              <td>
+                <h6>{{estimate.selectedItem.hsn}}</h6>
+              </td>
+              <td style="text-align:right;">
+                <h6>{{estimate.quantity}} {{estimate.unit}}</h6>
+              </td>
+              <td style="text-align:right;">
+                <h6>{{estimate.rate|number:2}}</h6>
+              </td>
+              <td style="text-align:right;" >
+                <h6>{{estimate.cgst}}%</h6>
+              </td>
+              <td style="text-align:right;" >
+                <h6>{{estimate.singlecgst}}</h6>
+              </td>
+              <td style="text-align:right;" >
+                <h6>{{estimate.sgst}}%</h6>
+              </td>
+              <td style="text-align:right;" >
+                <h6>{{estimate.singlesgst}}</h6>
+              </td>
+              <td style="text-align:right;">
+                <h6>{{estimate.igst}}%</h6>
+              </td>
+              <td style="text-align:right;">
+                <h6>{{estimate.singleigst}}</h6>
+              </td>
+              <td style="text-align:right;">
+                <h6>{{estimate.subtotal|number:2}}</h6>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom:5px ">
+        <div class="col s6 ">
+          <div class="row" style="border:1px solid black; height:100px;">
+            <p style="width:100%;">Amount In words</p>
+            <p><b>{{amount2text}}</b></p>
+          </div>
+        </div>
+        <div class="col s6">
+
+          <table style="width: 100%">
+            <tbody>
+            <tr>
+              <td>Subtotal</td>
+              <td style="width: 140px;">{{details.subtotal|number:2}}</td>
+            </tr>
+            <tr ng-if="details.cgstprice">
+              <td>CGST</td>
+              <td>{{details.cgstprice|number:2}}</td>
+            </tr>
+            <tr ng-if="details.sgstprice">
+              <td>SGST</td>
+              <td>{{details.sgstprice|number:2}}</td>
+            </tr>
+            <tr ng-if="details.igstprice">
+              <td >IGST</td>
+              <td>{{details.igstprice|number:2}}</td>
+            </tr>
+            <tr ng-if="details.cessprice">
+              <td>CESS</td>
+              <td>{{details.cessprice|number:2}}</td>
+            </tr>
+
+            <tr>
+              <td><b>Grand Total</b></td>
+              <td ><b>₹ {{details.maintotal|number:2}}</b></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="display: flex;">
+          <div class="col-md-6" style="text-align: center;border: 1px solid black;height: 105px;">
+            <p><u>Terms & Conditions</u></p>
+            <p>{{config.terms}}</p>
+          </div>
+
+          <div class="col-md-3" style="text-align: center;border: 1px solid black;border-left:none;height: 105px;">
+            <p style="margin-top: 80px;">(Common Seal)</p>
+          </div>
+
+          <div class="col-md-3" style="text-align: center;border: 1px solid black;border-left:none; height: 105px">
+            <p><span style="font-size: 8pt">For </span><b>{{mainuser.company}}</b></p>
+            <p style="font-size: 8pt;margin-top: 50px;">Authorised Signature</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

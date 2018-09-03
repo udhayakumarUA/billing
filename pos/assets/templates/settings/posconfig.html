@@ -1,0 +1,151 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools">
+            Configuartion Page
+          </div>
+        </md-toolbar>
+        <md-content>
+          <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="INVOICE & POS" layout="row" layout-align="center">
+              <md-content class="md-padding">
+                <!--<md-toolbar style="background:white;color:#D81B60">
+                  <div class="md-toolbar-tools">
+                    <h3>POS Configuartion</h3>
+                    <span class="flex"></span>
+                  </div>
+                </md-toolbar>-->
+                <div class="md-content__body">
+                  <form name="cusform" ng-submit="addposcustomer()&&cusform.$valid">
+                    <md-card style="padding:15px">
+                      <h3 style="margin-bottom:15px">Default POS Customer</h3>
+                      <md-autocomplete
+                        ng-disabled="isDisabled"
+                        md-no-cache="noCache"
+                        md-search-text-change="search(searchtext)"
+                        md-selected-item="selectedcustomer"
+                        md-search-text="searchtext"
+                        md-items="item in search(searchtext)"
+                        md-item-text="item.firstname"
+                        md-min-length="0"
+                        placeholder="Select Customer">
+                        <md-item-template>
+                          <span md-highlight-text="searchtext" md-highlight-flags="^i">{{item.firstname}} {{item.lastname}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                          No states matching "{{searchtext}}" were found.
+                          <a ui-sref="addcontact">Create a new one!</a>
+                        </md-not-found>
+                      </md-autocomplete>
+                      <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="text-align:center;margin:10px;float:right;">Save</md-button>
+                    </md-card>
+                  </form>
+
+                  <form name="disform" ng-submit="addposconfig()&&disform.$valid">
+                    <md-card style="padding:15px;margin-top:15px">
+                      <h3 style="margin-bottom:15px">Customer notes for POS (This note will be printed at the bottom of retail bills)</h3>
+                      <md-input-container style="width:100%">
+                        <label>Description</label>
+                        <textarea ng-model="description" md-maxlength="50" rows="2" md-select-on-focus required></textarea>
+                      </md-input-container>
+                      <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="text-align:center;margin:10px;float:right;">Save</md-button>
+                    </md-card>
+                  </form>
+
+                  <form name="disform" ng-submit="addposconfig()&&disform.$valid">
+                    <md-card style="padding:15px;margin-top:15px">
+                      <h3 style="margin-bottom:15px">Terms & Conditions (Terms and conditions will be printed in Invoices)</h3>
+                      <md-input-container style="width:100%">
+                        <label>Terms & Conditions</label>
+                        <textarea ng-model="terms" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+                      </md-input-container>
+                      <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="text-align:center;margin:10px;float:right;">Save</md-button>
+                    </md-card>
+                  </form>
+
+                  <form name="disform" ng-submit="startinvoice()&&disform.$valid" >
+                    <md-card style="padding:15px;margin-top:15px" ng-hide="poscount>=1">
+                      <h3 style="margin-bottom:15px">START INVOICE NUMBER FROM</h3>
+                      <md-input-container style="width:100%">
+                        <label>Start Invoice Number</label>
+                        <input ng-model="invoicenumber" type="number" required>
+                      </md-input-container>
+                      <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="text-align:center;margin:10px;float:right;">Save</md-button>
+                    </md-card>
+                  </form>
+                </div>
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>
+
+
+<!--
+<section class="page-padding">
+ <div class="col-md-12">
+   <section class="md-content-section">
+    <div class="md-whiteframe-z1">
+     <md-toolbar class="md-accent">
+       <div class="md-toolbar-tools">
+           POS Configuartion
+        </div>
+       </md-toolbar>
+        <div class="md-content__body">
+          <form name="cusform" ng-submit="addposcustomer()&&cusform.$valid">
+           <md-card style="padding:15px">
+             <h3 style="margin-bottom:15px">Default POS Customer</h3>
+             <md-autocomplete
+		          ng-disabled="isDisabled"
+		          md-no-cache="noCache"
+              md-search-text-change="search(searchtext)"
+		          md-selected-item="selectedcustomer"
+		          md-search-text="searchtext"
+		          md-items="item in search(searchtext)"
+		          md-item-text="item.firstname"
+		          md-min-length="0"
+		          placeholder="Select Customer">
+            <md-item-template>
+           <span md-highlight-text="searchtext" md-highlight-flags="^i">{{item.firstname}} {{item.lastname}}</span>
+         </md-item-template>
+         <md-not-found>
+          No states matching "{{searchtext}}" were found.
+          <a ui-sref="addcontact">Create a new one!</a>
+        </md-not-found>
+        </md-autocomplete>
+        <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="text-align:center;margin:10px;float:right;">Save</md-button>
+      </md-card>
+           </form>
+           <form name="disform" ng-submit="addposconfig()&&disform.$valid">
+           <md-card style="padding:15px;margin-top:15px">
+              <h3 style="margin-bottom:15px">Customer notes for POS (This note will be printed at the bottom of retail bills)</h3>
+              <md-input-container style="width:100%">
+                  <label>Description</label>
+                  <textarea ng-model="description" md-maxlength="50" rows="2" md-select-on-focus required></textarea>
+              </md-input-container>
+              <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="text-align:center;margin:10px;float:right;">Save</md-button>
+       </md-card>
+       </form>
+          <form name="disform" ng-submit="addposconfig()&&disform.$valid">
+            <md-card style="padding:15px;margin-top:15px">
+              <h3 style="margin-bottom:15px">Terms & Conditions (Terms and conditions will be printed in Invoices)</h3>
+              <md-input-container style="width:100%">
+                <label>Terms & Conditions</label>
+                <textarea ng-model="terms" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+              </md-input-container>
+              <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="text-align:center;margin:10px;float:right;">Save</md-button>
+            </md-card>
+          </form>
+           </div>
+
+    </div>
+   </section>
+
+ </div>
+ </section>
+-->

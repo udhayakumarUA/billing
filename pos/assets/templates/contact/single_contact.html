@@ -1,0 +1,724 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent" style="background:white;">
+          <div class="md-toolbar-tools" style="height:50px;color:#D81B60;">
+            <md-button aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="contactpage" style="margin-right:20px">
+              <md-icon class="md-primary" md-svg-src="/img/icons/ic_keyboard_arrow_left_24px.svg"></md-icon>back</md-button>
+            <span class="flex"></span>
+            <md-button aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="editcontact({id:contact.id})" style="margin-right:20px">
+              <md-icon class="md-primary" style="margin-right:5px;" md-svg-src="/img/icons/ic_create_24px.svg"></md-icon>Edit</md-button>
+            <md-button aria-label="Button" ng-disabled="disable" ng-click="delete(contact.id)" class="btn-width-sm md-raised md-accent" style="margin-right:20px">
+              <md-icon class="md-primary" style="margin-right:5px;" md-svg-src="/img/icons/ic_delete_24px.svg" ></md-icon>Delete</md-button>
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+            <md-tab label="Overview" flex="33">
+              <md-content class="md-padding">
+                <div class="md-content__body">
+                  <div layout="row">
+                    <div flex="40" style="padding: 0px 20px 0px 5px;">
+                      <div style="border: 1px solid #e0e0e0;border-radius: 4px;padding: 10px;margin: 0.5rem 0 1rem 0;">
+                        <p><b>{{contact.company}}</b></p>
+                        <p>{{contact.firstname}} {{contact.lastname}}</p>
+                        <p>{{contact.phonenumber}}</p>
+                        <p>{{contact.mobilenumber}}</p>
+                        <p>{{contact.email}}</p>
+                      </div>
+                      <div style="border: 1px solid #e0e0e0;border-radius: 4px;padding: 10px;margin: 0.5rem 0 1rem 0;">
+                        <p><b>ADDRESS</b></p>
+                        <p>{{contact.address}}</p>
+
+                      </div>
+                      <div style="border: 1px solid #e0e0e0;border-radius: 4px;padding: 10px;margin: 0.5rem 0 1rem 0;">
+                        <p><b>GST Treatment</b></p>
+                        <p ng-if="contact.gsttype">GST Treatment : {{contact.gsttype}}</p>
+                        <p ng-if="contact.gsttype == 'Registered business'">GSTIN : {{contact.gstin}}</p>
+                        <!--If cutsomer-->
+                        <p ng-if="contact.plos&&contact.type =='Customer'">Place of Supply :{{contact.plos}}</p>
+                        <!--If Vendor-->
+                        <p ng-if="contact.sos&&contact.type =='Vendor'">Source of Supply :{{contact.sos}}</p>
+                        <p ng-if="contact.statecode">State Code : {{contact.statecode}}</p>
+                                      <hr>
+                        <p><b>Other Details</b></p>
+                        <p >Type : {{contact.type}}</p>
+                        <p ng-if="contact.taxtype">Tax Type : {{contact.taxtype}}</p>
+                        <p ng-if="contact.pannumber">Pan Number : {{contact.pannumber}}</p>
+                      </div>
+
+                    </div>
+                    <div flex="60" style="padding: 0px 20px 0px 5px;">
+                      <!--If cutsomer-->
+                      <div layout="row" ng-if="contact.type =='Customer'" ng-init="calculate(bill.maintotal,bill.balance)">
+                        <md-card flex="30" align="center" style="margin: 10px;">
+                          <p>Total Billed Amount</p>
+                          <hr>
+                          <p>₹{{bill.maintotal|number:2}}</p>
+                        </md-card>
+                        <md-card flex="30" align="center" style="margin: 10px;">
+                          <p>Total Paid Amount</p>
+                          <hr>
+                          <p>₹{{due|number:2}}</p>
+                        </md-card>
+                        <md-card flex="30" align="center" style="margin: 10px;">
+                          <p>Balance Recievables</p>
+                          <hr>
+                          <p>₹{{bill.balance|number:2}}</p>
+                        </md-card>
+                      </div>
+                      <!--If Vendor-->
+                      <div layout="row" ng-if="contact.type =='Vendor'" ng-init="calculate(purchase.maintotal,purchase.balance)">
+                        <md-card flex="30" align="center" style="margin: 10px;">
+                          <p>Total Billed Amount</p>
+                          <hr>
+                          <p>₹{{purchase.maintotal|number:2}}</p>
+                        </md-card>
+                        <md-card flex="30" align="center" style="margin: 10px;">
+                          <p>Total Paid Amount</p>
+                          <hr>
+                          <p>₹{{due|number:2}}</p>
+                        </md-card>
+                        <md-card flex="30" align="center" style="margin: 10px;">
+                          <p>Balance Payables</p>
+                          <hr>
+                          <p>₹{{purchase.balance|number:2}}</p>
+                        </md-card>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </md-content>
+            </md-tab>
+            <!--If Customer-->
+            <md-tab label="Sales" flex="33" ng-if="contact.type =='Customer'">
+              <md-content class="md-padding">
+                <div class="md-content__body">
+                  <div class="table-responsive">
+                    <h6><b>Sale Details</b></h6>
+                    <table class="table table-striped table-bordered" align="center">
+                      <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Bill No</th>
+                        <th>Status</th>
+                        <th>Amount</th>
+                        <th>Balance</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="pos in contact.pos | limitTo:plimit">
+                        <td>{{pos.createdAt|date}}</td>
+                        <td><a ui-sref="singlepos({posid:pos.posid})">{{pos.posid}}</a></td>
+                        <td><p ng-if="pos.status=='Paid'" style="color: green">{{pos.status}}</p>
+                          <p ng-if="pos.status=='Draft'" style="color: orange">{{pos.status}}</p>
+                          <p ng-if="pos.status=='Partially Paid'" style="color: red">{{pos.status}}</p></td>
+                        <td style="text-align: right;">₹{{pos.maintotal|number:2}}</td>
+                        <td style="text-align: right;">₹{{pos.balance|number:2}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p ng-hide="pnomore" style="text-align: center;cursor:pointer;text-decoration:underline;" ng-click="ploadMore()">Load more</p>
+                </div>
+                <div class="md-content__body">
+                  <div class="table-responsive">
+                    <h6><b>Payment Received</b></h6>
+                    <table class="table table-striped table-bordered" align="center">
+                      <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Payment Id</th>
+                        <th>Payment Mode</th>
+                        <th>Bill No</th>
+                        <th>Total Amount</th>
+                        <th>Amount Received</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="payment in contact.paymentreceived | limitTo:paylimit">
+                        <td>{{payment.paymentdate|date}}</td>
+                        <td><a ui-sref="singlereceive({id:payment.paymentid})">{{payment.paymentid}}</a></td>
+                        <td>{{payment.paymentmode}}</td>
+                        <td><a ui-sref="singlepos({posid:payment.billid})">{{payment.billid}}</a></td>
+                        <td style="text-align: right;">₹.{{payment.totalamount|number:2}}</td>
+                        <td style="text-align: right;">₹.{{payment.amount|number:2}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p ng-hide="paynomore" style="text-align: center;cursor:pointer;text-decoration:underline;" ng-click="payloadMore()">Load more</p>
+                </div>
+                <div class="md-content__body">
+                  <div class="table-responsive">
+                    <h6><b>Estimation</b></h6>
+                    <table class="table table-striped table-bordered" align="center">
+                      <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Estimate Id</th>
+                        <th>Status</th>
+                        <th>Expiry Date</th>
+                        <th>Amount</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="estimate in contact.estimate  | limitTo:elimit">
+                        <td>{{estimate.startdate|date}}</td>
+                        <td><a ui-sref="estimatesingle({id:estimate.id})">{{estimate.estimateid}}</a></td>
+                        <td>
+                          <p ng-if="estimate.status=='Approved'" style="color: green">{{estimate.status}}</p>
+                          <p ng-if="estimate.status=='Draft'" style="color: orange">{{estimate.status}}</p>
+                          <p ng-if="estimate.status=='Rejected'" style="color: red">{{estimate.status}}</p>
+                          <p ng-if="estimate.status=='Cancelled'" style="color: gray">{{estimate.status}}</p>
+                        </td>
+                        <td>{{estimate.enddate|date}}</td>
+                        <td style="text-align: right;">₹{{estimate.maintotal|number:2}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p ng-hide="enomore" style="text-align: center;cursor:pointer;text-decoration:underline;" ng-click="eloadMore()">Load more</p>
+                </div>
+              </md-content>
+            </md-tab>
+            <!-- if  Vendor -->
+            <md-tab label="Purchase" flex="33" ng-if="contact.type =='Vendor'">
+              <md-content class="md-padding">
+                <div class="md-content__body">
+                  <div class="table-responsive">
+                    <h6><b>Purchase Bills</b></h6>
+                    <table class="table table-striped table-bordered" align="center">
+                      <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Bill ID</th>
+                        <th>Ref No</th>
+                        <th>Status</th>
+                        <th>Due Date</th>
+                        <th>Amount</th>
+                        <th>Balance</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="purchase in contact.purchase | limitTo:purlimit">
+                        <td>{{purchase.purchasedate|date}}</td>
+                        <td>{{purchase.billid}}</td>
+                        <td><a ui-sref="billsingle({pid:purchase.purchaseid})">{{purchase.purchaseid}}</a></td>
+                        <td>
+                          <p ng-if="purchase.status=='Paid'" style="color: green">{{purchase.status}}</p>
+                          <p ng-if="purchase.status=='Draft'" style="color: orange">{{purchase.status}}</p>
+                          <p ng-if="purchase.status=='Partially Paid'" style="color: red">{{purchase.status}}</p>
+                        <td>{{purchase.duedate|date}}</td>
+                        <td style="text-align: right;">₹{{purchase.maintotal|number:2}}</td>
+                        <td style="text-align: right;">₹{{purchase.balance|number:2}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p ng-hide="purnomore" style="text-align: center;cursor:pointer;text-decoration:underline;"  ng-click="purloadMore()">Load more</p>
+                </div>
+                <div class="md-content__body">
+                  <div class="table-responsive">
+                    <h6><b>Bill Payment</b></h6>
+                    <table class="table table-striped table-bordered" align="center">
+                      <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Payment Id</th>
+                        <th>Payment Mode</th>
+                        <th>Reference No</th>
+                        <th>Total Amount</th>
+                        <th>Amount Paid</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="pay in contact.paymentmade | limitTo:purpaylimit">
+                        <td>{{pay.paymentdate|date}}</td>
+                        <td><a ui-sref="singlepaymade({id:pay.paymentid})">{{pay.paymentid}}</a></td>
+                        <td>{{pay.paymentmode}}</td>
+                        <td><a ui-sref="billsingle({pid:pay.billid})">{{pay.billid}}</a></td>
+                        <td style="text-align: right;">₹.{{pay.totalamount|number:2}}</td>
+                        <td style="text-align: right;">₹.{{pay.amount|number:2}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p ng-hide="purpaynomore" style="text-align: center;cursor:pointer;text-decoration:underline;"  ng-click="purpayloadMore()">Load more</p>
+                </div>
+                <div class="md-content__body">
+                  <div class="table-responsive">
+                    <h6><b>Purchase Order</b></h6>
+                    <table class="table table-striped table-bordered" align="center">
+                      <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>PO Number</th>
+                        <th>Status</th>
+                        <th>Amount</th>
+                        <th>Amount with tax</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="">
+                        <td></td>
+                        <td><a ui-sref=""></a></td>
+                        <td></td>
+                        <td style="text-align: right;">₹.</td>
+                        <td style="text-align: right;">₹.</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p ng-hide="purpaynomore" style="text-align: center;cursor:pointer;text-decoration:underline;"  ng-click="purpayloadMore()">Load more</p>
+                </div>
+              </md-content>
+            </md-tab>
+            <md-tab label="Report" flex="33">
+              <md-content class="md-padding">
+                <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+                  <md-tab label="Sales" flex="50" ng-if="contact.type =='Customer'">
+                    <md-content class="md-padding">
+                      <md-card>
+                        <div class="col-md-12">
+                          <div layout="row">
+                            <div  style="display:inline-flex;">
+                              <h4>Custom Date:</h4>
+                            </div>
+                            <div class="col-md-2 col-lg-2" style="display:inline-flex;">
+                              <md-datepicker flex ng-model="$parent.startdate"  md-placeholder="From" required>
+                              </md-datepicker>
+                            </div>
+                            <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+                              <md-datepicker flex ng-model="$parent.enddate" md-placeholder="To" required>
+                              </md-datepicker>
+                            </div>
+                            <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+                              <md-button ng-click="getreportc()" aria-label="Button" class="btn-width-sm md-raised md-accent" style="float:right"><md-icon class="md-primary" md-svg-src="/img/icons/ic_autorenew_24px.svg" style="margin-right:5px" ></md-icon>Run Report</md-button>
+                            </div>
+                            <div class="col-md-1 col-lg-1" style="display:inline-flex;">
+                              <md-button aria-label="Button" ng-click="PrintDiv()" class="btn-width-sm md-raised md-accent"><md-icon class="md-primary" md-svg-src="/img/icons/ic_print_24px.svg" style="margin-right:5px"></md-icon>Print</md-button>
+                            </div>
+                            <div class="col-md-3 col-lg-3" style="display:inline-flex;padding-left: 20px;">
+                              <md-select ng-model="exporrval" ng-change="exportAction(exporrval)" placeholder="Export as" style="width:100%">
+                                <md-option value="pdf">PDF</md-option>
+                                <md-option value="excel">XLS(Microsoft Excel)</md-option>
+                                <md-option value="csv">CSV (Comma Seperated Value)</md-option>
+                              </md-select>
+                            </div>
+                          </div>
+                        </div>
+                      </md-card>
+
+                      <md-content style="margin-top:25px" id="dvContents">
+                        <div class="md-content__body">
+                          <div style="text-align:center;">
+                            <h3>{{company}}</h3>
+                            <h2>Sales Report</h2>
+                            <p>{{contact.firstname}} {{contact.lastname}}</p>
+                            <p>{{contact.address}}</p>
+                            <p>From {{startdate|date}} - {{enddate|date}}</p>
+                          </div>
+                          <div class="table-responsive">
+                            <table class="table table-striped table-bordered export-table" align="center">
+                              <thead>
+                              <tr>
+                                <th>Date</th>
+                                <th>Bill No</th>
+                                <th>Place Supply</th>
+                                <th>Amount</th>
+                                <th>CGST</th>
+                                <th>SGST</th>
+                                <th>IGST</th>
+                                <th>Sales with tax</th>
+                                <th>Status</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr ng-repeat="report in customerreport">
+                                <td>{{report.date}}</td>
+                                <td>{{report.posid}}</td>
+                                <td>{{report.user.plos}}</td>
+                                <td style="text-align: right"> {{report.totalsub|number:2}}</td>
+                                <td style="text-align: right">{{report.totalcgst|number:2}}</td>
+                                <td style="text-align: right">{{report.totalsgst|number:2}}</td>
+                                <td style="text-align: right">{{report.totaligst|number:2}}</td>
+                                <td style="text-align: right">{{report.maintotal|number:2}}</td>
+
+                                <td><span ng-if="report.status=='Paid'" style="color: green">{{report.status}}</span>
+                                  <span ng-if="report.status=='Draft'" style="color: orange">{{report.status}}</span>
+                                  <span ng-if="report.status=='Partially Paid'" style="color: red">{{report.status}}</span></td>
+                              </tr>
+                              <tr ng-if="amount.maintotal || amount.totalsub">
+                                <td></td>
+                                <td></td>
+                                <td><b>Total Amount</b></td>
+                                <td style="text-align: right"><b> {{amount.totalsub|number:2}}</b></td>
+                                <td style="text-align: right"><b> {{amount.totalcgst|number:2}}</b></td>
+                                <td style="text-align: right"><b> {{amount.totalsgst|number:2}}</b></td>
+                                <td style="text-align: right"><b> {{amount.totaligst|number:2}}</b></td>
+                                <td style="text-align: right"><b ng-if="amount.maintotal"> {{amount.maintotal|number:2}}</b></td>
+                                <td></td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <style>
+                          @media print{
+                            div{
+                              font-size: 10pt;
+                            }
+                            table{
+                              font-size: 8pt;
+                              width: 100%;
+                              margin-bottom: 1rem;
+                              background-color: transparent;
+                              border-collapse: collapse;
+                            }
+                            *, ::after, ::before {
+                              box-sizing: inherit;
+                            }
+
+                            table, th, td {
+                              border: 1px solid #e9ecef;
+                            }
+
+                          }
+                        </style>
+                      </md-content>
+                    </md-content>
+                  </md-tab>
+                  <md-tab label="Payment Received" flex="50" ng-if="contact.type =='Customer'">
+                    <md-content class="md-padding">
+                      <md-card>
+                        <div class="col-md-12">
+                          <div layout="row">
+                            <div  style="display:inline-flex;">
+                              <h4>Custom Date:</h4>
+                            </div>
+                            <div class="col-md-2 col-lg-2" style="display:inline-flex;">
+                              <md-datepicker flex ng-model="$parent.startdate1"  md-placeholder="From" required>
+                              </md-datepicker>
+                            </div>
+                            <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+                              <md-datepicker flex ng-model="$parent.enddate1" md-placeholder="To" required>
+                              </md-datepicker>
+                            </div>
+                            <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+                              <md-button ng-click="getpaymentreportc()" aria-label="Button" class="btn-width-sm md-raised md-accent" style="float:right"><md-icon class="md-primary" md-svg-src="/img/icons/ic_autorenew_24px.svg" style="margin-right:5px" ></md-icon>Run Report</md-button>
+                            </div>
+                            <div class="col-md-1 col-lg-1" style="display:inline-flex;">
+                              <md-button aria-label="Button" ng-click="PrintDiv1()" class="btn-width-sm md-raised md-accent"><md-icon class="md-primary" md-svg-src="/img/icons/ic_print_24px.svg" style="margin-right:5px"></md-icon>Print</md-button>
+                            </div>
+                            <div class="col-md-3 col-lg-3" style="display:inline-flex;padding-left: 20px;">
+                              <md-select ng-model="exporrval" ng-change="exportAction(exporrval)" placeholder="Export as" style="width:100%">
+                                <md-option value="pdf">PDF</md-option>
+                                <md-option value="excel">XLS(Microsoft Excel)</md-option>
+                                <md-option value="csv">CSV (Comma Seperated Value)</md-option>
+                              </md-select>
+                            </div>
+                          </div>
+                        </div>
+                      </md-card>
+
+                      <md-content style="margin-top:25px" id="dvContents1">
+                        <div class="md-content__body">
+                          <div style="text-align:center;">
+                            <h3>{{company}}</h3>
+                            <h2>Payments Received</h2>
+                            <p>{{contact.firstname}} {{contact.lastname}}</p>
+                            <p>{{contact.address}}</p>
+                            <p>From {{startdate1|date}} - {{enddate1|date}}</p>
+                          </div>
+                          <div class="table-responsive">
+                            <table class="table table-striped table-bordered table export-table" align="center">
+                              <thead>
+                              <tr>
+                                <th>Date</th>
+                                <th>Payment ID</th>
+                                <th>Bill No</th>
+                                <th>Payment Method</th>
+                                <th>Notes</th>
+                                <th>Total Amount</th>
+                                <th>Amount Received</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr ng-repeat="pay in payments">
+                                <td>{{pay.paymentdate}}</td>
+                                <td>{{pay.paymentid}}</td>
+                                <td>{{pay.billid}}</td>
+                                <td>{{pay.paymentmode}}</td>
+                                <td>{{pay.notes}}</td>
+                                <td style="text-align: right"> {{pay.totalamount|number:2}}</td>
+                                <td style="text-align: right"> {{pay.amount|number:2}}</td>
+                              </tr>
+                              <tr ng-if="amount1">
+                                <td><b>Total Amount</b></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: right;">₹ {{amount1.totalamount|number:2}}</td>
+                                <td style="text-align: right;">₹ {{amount1.amount|number:2}}</td>
+                              </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <style>
+                          @media print{
+                            div{
+                              font-size: 10pt;
+                            }
+                            table{
+                              font-size: 8pt;
+                              width: 100%;
+                              margin-bottom: 1rem;
+                              background-color: transparent;
+                              border-collapse: collapse;
+                            }
+                            *, ::after, ::before {
+                              box-sizing: inherit;
+                            }
+
+                            table, th, td {
+                              border: 1px solid #e9ecef;
+                            }
+
+                          }
+                        </style>
+                      </md-content>
+                    </md-content>
+                  </md-tab>
+                  <md-tab label="Purchase" flex="50" ng-if="contact.type =='Vendor'">
+                    <md-content class="md-padding">
+                      <md-card>
+                        <div class="col-md-12">
+                          <div layout="row">
+                            <div  style="display:inline-flex;">
+                              <h4>Custom Date:</h4>
+                            </div>
+                            <div class="col-md-2 col-lg-2" style="display:inline-flex;">
+                              <md-datepicker flex ng-model="$parent.startdate2"  md-placeholder="From" required>
+                              </md-datepicker>
+                            </div>
+                            <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+                              <md-datepicker flex ng-model="$parent.enddate2" md-placeholder="To" required>
+                              </md-datepicker>
+                            </div>
+                            <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+                              <md-button ng-click="getreportvendor()" aria-label="Button" class="btn-width-sm md-raised md-accent" style="float:right"><md-icon class="md-primary" md-svg-src="/img/icons/ic_autorenew_24px.svg" style="margin-right:5px" ></md-icon>Run Report</md-button>
+                            </div>
+                            <div class="col-md-1 col-lg-1" style="display:inline-flex;">
+                              <md-button aria-label="Button" ng-click="PrintDiv2()" class="btn-width-sm md-raised md-accent"><md-icon class="md-primary" md-svg-src="/img/icons/ic_print_24px.svg" style="margin-right:5px"></md-icon>Print</md-button>
+                            </div>
+                            <div class="col-md-3 col-lg-3" style="display:inline-flex;padding-left: 20px;">
+                              <md-select ng-model="exporrval" ng-change="exportAction(exporrval)" placeholder="Export as" style="width:100%">
+                                <md-option value="pdf">PDF</md-option>
+                                <md-option value="excel">XLS(Microsoft Excel)</md-option>
+                                <md-option value="csv">CSV (Comma Seperated Value)</md-option>
+                              </md-select>
+                            </div>
+                          </div>
+                        </div>
+                      </md-card>
+
+                      <md-content style="margin-top:25px" id="dvContents2">
+                        <div class="md-content__body">
+                          <div style="text-align:center;">
+                            <h3>{{company}}</h3>
+                            <h2>Purchase Report</h2>
+                            <p>{{contact.firstname}} {{contact.lastname}}</p>
+                            <p>{{contact.address}}</p>
+                            <p>From {{startdate2|date}} - {{enddate2|date}}</p>
+                          </div>
+                          <div class="table-responsive">
+                            <table class="table table-striped table-bordered export-table" align="center">
+                              <thead>
+                              <tr>
+                                <th>Date</th>
+                                <th>Bill No</th>
+                                <th>Ref Number</th>
+                                <th>source of Supply</th>
+                                <th>Amount</th>
+                                <th>CGST</th>
+                                <th>SGST</th>
+                                <th>IGST</th>
+                                <th>Sales with tax</th>
+                                <th>Status</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr ng-repeat="report in vendorreport">
+                                <td>{{report.purchasedate}}</td>
+                                <td>{{report.billid}}</td>
+                                <td>{{report.purchaseid}}</td>
+                                <td>{{report.user.sourceofsuply}}</td>
+                                <td style="text-align: right"> {{report.totalsub|number:2}}</td>
+                                <td style="text-align: right">{{report.totalcgst|number:2}}</td>
+                                <td style="text-align: right">{{report.totalsgst|number:2}}</td>
+                                <td style="text-align: right">{{report.totaligst|number:2}}</td>
+                                <td style="text-align: right">{{report.maintotal|number:2}}</td>
+                                <td><span ng-if="report.status=='Paid'" style="color: green">{{report.status}}</span>
+                                  <span ng-if="report.status=='Draft'" style="color: orange">{{report.status}}</span>
+                                  <span ng-if="report.status=='Partially Paid'" style="color: red">{{report.status}}</span></td>
+                              </tr>
+                              <tr ng-if="amount2.maintotal || amount2.totalsub">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>Total Amount</b></td>
+                                <td style="text-align: right"><b> {{amount2.totalsub|number:2}}</b></td>
+                                <td style="text-align: right"><b> {{amount2.totalcgst|number:2}}</b></td>
+                                <td style="text-align: right"><b> {{amount2.totalsgst|number:2}}</b></td>
+                                <td style="text-align: right"><b> {{amount2.totaligst|number:2}}</b></td>
+                                <td style="text-align: right"><b ng-if="amount2.maintotal"> {{amount2.maintotal|number:2}}</b></td>
+                                <td></td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <style>
+                          @media print{
+                            div{
+                              font-size: 10pt;
+                            }
+                            table{
+                              font-size: 8pt;
+                              width: 100%;
+                              margin-bottom: 1rem;
+                              background-color: transparent;
+                              border-collapse: collapse;
+                            }
+                            *, ::after, ::before {
+                              box-sizing: inherit;
+                            }
+
+                            table, th, td {
+                              border: 1px solid #e9ecef;
+                            }
+
+                          }
+                        </style>
+                      </md-content>
+                    </md-content>
+                  </md-tab>
+                  <md-tab label="Payment Made" flex="50" ng-if="contact.type =='Vendor'">
+                    <md-content class="md-padding">
+                      <md-card>
+                        <div class="col-md-12">
+                          <div layout="row">
+                            <div  style="display:inline-flex;">
+                              <h4>Custom Date:</h4>
+                            </div>
+                            <div class="col-md-2 col-lg-2" style="display:inline-flex;">
+                              <md-datepicker flex ng-model="$parent.startdate3"  md-placeholder="From" required>
+                              </md-datepicker>
+                            </div>
+                            <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+                              <md-datepicker flex ng-model="$parent.enddate3" md-placeholder="To" required>
+                              </md-datepicker>
+                            </div>
+                            <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+                              <md-button ng-click="getpaymentmadereportc()" aria-label="Button" class="btn-width-sm md-raised md-accent" style="float:right"><md-icon class="md-primary" md-svg-src="/img/icons/ic_autorenew_24px.svg" style="margin-right:5px" ></md-icon>Run Report</md-button>
+                            </div>
+                            <div class="col-md-1 col-lg-1" style="display:inline-flex;">
+                              <md-button aria-label="Button" ng-click="PrintDiv3()" class="btn-width-sm md-raised md-accent"><md-icon class="md-primary" md-svg-src="/img/icons/ic_print_24px.svg" style="margin-right:5px"></md-icon>Print</md-button>
+                            </div>
+                            <div class="col-md-3 col-lg-3" style="display:inline-flex;padding-left: 20px;">
+                              <md-select ng-model="exporrval" ng-change="exportAction(exporrval)" placeholder="Export as" style="width:100%">
+                                <md-option value="pdf">PDF</md-option>
+                                <md-option value="excel">XLS(Microsoft Excel)</md-option>
+                                <md-option value="csv">CSV (Comma Seperated Value)</md-option>
+                              </md-select>
+                            </div>
+                          </div>
+                        </div>
+                      </md-card>
+
+                      <md-content style="margin-top:25px" id="dvContents3">
+                        <div class="md-content__body">
+                          <div style="text-align:center;">
+                            <h3>{{company}}</h3>
+                            <h2>Payment Made</h2>
+                            <p>{{contact.firstname}} {{contact.lastname}}</p>
+                            <p>{{contact.address}}</p>
+                            <p>From {{startdate3|date}} - {{enddate3|date}}</p>
+                          </div>
+                          <div class="table-responsive">
+                            <table class="table table-striped table-bordered table export-table" align="center">
+                              <thead>
+                              <tr>
+                                <th>Date</th>
+                                <th>Payment ID</th>
+                                <th>Bill No</th>
+                                <th>Payment Method</th>
+                                <th>Notes</th>
+                                <th>Total Amount</th>
+                                <th>Amount Received</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr ng-repeat="pay in paymentmade">
+                                <td>{{pay.paymentdate}}</td>
+                                <td>{{pay.paymentid}}</td>
+                                <td>{{pay.billid}}</td>
+                                <td>{{pay.paymentmode}}</td>
+                                <td>{{pay.notes}}</td>
+                                <td style="text-align: right"> {{pay.totalamount|number:2}}</td>
+                                <td style="text-align: right"> {{pay.amount|number:2}}</td>
+                              </tr>
+                              <tr ng-if="amount3">
+                                <td><b>Total Amount</b></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: right;">₹ {{amount3.totalamount|number:2}}</td>
+                                <td style="text-align: right;">₹ {{amount3.amount|number:2}}</td>
+                              </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <style>
+                          @media print{
+                            div{
+                              font-size: 10pt;
+                            }
+                            table{
+                              font-size: 8pt;
+                              width: 100%;
+                              margin-bottom: 1rem;
+                              background-color: transparent;
+                              border-collapse: collapse;
+                            }
+                            *, ::after, ::before {
+                              box-sizing: inherit;
+                            }
+
+                            table, th, td {
+                              border: 1px solid #e9ecef;
+                            }
+
+                          }
+                        </style>
+                      </md-content>
+                    </md-content>
+                  </md-tab>
+                </md-tabs>
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>

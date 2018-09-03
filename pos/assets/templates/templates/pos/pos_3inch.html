@@ -1,0 +1,150 @@
+<style>
+  @page {
+    /*size: 3.0in 11in;  !* width height *!*/
+    margin: 0px;
+  }
+  p{
+    margin: 0px;
+    color: black;
+  }
+  table {
+    width: 100%;
+    display: table;
+  }
+  table.bordered>tbody>tr, table.bordered>thead>tr {
+    border-bottom: 1px solid #E0E0E0;
+  }
+  thead {
+    border-bottom: 1px solid #d0d0d0;
+  }
+</style>
+<section  class="page-padding" style="color: black;font-family: Arial, Helvetica, sans-serif;padding-top: 0px;">
+  <div class="col-md-12" style="padding: 0px;">
+    <div class="card-content" style="padding:15px;padding-top: 0px;">
+      <div class="row" style="margin:0px 0px 20px;">
+
+        <div align="center" style="width: 100%">
+          <h5 style="font-size:20px;margin:0px">{{mainuser.company}}</h5>
+          <p style="font-size:14px;">{{mainuser.address}}</p>
+          <p ng-if="mainuser.city" style="font-size:14px;">{{mainuser.city}}-{{mainuser.postalcode}},{{mainuser.country}}</p>
+          <p style="font-size:14"><small style="font-size:88%">{{mainuser.phoneno}}</small></p>
+          <p ng-if="mainuser.gstin" style="font-size:14"><small style="font-size:88%">GSTIN :{{mainuser.gstin}}</small></p>
+        </div>
+      </div>
+      <div class="row" style="margin:0px">
+        <table class="bordered" style="font-size: 12px;">
+          <tbody>
+          <tr>
+            <td style="padding:2px"><b>Bill # : </b>{{pos.posid}}</td>
+            <td style="text-align:right;padding:2px"><b>Date : </b>{{pos.createdAt|date:'dd/MM/yyyy'}}</td>
+          </tr>
+          <tr>
+            <td style="padding:2px" ><b ng-if="pos.user.gstin">GSTIN : </b>{{pos.user.gstin}}</td>
+            <td style="padding:2px;text-align:right;"><b>Time : </b>{{pos.createdAt|date:'h:mm:ss a'}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="margin: 10px 0px 0px;">
+        <table style="font-size:12px;">
+          <thead>
+          <tr style="text-align:right">
+            <th data-field="vendorname" style="padding:2px;">Item Name</th>
+            <th data-field="balance" style="padding:2px;text-align:right">Rate</th>
+            <th data-field="exesspayment" style="padding:2px;text-align:right;">Qty</th>
+            <th data-field="balance" style="padding:2px;text-align:right">Tax</th>
+            <th data-field="balance" style="padding:2px;text-align:right">Amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="product in pos.products">
+            <td style="padding:2px">{{product.selectedItem.productname}}</td>
+            <td style="padding:2px;text-align:right">{{product.rate|number:2}}</td>
+            <td style="padding:2px;text-align:right;">{{product.quantity}} {{product.unit}}</td>
+            <td style="padding:2px;text-align:right;">{{product.singletax}}%</td>
+            <td style="padding:2px;text-align:right">{{product.subtotal|number:2}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr style="margin:0px;border-bottom:dashed 1px;">
+      <div class="row" style="margin:0px">
+        <table style="font-size:12px;">
+          <tbody>
+          <tr>
+            <td style="padding:2px"><b>Subtotal : : </b></td>
+            <td style="text-align:right;padding:2px"><b>{{pos.totalsub|number:2}}</b></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr style="margin:0px">
+      <div class="row" style="margin:0px;">
+        <table style="font-size:9px;">
+          <tbody>
+          <tr>
+            <td style="padding:2px" ng-if="pos.totalsgst">SGST : </td>
+            <td style="text-align:right;padding:2px" ng-if="pos.totalsgst">{{pos.totalsgst|number:2}}</td>
+          </tr>
+          <tr>
+            <td style="padding:2px" ng-if="pos.totalcgst">CGST : </td>
+            <td style="text-align:right;padding:2px" ng-if="pos.totalcgst">{{pos.totalcgst|number:2}}</td>
+          </tr>
+          <tr>
+            <td style="padding:2px" ng-if="pos.totaligst">IGST : </td>
+            <td style="text-align:right;padding:2px" ng-if="pos.totaligst">{{pos.totaligst|number:2}}</td>
+          </tr>
+          <tr>
+            <td style="padding:2px" ng-if="pos.discount!=0">Discount : </td>
+            <td style="text-align:right;padding:2px" ng-if="pos.discount!=0">{{pos.discount |number:2}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="margin:0px">
+        <table style="font-size:12px;">
+          <tbody>
+          <tr>
+            <td style="border-bottom:dashed 1px;font-size:14px;padding:3px"><b>Grand Total</b></td>
+            <td style="border-bottom:dashed 1px;font-size:14px;text-align:right;padding:3px"><b>₹ {{pos.maintotal|number:2}}</b></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="margin:0px">
+        <table style="font-size:12px;" class="bordered" style="font-size: 12px;">
+          <tbody>
+          <tr>
+            <td style="padding:2px;"><b>Tot Items :</b></td>
+            <td style="padding:2px;">{{pos.items}}</td>
+            <td style="text-align:right;padding:2px"><b>Tot Qty :</b></td>
+            <td style="text-align:right; padding:2px">{{pos.totalquantity}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="margin:0px">
+        <table class="bordered" style="font-size: 12px;">
+          <tbody>
+          <tr>
+            <td style="padding:2px;"><b>Cash Received : </b>₹ {{pos.tenderedamount|number:2 }}</td>
+          </tr>
+          <tr>
+            <td style="padding:2px"><b>Balance : </b>₹ {{pos.balance|number:2}}</td>
+          </tr>
+          <tr>
+            <td style=" padding:2px" colspan="4"><b>Customer Name : </b>{{pos.username}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="margin:0px">
+        <div style="width: 100%;margin-bottom: 20px;" align="center">
+          <p style="font-size:10px"><b>{{config.description}}</b></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+

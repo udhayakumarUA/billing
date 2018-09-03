@@ -1,0 +1,173 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent" style="background:white;">
+          <div class="md-toolbar-tools" style="height:50px;color:#D81B60;">
+            <md-button aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="itempage" style="margin-right:20px">
+              <md-icon class="md-primary" md-svg-src="/img/icons/ic_keyboard_arrow_left_24px.svg"></md-icon>back</md-button>
+            <span class="flex"></span>
+            <md-button aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="edititem({id:product.id})" style="margin-right:20px"><md-icon class="md-primary" style="margin-right:5px;" md-svg-src="/img/icons/ic_create_24px.svg"></md-icon>Edit</md-button>
+            <md-button aria-label="Button" ng-click="delete(product.id)" class="btn-width-sm md-raised md-accent" style="margin-right:20px"><md-icon class="md-primary" style="margin-right:5px;"md-svg-src="/img/icons/ic_delete_24px.svg"></md-icon>Delete</md-button>
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+            <md-tab label="Overview" flex="50">
+              <md-content class="md-padding">
+                <div class="md-content__body">
+                  <div class="row">
+                    <div class="col s12">
+                      <span class="title" style="font-size:21px; color:green;">{{product.productname}}</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div flex="70">
+                      <div class="bottom-gap" style="padding:15px 10px 0px 10px">
+                        <div class="row">
+                          <label class="col m3" style="color:#272828;font-size:14px"><b>Item Type</b></label>
+                          <label class="col m7" style="color:#272828;font-size:14px"><b>{{product.itemtype}}</b></label>
+                        </div>
+                      </div>
+                      <div class="group" style="padding:10px">
+                        <div class="row">
+                          <label class="col m3" style="color: #777;font-size:14px">SKU</label>
+                          <label class="col m7" style="font-size:14px">{{product.sku}}</label>
+                        </div>
+                        <div class="row">
+                          <label class="col m3" style="color: #777;font-size:14px">HSN Code</label>
+                          <label class="col m7" style="font-size:14px">{{product.hsn}}</label>
+                        </div>
+                        <div class="row">
+                          <label class="col m3" style="color: #777;font-size:14px">Category</label>
+                          <label class="col m7" style="font-size:14px">{{product.collection.collectiontitle}}</label>
+                        </div>
+                        <div class="row">
+                          <label class="col m3" style="color: #777;font-size:14px">Unit</label>
+                          <label class="col m7" style="font-size:14px">{{product.unit}}</label>
+                        </div>
+                        <div class="row" ng-if="product.barcode">
+                          <label class="col m3" style="color: #777;font-size:14px">Barcode</label>
+                          <label class="col m7" style="font-size:14px">{{product.barcode}}</label>
+                        </div>
+                        <div class="row">
+                          <label class="col m3" style="color: #777;font-size:14px">Tax Preference</label>
+                          <label class="col m7" style="font-size:14px">{{product.taxpreference}}</label>
+                        </div>
+                        <div class="row">
+                          <label class="col m3" style="color: #777;font-size:14px">CGST</label>
+                          <label class="col m7" style="font-size:14px">{{product.cgst}}%</label>
+                        </div>
+                        <div class="row">
+                          <label class="col m3" style="color: #777;font-size:14px">SGST</label>
+                          <label class="col m7" style="font-size:14px">{{product.sgst}}%</label>
+                        </div>
+                        <div class="row">
+                          <label class="col m3" style="color: #777;font-size:14px">IGST</label>
+                          <label class="col m7" style="font-size:14px">{{product.igst}}%</label>
+                        </div>
+                        <div class="row">
+                          <label class="col m3" style="color: #777;font-size:14px">Cess</label>
+                          <label class="col m7" style="font-size:14px">{{product.cess}}%</label>
+                        </div>
+
+                      </div>
+                      <div class="bottom-gap" style="padding:15px 10px 0px 10px" ng-if="product.purchaserate">
+                        <div class="row">
+                          <label class="col m12" style="color:#272828;font-size:14px"><b>Purchase Information</b></label>
+                        </div>
+                      </div>
+                      <div class="group" style="padding:10px" ng-if="product.purchaserate">
+                        <div class="row">
+                          <label class="col m3" style="color: #777;font-size:14px">Purchase Rate</label>
+                          <label class="col m7" style="font-size:14px"><span ng-repeat="rate in product.prices">₹ {{rate.purchaserate|number:2}}, </span></label>
+                        </div>
+                      </div>
+                      <div class="bottom-gap" style="padding:15px 10px 0px 10px">
+                        <div class="row">
+                          <label class="col m12" style="color:#272828;font-size:14px"><b>Sales Information</b></label>
+                        </div>
+                      </div>
+                      <div class="group" style="padding:10px">
+                        <div class="row">
+                          <label class="col m3" style="color: #777;font-size:14px">Selling Price</label>
+                          <label class="col m7" style="font-size:14px"><span ng-repeat="rate in product.prices">₹ {{rate.salesrate|number:2}}, </span></label>
+                        </div>
+                      </div>
+                    </div>
+                    <div flex="30" ng-if="product.trackinventary==true">
+                      <div class="collection">
+                        <div style="padding: 10px;">
+                          <span class="title"><b>Stocks</b></span>
+                          <p ng-if="product.openingstock">Opening Stock<br></p>
+                          <p style="font-size:14px" ng-if="product.openingstock">{{product.openingstock}}</p>
+                          <p></p>
+                          <p>Available<br></p>
+                          <p style="font-size:14px">{{product.stockinhand}}</p>
+                          <p></p>
+                          <p>Inventory Alert<br></p>
+                          <p style="font-size:14px">{{product.inventoryalert}}</p>
+                          <p></p>
+                        </div>
+                      </div>
+                      <div class="collection" ng-hide="$root.role=='S'">
+                        <div style="padding: 10px;">
+                          <span class="title"><b>Stock Adjustment</b></span>
+                          <form>
+                            <div layout="row">
+                              <md-input-container flex="100" style="margin-top: 25px;margin-bottom: 0px;">
+                                <label>Stock Adjustment</label>
+                                <input  ng-model="$parent.stockadjustment" type="number">
+                                <p style="color:red" ></p>
+                              </md-input-container>
+                            </div>
+                            <div layout="row">
+                              <md-button class="btn-width-medium md-raised md-primary" ng-click="updatestock()" >Submit</md-button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </md-content>
+            </md-tab>
+
+            <!--<md-tab label="Purchase" flex="50">
+              <md-content class="md-padding">
+                <div class="md-content__body">
+                  <div class="table-responsive">
+                    <table class="table table-striped table-bordered" align="center">
+                      <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Bill No</th>
+                        <th>Ref No</th>
+                        <th>Vendor Name</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>12/06/2017</td>
+                        <td><a >POS0001</a></td>
+                        <td>Ref-0001</td>
+                        <td>sat kumar</td>
+                        <td>1</td>
+                        <td>₹1000.00</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p style="text-align: center;cursor:pointer;text-decoration:underline;">Load more</p>
+                </div>
+              </md-content>
+            </md-tab>-->
+          </md-tabs>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>

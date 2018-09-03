@@ -1,0 +1,72 @@
+<section class="page-padding">
+    <div>
+      <div class="md-whiteframe-z1">
+        <md-toolbar style="background:white;color:#D81B60">
+          <div class="md-toolbar-tools">
+            <h3>Stock Alert List</h3>
+            <span class="flex"></span>
+            </div>
+        </md-toolbar>
+        <md-content>
+          <div class="md-content__body">
+          <!-- <div class="row">
+           <div flex>
+             <span>Show
+               <md-input-container>
+                  <md-select ng-model="rows" ng-change="changevalue()">
+                    <md-option value="20" ng-selected="true">20</md-option>
+                    <md-option value="30">30</md-option>
+                    <md-option value="40">40</md-option>
+                    <md-option value="50">50</md-option>
+                  </md-select>
+                </md-input-container>
+                entries per page</span>
+            </div>
+            <div flex>
+             <div class="table-filters">
+              <md-input-container class="md-accent" style="width:100%">
+                <label>Search Estimation</label>
+                <input type="text"
+                      placeholder="Enter Estimate ID or Customer Name"
+                       class="form-control"
+                       data-ng-model="searchtext"
+                       data-ng-keyup="search(searchtext)">
+              </md-input-container>
+            </div>
+            </div>
+            </div> -->
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered" align="center">
+                <thead>
+                  <tr>
+                    <th>Item Name</th>
+                    <th width="80px">SKU</th>
+                    <th>HSN</th>
+                    <th>Stock Alert</th>
+                    <th>Quantity Available</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="stock in stocks">
+                    <td><a ui-sref="singleitem({id:stock._id})">{{stock.productname}}</a></td>
+                    <td>{{stock.sku}}</td>
+                    <td>{{stock.hsn}}</td>
+                    <td>{{stock.inventoryalert}}</td>                      
+                    <td style="color: red;">{{stock.stockinhand}}</td>
+                  </tr>
+                  </tbody>
+              </table>
+              <!-- <footer class="table-footer">
+              <div class="row">
+              <div class="col-md-12 text-right pagination-container">
+                <cl-paging flex cl-pages="totalpages" , cl-steps="6" , cl-page-changed="more()" , cl-align="center center" , cl-current-page="currentpage"></cl-paging>
+                </div>
+              </div>
+             </footer> -->
+            </div>
+          </div>
+        </md-content>
+      </div>
+    </div>
+  </section>
+  

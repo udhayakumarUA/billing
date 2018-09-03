@@ -1,0 +1,146 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent" style="background-color: white;">
+          <div class="md-toolbar-tools" style="height:50px;padding: 0px 45px;">
+            <md-button aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="pointofsale" style="margin-right:20px">
+              <md-icon class="md-primary" md-svg-src="/img/icons/ic_keyboard_arrow_left_24px.svg"></md-icon>back</md-button>
+            <span class="flex"></span>
+            <md-button class="md-fab md-mini" ng-click="print()" aria-label="create"><md-icon md-svg-src="/img/icons/ic_print_24px.svg"></md-icon></md-button>
+           <!-- <md-button class="md-fab md-mini" aria-label="create"><md-icon md-svg-src="/img/icons/ic_file_download_24px.svg"></md-icon></md-button> -->
+            <md-button ng-click="delete(pos.id)" class="md-fab md-mini" aria-label="create"><md-icon md-svg-src="/img/icons/ic_delete_24px.svg"></md-icon></md-button>
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="card-content">
+            <div class="card" style="padding:30px 15px; margin:30px;position: relative;">
+              <div class="card-content">
+                <div class="card-content" style="padding:5px">
+                  <div class="row" style="margin:20px 0px;">
+                    <div align="center" style="width: 100%">
+                      <h5 style="font-size:20px;margin:0px">{{mainuser.company}}</h5>
+                      <p style="font-size:14px;">{{mainuser.address}}</p>
+                      <p ng-if="mainuser.city" style="font-size:14px;">{{mainuser.city}}-{{mainuser.postalcode}},{{mainuser.country}}</p>
+                      <p style="font-size:14"><small style="font-size:88%">{{mainuser.phoneno}}</small></p>
+                      <p ng-if="mainuser.gstin" style="font-size:14"><small style="font-size:88%">{{mainuser.gstin}}</small></p>
+                    </div>
+                  </div>
+                  <div class="row" style="margin:0px">
+                    <table style="font-size: 16px;width: 100%;">
+                      <tbody>
+                      <tr>
+                        <td style="padding:2px">Bill No :{{pos.posid}} </td>
+                        <td style="text-align:right;padding:2px"><b>Date : </b>{{pos.createdAt|date:'dd/MM/yyyy'}}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:2px"><p ng-if="pos.user.gstin">GSTIN : {{pos.user.gstin}}</p></td>
+                        <td style="text-align:right;padding:2px"><b>Time :</b>{{pos.createdAt|date:'h:mm:ss a'}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="row" style="margin: 10px 0px;">
+                    <table style="font-size: 16px;width: 100%;">
+                      <thead>
+                      <tr style="text-align:right">
+                        <th data-field="vendorname" style="padding:2px;">Item Name</th>
+                        <th data-field="billbalance" style="padding:2px">HSN</th>
+                        <th data-field="balance" style="padding:2px;text-align:right">Rate</th>
+                        <th data-field="exesspayment" style="padding:2px;text-align:right;">Qty</th>
+                        <th data-field="balance" style="padding:2px;text-align:right">Tax</th>
+                        <th data-field="balance" style="padding:2px;text-align:right">Amount</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="product in pos.products">
+                          <td style="padding:2px">{{product.selectedItem.productname}}</td>
+                          <td style="padding:2px">{{product.selectedItem.hsn}}</td>
+                          <td style="padding:2px;text-align:right">{{product.rate|number:2}}</td>
+                          <td style="padding:2px;text-align:right;">{{product.quantity}} {{product.unit}}</td>
+                          <td style="padding:2px;text-align:right;">{{product.singletax}}%</td>
+                          <td style="padding:2px;text-align:right">{{product.subtotal|number:2}}</td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                  <hr style="margin:0px">
+                  <div class="row" style="margin:0px">
+                    <table class="" style="font-size: 16px;width: 100%;">
+                      <tbody>
+                      <tr>
+                        <td style="padding:2px;"><b>Tot Items :</b></td>
+                        <td style="padding:2px;">{{pos.items}}</td>
+                        <td style="text-align:right;padding:2px"><b>Tot Qty :</b></td>
+                        <td style="text-align:right; padding:2px">{{pos.totalquantity}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <hr style="margin:0px">
+                  <div class="row" style="margin:0px">
+                    <table class="" style="font-size: 16px;width: 100%;">
+                      <tbody>
+                      <tr>
+                        <td style="padding:2px">Subtotal :</td>
+                        <td style="text-align:right;padding:2px">{{pos.totalsub|number:2}}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:2px">SGST :</td>
+                        <td style="text-align:right;padding:2px">{{pos.totalsgst|number:2}}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:2px;">CGST :</td>
+                        <td style="text-align:right;padding:2px;">{{pos.totalcgst|number:2}}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:2px;">CESS :</td>
+                        <td style="text-align:right;padding:2px;">{{pos.totalcess|number:2}}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:2px;"><b>IGST : </b></td>
+                        <td style="text-align:right;padding:2px;">{{pos.totaligst|number:2}}</td>
+                      </tr>
+                      <tr ng-if="pos.discount!=0">
+                        <td style="padding:2px;border-bottom:dashed 1px;"><b>Discount : </b></td>
+                        <td style="text-align:right;border-bottom:dashed 1px;padding:2px;">{{pos.discount|number:2}}</td>
+                      </tr>
+                      <tr>
+                        <td style="color:#2f3333; font-size:18px;padding:3px"><b>Total</b></td>
+                        <td style="color:#2f3333;font-size:18px;text-align:right;padding:3px"><b>₹{{pos.maintotal|number:2}}</b></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="row" style="margin:0px">
+                  <table class="bordered" style="font-size: 12px;width: 100%;">
+                    <tbody>
+                    <tr>
+
+                      <td style="padding:2px"><b>Balance  : </b></td>
+                      <td style="text-align:right; padding:2px">₹{{pos.balance|number:2}}</td>
+                      <td style="text-align:right; padding:2px"><b>Cash Received : </b></td>
+                      <td style="text-align:right; padding:2px">₹ {{pos.tenderedamount|number:2}}</td>
+
+
+                    </tr>
+                    <tr>
+                      <td style=" padding:2px"><b>Customer Name : </b></td>
+                      <td style=" padding:2px;text-align:right;">{{pos.username}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              </div>
+            </div>
+
+          </div>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>
+

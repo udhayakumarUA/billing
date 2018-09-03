@@ -1,0 +1,233 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools" style="height:50px">
+            Edit Sale Return
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="md-content__body">
+            <form>
+              <div class="row">
+                <div class="col-md-6" style="padding-top: 15px;">
+                  <md-autocomplete
+                    ng-disabled="isDisabled"
+                    md-no-cache="noCache"
+                    md-selected-item-change="customerchange()"
+                    md-search-text-change="search(searchtext)"
+                    md-selected-item="selectedcustomer"
+                    md-search-text="searchtext"
+                    md-items="item in search(searchtext)"
+                    md-item-text="item.firstname"
+                    md-min-length="0"
+                    placeholder="Customer Name">
+                    <md-item-template>
+                      <span md-highlight-text="searchtext" md-highlight-flags="^i">{{item.firstname}} {{item.lastname}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                      No states matching "{{searchtext}}" were found.
+                      <a ui-sref="addcontact">Create a new one!</a>
+                    </md-not-found>
+                  </md-autocomplete>
+                </div>
+                <div class="col-md-6" style="padding-top: 15px;">
+                  <md-autocomplete
+                    ng-disabled="isDisabled"
+                    md-no-cache="noCache"
+                    md-selected-item="selectedbill"
+                    md-search-text="searchtextbill"
+                    md-items="item in searchbill(searchtextbill)"
+                    md-item-text="item.posid"
+                    md-min-length="0"
+                    placeholder="Sale Bill No">
+                    <md-item-template>
+                      <span md-highlight-text="searchtextbill" md-highlight-flags="^i">{{item.posid}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                      No states matching "{{searchtextbill}}" were found.
+                      <a ui-sref="addcontact">Create a new one!</a>
+                    </md-not-found>
+                  </md-autocomplete>
+                </div>
+              </div><br>
+              <div class="row" ng-if="selectedcustomer">
+                <div class="col-md-2"></div>
+                <div class="col-md-5" ng-if="selectedcustomer.address">
+                  <span><b>BILLING ADDRESS</b></span>
+                  <address>
+                    <span ng-if="selectedcustomer.address.address1">{{selectedcustomer.address.address1}}</span>
+                    <span ng-if="!selectedcustomer.address.address1">{{selectedcustomer.address}}</span>
+                      {{selectedcustomer.address.address2}}<br>
+                      {{selectedcustomer.address.city}}  {{selectedcustomer.address.zipcode}}<br>
+                      {{selectedcustomer.address.state}}
+                      {{selectedcustomer.address.country}}
+                  </address>
+                </div>
+
+                <div class="col-md-5" ng-if="selectedcustomer.shippingAddress">
+                  <span><b>SHIPPING ADDRESS</b></span>
+                  <address>
+                      {{selectedcustomer.shippingAddress.address1}}
+                      {{selectedcustomer.shippingAddress.address2}}<br>
+                      {{selectedcustomer.shippingAddress.city}}  {{selectedcustomer.shippingAddress.zipcode}}<br>
+                      {{selectedcustomer.shippingAddress.state}}
+                      {{selectedcustomer.shippingAddress.country}}
+                  </address>
+                </div>
+              </div>
+              <div layout="row">
+              <div layout="row" style="margin-top: 10px;">
+                  <md-input-container flex="40">
+                      <label>Sale Return No</label>
+                      <input  type="number" ng-model="returnid" ng-change="err='';checkid(returnid)" >
+                      <p style="color:red" ng-if="err">{{err}}</p>
+                    </md-input-container>
+                    <md-input-container flex="30">
+                        Return Date : <md-datepicker flex ng-model="billdate" md-placeholder="Return Date" requireds></md-datepicker>
+                      </md-input-container>
+                    <md-input-container flex="30">
+                      <label>Reason </label>
+                      <input  ng-model="reason">
+                    </md-input-container>
+              </div>
+              <table class="table table-striped table-bordered" align="center">
+                <thead>
+                <tr>
+                  <th style="width: 30%;">Item Details</th>
+                  <th style="width: 10%;">Quantity</th>
+                  <th style="width: 10%;">Rate</th>
+                  <th ng-if="selectedcustomer.taxtype!='Inter State Tax Rate'" style="width: 10%;">CGST</th>
+                  <th ng-if="selectedcustomer.taxtype!='Inter State Tax Rate'" style="width: 10%;">SGST</th>
+                  <th ng-if="selectedcustomer.taxtype=='Inter State Tax Rate' ||!selectedcustomer" style="width: 10%;">IGST</th>
+                  <th style="width: 10%;">CESS</th>
+                  <th style="width: 10%;">Amount</th>
+                  <th style="width: 2%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="product in products">
+                  <td>
+                    <md-autocomplete flex
+                                     md-input-name="autocompleteField"
+                                     md-input-id="autoCompleteId{{$index}}"
+                                     md-no-cache="noCache"
+                                     md-selected-item="product.selectedItem"
+                                     md-selected-item-change="fectchdata(product.selectedItem,$index)"
+                                     md-search-text="searchText"
+                                     md-items="item in searchproducts(searchText)"
+                                     md-item-text="item.productname"
+                                     md-require-match
+                                     md-floating-label="  ">
+                      <md-item-template>
+                        <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.productname}}</span>
+                      </md-item-template>
+                      <md-not-found>
+                        No states matching "{{searchText}}" were found.
+                        <a ng-click="ctrl.newState(searchText)">Create a new one!</a>
+                      </md-not-found>
+                    </md-autocomplete>
+                  </td>
+                  <td>
+                    <md-input-container flex="100" style="margin:0px;height: 34px;">
+                      <input  id="qty{{$index}}" ng-change="calculatetotal()" ng-keydown="movetorate($event,$index)" ng-model="product.quantity" type="number">
+                    </md-input-container>
+                  </td>
+                  <td>
+                    <md-input-container flex="100" style="margin:0px;height: 34px;">
+                      <input id="rate{{$index}}" ng-change="calculatetotal()" ng-keydown="movetorow($event,$index)" ng-model="product.rate" type="number">
+                    </md-input-container>
+                  </td>
+                  <td ng-if="selectedcustomer.taxtype!='Inter State Tax Rate'">
+                    <md-input-container flex="100" style="margin:0px;height: 34px;">
+                      <md-select ng-model="product.cgst" ng-change="calculatetotal()">
+                        <md-option value="0">0</md-option>
+                        <md-option ng-repeat="cgst in cgsts" value="{{cgst.rate}}">{{cgst.name}}[{{cgst.rate}}]%</md-option>
+                      </md-select>
+                    </md-input-container>
+                  </td>
+                  <td ng-if="selectedcustomer.taxtype!='Inter State Tax Rate'">
+                    <md-input-container flex="100" style="margin:0px;height: 34px;">
+                      <md-select ng-model="product.sgst" ng-change="calculatetotal()">
+                        <md-option value="0">0</md-option>
+                        <md-option ng-repeat="sgst in sgsts" value="{{sgst.rate}}">{{sgst.name}}[{{sgst.rate}}]%</md-option>
+                      </md-select>
+                    </md-input-container>
+                  </td>
+                  <td ng-if="selectedcustomer.taxtype=='Inter State Tax Rate' ||!selectedcustomer">
+                    <md-input-container flex="100" style="margin:0px;height: 34px;">
+                      <md-select ng-model="product.igst" ng-change="calculatetotal()">
+                        <md-option value="0">0</md-option>
+                        <md-option ng-repeat="igst in igsts" value="{{igst.rate}}">{{igst.name}}[{{igst.rate}}]%</md-option>
+                      </md-select>
+                    </md-input-container>
+                  </td>
+                  <td>
+                    <md-input-container flex="100" style="margin:0px;height: 34px;">
+                      <md-select ng-model="product.cess" ng-change="calculatetotal()">
+                        <md-option value="0">0</md-option>
+                        <md-option ng-repeat="cess in cesss" value="{{cess.rate}}">{{cess.name}}[{{cess.rate}}]%</md-option>
+                      </md-select>
+                    </md-input-container>
+                  </td>
+                  <td style="text-align: right">
+                    {{product.subtotal |number:2}}
+                  </td>
+                  <td>
+                    <md-icon  class="md-primary"  ng-click="removes($index)" style="margin-right:5px;"md-svg-src="/img/icons/ic_delete_24px.svg"></md-icon>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="row" style="margin: 0px 0px 20px;">
+                <div class="col-md-8 col-sm-8">
+                  <div layout="row">
+                    <a href="" ng-click="addNew()">+ Add Row </a> <br>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4" style="padding-right: 55px;">
+                  <table class="right" style="color: rgba(0,0,0,.6);">
+                    <tbody>
+                    <tr>
+                      <td style="text-align:right;padding:5px 50px 5px 0px;color:#2e3033">Subtotal </td>
+                      <td style="text-align:right;color:#2e3033">{{subtotal|number : 2}}</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:right;padding:5px 50px 5px 0px;">CGST </td>
+                      <td style="text-align:right;">{{cgstprice |number:2}}</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:right;padding:5px 50px 5px 0px;">SGST</td>
+                      <td style="text-align:right;">{{sgstprice |number:2}}</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:right;padding:5px 50px 5px 0px;">IGST </td>
+                      <td style="text-align:right;">{{igstprice |number:2}}</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:right;padding:5px 50px 5px 0px;">CESS</td>
+                      <td style="text-align:right;">{{cessprice |number:2}}</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:right;padding:5px 50px 5px 0px;color:#2e3033">Total Amount</td>
+                      <td style="text-align:right;color:#2e3033">{{maintotal|number:2}}</td>
+                    </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div layout="row">
+                <md-button class="btn-width-medium md-raised md-primary" ng-click="updatebill()" style="float:right">Save</md-button>
+                <md-button class="btn-width-medium md-raised md-primary" ui-sref="salereturnlist" style="float:right">Cancel</md-button>
+              </div>
+            </form>
+          </div>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>
+

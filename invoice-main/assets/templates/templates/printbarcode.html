@@ -1,0 +1,113 @@
+<section class="page-padding">
+  <md-toolbar class="md-accent" style="background:white;">
+    <div class="md-toolbar-tools" style="height:50px;color:#D81B60;">
+      <md-button aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="barcodeprint" style="margin-right:20px">
+        <md-icon class="md-primary" md-svg-src="/img/icons/ic_keyboard_arrow_left_24px.svg"></md-icon>back</md-button>
+      <span class="flex"></span>
+      <md-button aria-label="Button" ng-click="PrintDiv()" style="float:right;height: 36px;" class="btn-width-sm md-raised md-accent"><md-icon class="md-primary" md-svg-src="/img/icons/ic_print_24px.svg" style="margin-right:5px"></md-icon>Print</md-button>
+    </div>
+  </md-toolbar>
+
+  <md-content id="dvContents">
+    <style>
+      @media print{
+        .barcode{
+          margin-top: -5px;
+          margin-bottom: -5px;
+        }
+        .barcode1{
+          margin-top: -5px;
+          margin-bottom: -5px;
+          width: 100%;
+        }
+        .bar1{
+          width:1in;background-color: white;
+          margin: 0.1cm;
+        }
+        .bar2{
+          width:1.8in;background-color: white;
+          margin: 0.1cm;
+        }
+        .bar3{
+          width:2.8in;background-color: white;
+          margin: 0.1cm;
+        }
+        h6{
+          margin: 0px 5px;
+          position: relative;
+        }
+        .main{
+          display: flex;
+          flex-flow: row wrap;
+          margin: -40px;
+          padding: 0px;
+        }
+        @page {
+          margin: 0cm;
+        }
+      }
+      .barcode{
+        margin-top: -5px;
+        margin-bottom: -5px;
+      }
+      .barcode1{
+        margin-top: -5px;
+        margin-bottom: -5px;
+      }
+      h6{
+        margin: 0px 5px;
+        position: relative;
+      }
+      .bar1{
+        width:1in;background-color: white;
+        margin: 0.1cm;
+      }
+      .bar2{
+        width:1.8in;background-color: white;
+        margin: 0.1cm;
+      }
+      .bar3{
+        width:2.8in;background-color: white;
+        margin: 0.1cm;
+      }
+      .main{
+        display: flex;
+        flex-flow: row wrap;
+      }
+
+    </style>
+    <div style="margin: 0px;" class="main">
+      <div class="bar1" ng-repeat="i in [].constructor(labelnumber) track by $index" ng-if="width==1">
+        <h6 style="text-align: center;font-size: 8px;"><b>{{bc.company}}</b></h6>
+        <angular-barcode  ng-model="txt" bc-options="bc" bc-class="barcode1" bc-type="img"></angular-barcode>
+        <h6 style="font-size: 8px;"><b>{{bc.productname}}</b></h6>
+        <h6 style="font-size: 8px;"><b ng-if="bc.pkd">{{bc.pkd}}</b> <b>RS. {{bc.price}}</b></h6>
+        <h6 style="font-size: 8px;"><b ng-if="bc.best">{{bc.best}}</b></h6>
+      </div>
+      <div class="bar2" ng-repeat="i in [].constructor(labelnumber) track by $index" ng-if="width==2">
+        <h6 style="text-align: center;font-size: 10px;"><b>{{bc.company}}</b></h6>
+        <angular-barcode  ng-model="txt" bc-options="bc" bc-class="barcode" bc-type="img"></angular-barcode>
+        <h6 style="font-size: 10px;"><b>{{bc.productname}}</b></h6>
+        <h6 style="font-size: 10px;"><b ng-if="bc.pkd">{{bc.pkd}}</b> <b>RS. {{bc.price}}</b></h6>
+        <h6 style="font-size: 10px;"><b ng-if="bc.best">{{bc.best}}</b></h6>
+      </div>
+      <div class="bar3" ng-repeat="i in [].constructor(labelnumber) track by $index" ng-if="width==3">
+        <h6 style="text-align: center;font-size: 10px;"><b>{{bc.company}}</b></h6>
+        <angular-barcode  ng-model="txt" bc-options="bc" bc-class="barcode" bc-type="img"></angular-barcode>
+        <h6 style="font-size: 10px;"><b>{{bc.productname}}</b></h6>
+        <h6 style="font-size: 10px;"><b ng-if="bc.pkd">{{bc.pkd}}</b> <b>RS. {{bc.price}}</b></h6>
+        <h6 style="font-size: 10px;"><b ng-if="bc.best">{{bc.best}}</b></h6>
+      </div>
+      <div style="width:{{width}}px;" ng-repeat="i in [].constructor(labelnumber) track by $index" ng-if="width=<4">
+        <h6 style="text-align: center;font-size: 10px;"><b>{{bc.company}}</b></h6>
+        <angular-barcode  ng-model="txt" bc-options="bc" bc-class="barcode" bc-type="img"></angular-barcode>
+        <h6 style="font-size: 10px;"><b>{{bc.productname}}</b></h6>
+        <h6 style="font-size: 10px;"><b ng-if="bc.pkd">{{bc.pkd}}</b> <b>RS. {{bc.price}}</b></h6>
+        <h6 style="font-size: 10px;"><b ng-if="bc.best">{{bc.best}}</b></h6>
+      </div>
+    </div>
+  </md-content>
+</section>
+
+
+

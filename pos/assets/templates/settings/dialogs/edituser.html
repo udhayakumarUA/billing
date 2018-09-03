@@ -1,0 +1,19 @@
+<section class="page-padding">
+<div class="col-md-12">
+   <md-content>
+       <div class="md-content__body">
+         <form ng-submit="update()">
+           <h3 style="margin-bottom:15px;color:#D81B60">Edit User Password</h3>
+           <div class="form-group">
+             <md-input-container style="width:100%">
+                  <label>Password</label>
+                  <input type="Password" class="form-control" required data-ng-model="password">
+             </md-input-container>
+                <md-button class="btn-width-medium md-raised md-primary" type="submit" style="float:right">Submit</md-button>
+                <md-button class="btn-width-medium md-raised md-primary" ng-click="cancel()" style="float:right">Cancel</md-button>
+             </div>
+           </form>
+        </div>
+     </md-content>
+ </div>
+</section>

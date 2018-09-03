@@ -1,0 +1,30 @@
+<section class="page-padding">
+<div class="col-md-12">
+   <md-content>
+       <div class="md-content__body">
+         <form name="edittax" ng-submit="update()&&edittax.$valid">
+           <h3 style="margin-bottom:15px;color:#D81B60">Edit Tax</h3>
+           <div class="form-group">
+             <md-input-container style="width:100%">
+                  <label>Tax Name</label>
+                  <input type="text" class="form-control" required data-ng-model="taxdata.name">
+             </md-input-container>
+              <md-select aria-label="Test select" ng-model="taxdata.type" placeholder="Select Tax Type" style="width:100%">
+                  <md-option value="SGST">SGST</md-option>
+                  <md-option value="CGST" ng-selected="selected">CGST</md-option>
+                  <md-option value="IGST" ng-selected="selected">IGST</md-option>
+                  <md-option value="CESS" ng-selected="selected">CESS</md-option>
+                  <md-option value="UTGST" ng-selected="selected">UTGST</md-option>
+                </md-select>
+                 <md-input-container style="width:100%">
+                  <label>Rate in %</label>
+                  <input type="number" step="0.01" min="0" class="form-control" required data-ng-model="taxdata.rate">
+             </md-input-container>
+              <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="float:right">Submit</md-button>
+                <md-button class="btn-width-medium md-raised md-primary" ng-click="cancel()" style="float:right">Cancel</md-button>
+           </div>
+           </form>
+        </div>
+     </md-content>
+ </div>
+</section>

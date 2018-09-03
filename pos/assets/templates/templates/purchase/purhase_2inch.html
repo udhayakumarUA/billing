@@ -1,0 +1,132 @@
+<style>
+  @page {
+    /*size: 2.0in 11in;  !* width height *!*/
+    margin: 0px;
+  }
+  p{
+    margin: 0px;
+    color: black;
+  }
+  table {
+    width: 100%;
+    display: table;
+  }
+  table.bordered>tbody>tr, table.bordered>thead>tr {
+    border-bottom: 1px solid #E0E0E0;
+  }
+  thead {
+    border-bottom: 1px solid #d0d0d0;
+  }
+</style>
+<section class="page-padding" style="color: black;font-family: Arial, Helvetica, sans-serif;padding-top: 0px;">
+  <div class="col-md-12" style="padding: 0px;">
+    <div class="card-content" style="padding:5px;padding-top: 0px;">
+      <div class="row" style="margin:0px 0px 20px;">
+
+        <div align="center" style="width: 100%">
+          <h5 style="font-size:15px;margin:0px">{{mainuser.company}}</h5>
+          <p style="font-size:6pt;">{{mainuser.address}}</p>
+          <p ng-if="mainuser.city" style="font-size:6pt;">{{mainuser.city}}-{{mainuser.postalcode}},{{mainuser.country}}</p>
+          <p style="font-size:14px"><small style="font-size:88%">{{mainuser.phoneno}}</small></p>
+          <p ng-if="mainuser.gstin" style="font-size:12px"><small style="font-size:88%">GSTIN : {{mainuser.gstin}}</small></p>
+        </div>
+      </div>
+      <div class="row" style="margin:0px">
+        <table class="bordered" style="font-size: 6pt;">
+          <tbody>
+          <tr>
+            <td style="padding:2px"><b>Ref No : </b>{{purchase.purchaseid}}</td>
+            <td style="text-align:right;padding:2px">{{purchase.purchasedate|date:'dd/MM/yyyy'}}</td>
+          </tr>
+          <tr>
+            <td style="padding:2px"><b ng-if="purchase.user.gstin">GSTIN : </b>{{purchase.user.gstin}}</td>
+            <td style="padding:2px;text-align:right;">{{purchase.createdAt|date:'h:mm:ss a'}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="margin: 10px 0px 0px;">
+        <table style="font-size:6pt;">
+          <thead>
+          <tr style="text-align:right">
+            <th data-field="vendorname" style="padding:2px;">Item Name</th>
+            <th data-field="balance" style="padding:2px;text-align:right">Rate</th>
+            <th data-field="exesspayment" style="padding:2px;text-align:right;">Qty</th>
+            <th data-field="balance" style="padding:2px;text-align:right">Amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="product in purchase.products">
+            <td style="padding:2px">
+              {{product.selectedItem.productname}}<br/>
+              <p style="font-size: 6pt">Tax : {{product.singletax}}%</p>
+            </td>
+            <td style="padding:2px;text-align:right">{{product.rate|number:2}}</td>
+            <td style="padding:2px;text-align:right;">{{product.quantity}} {{product.unit}}</td>
+            <td style="padding:2px;text-align:right">{{product.subtotal}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr style="margin:0px">
+      <div class="row" style="margin:0px">
+        <table style="font-size:6pt;">
+          <tbody>
+          <tr>
+            <td style="padding:2px"><b>Subtotal : </b></td>
+            <td style="text-align:right;padding:2px">{{purchase.totalsub|number:2}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr style="margin:0px">
+      <div class="row" style="margin:0px;">
+        <table style="font-size:9pt;">
+          <tbody>
+          <tr>
+            <td style="padding:2px">SGST : </td>
+            <td style="text-align:right;padding:2px">{{purchase.totalsgst|number:2}}</td>
+          </tr>
+          <tr>
+            <td style="padding:2px;">CGST : </td>
+            <td style="text-align:right;padding:2px;">{{purchase.totalcgst|number:2}}</td>
+          </tr>
+          <tr>
+            <td style="padding:2px;">IGST : </td>
+            <td style="text-align:right;padding:2px;">{{purchase.totaligst|number:2}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="margin:0px">
+        <table style="font-size:6pt;">
+          <tbody>
+          <tr>
+            <td style="border-bottom:dashed 1px; font-size:6pt;padding:3px"><b>Grand Total</b></td>
+            <td style="border-bottom:dashed 1px;font-size:6pt;text-align:right;padding:3px"><b>₹ {{purchase.maintotal|number:2}}</b></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="margin:0px">
+        <table style="font-size:6pt;" class="bordered" style="font-size: 12px;">
+          <tbody>
+          <tr>
+            <td style="padding:2px;width: 50%"><b>Tot Items :</b> {{purchase.items}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="margin:0px">
+        <table class="bordered" style="font-size: 6pt;">
+          <tbody>
+          <tr>
+            <td style=" padding:2px"><b>Vendor Name : </b>{{purchase.user.firstname}} {{purchase.user.lastname}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+

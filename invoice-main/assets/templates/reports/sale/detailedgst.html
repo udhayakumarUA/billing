@@ -1,0 +1,207 @@
+<section class="page-padding">
+  <div>
+    <md-card style="padding:10px">
+      <div class="col-md-12">
+        <div layout="row">
+          <div class="col-md-1 col-lg-1" style="display:inline-flex;">
+            <h4>Custom Date:</h4>
+          </div>
+          <div class="col-md-2 col-lg-2" style="display:inline-flex;">
+            <md-datepicker flex ng-model="startdate" md-placeholder="From" required>
+            </md-datepicker>
+          </div>
+          <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+            <md-datepicker flex ng-model="enddate" md-placeholder="To" required>
+            </md-datepicker>
+          </div>
+          <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+            <md-button ng-disabled="submitbutton" ng-click="submitbutton=true;getdetailedreport(startdate,enddate)" aria-label="Button" class="btn-width-sm md-raised md-accent" style="float:right"><md-icon class="md-primary" md-svg-src="/img/icons/ic_autorenew_24px.svg" style="margin-right:5px" ></md-icon>Run Report</md-button>
+          </div>
+          <div class="col-md-1 col-lg-1" style="display:inline-flex;">
+            <md-button aria-label="Button" ng-click="PrintDiv()" class="btn-width-sm md-raised md-accent"><md-icon class="md-primary" md-svg-src="/img/icons/ic_print_24px.svg" style="margin-right:5px"></md-icon>Print</md-button>
+          </div>
+          <div class="col-md-3 col-lg-3" style="display:inline-flex;">
+            <md-select ng-model="exporrval" ng-change="exportAction(exporrval)" placeholder="Export as" style="width:100%">
+              <md-option value="pdf">PDF</md-option>
+              <md-option value="excel">XLS(Microsoft Excel)</md-option>
+              <md-option value="csv">CSV (Comma Seperated Value)</md-option>
+            </md-select>
+          </div>
+        </div>
+      </div>
+    </md-card>
+
+    <md-content style="margin-top:25px" id="dvContents">
+      <div class="md-content__body">
+        <div style="text-align:center;">
+          <h3><b>{{company}}</b></h3>
+          <h6>{{address}}</h6>
+          <h6>{{address1}}</h6>
+          <h6 ng-if="gstin">GST ID :{{gstin}}</h6>
+          <h2>GST Sales Report</h2>
+          <p ng-hide="showdate" ng-init="showdate=true">From {{startdate|date:'dd/MM/yyyy'}} - {{enddate|date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered export-table" align="center">
+            <thead>
+              <tr>
+                <th rowspan="2">Date</th>
+                <th rowspan="2">Name</th>
+                <th rowspan="2">Company Name</th>
+                <th rowspan="2">Bill No</th>
+                <th rowspan="2">GST ID</th>
+                <th rowspan="2">Place Supply</th>
+                <th rowspan="2">Sales</th>
+                <th colspan="2">CGST</th>
+                <th colspan="2">SGST</th>
+                <th colspan="2">IGST</th>
+                <th colspan="2">CESS</th>
+                <th rowspan="2">Sales with Tax</th>
+              </tr>
+              <tr>
+                <td>rate</td>
+                <td>tax</td>
+                <td>rate</td>
+                <td>tax</td>
+                <td>rate</td>
+                <td>tax</td>
+                <td>rate</td>
+                <td>tax</td>
+              </tr>
+            </thead>
+            <tbody ng-repeat="detail in detailedgst">
+            <tr >
+              <th rowspan="2">{{detail.date}}</th>
+              <th rowspan="2">{{detail.user.firstname}}</th>
+              <th rowspan="2">{{detail.user.company}}</th>
+              <th rowspan="2">{{detail.posid}}</th>
+              <th rowspan="2">{{detail.user.gstin}}</th>
+              <th rowspan="2">{{detail.placeofsuply?detail.placeofsuply:detail.user.plos}}</th>
+              <th>
+                <table>
+                  <tr style="margin-top:1px solod black;text-align:right" ng-repeat="rowp in detail.salep">
+                    <td>{{rowp.total|number:2}}</td>
+                  </tr>
+                  <tr  ng-if="detail.salep.length>1">
+                    <td style="text-align:right">{{detail.totalsub|number:2}}</td>
+                  </tr>
+                  </table>
+              </th>
+              <th colspan="2">
+                <table>
+                  <tr style="text-align:right" ng-repeat="cgst in detail.cgstp" >
+                   <td>{{cgst.cgst}}%</td>
+                    <td >{{cgst.singlecgst|number:2}}</td>
+                  </tr>
+                  <tr >
+                    <td>Total</td>
+                    <td style="text-align:right" style="color:gray">{{detail.totalcgst|number:2}}</td>
+                  </tr>
+                  <!-- <tr>
+                    <td>rate</td>
+                    <td>tax</td>
+                  </tr>
+                  <tr>
+                    <td>rate</td>
+                    <td>tax</td>
+                  </tr> -->
+                </table>
+              </th>
+              <th colspan="2">
+                <table>
+                  <tr style="text-align:right" ng-repeat="sgst in detail.sgstp">
+                    <td>{{sgst.sgst}}%</td>
+                    <td>{{sgst.singlesgst|number:2}}</td>
+                  </tr>
+                  <tr>
+                    <td>Total</td>
+                    <td style="text-align:right">{{detail.totalsgst|number:2}}</td>
+                  </tr>
+                  <!-- <tr>
+                    <td>rate</td>
+                    <td>tax</td>
+                  </tr> -->
+                </table>
+              </th>
+              <th colspan="2">
+                <table>
+                  <tr style="text-align:right" ng-repeat="igst in detail.igstp" >
+                    <td>{{igst.igst}}%</td>
+                    <td>{{igst.singleigst|number:2}}</td>
+                  </tr>
+                  <tr>
+                    <td>Total</td>
+                    <td style="text-align:right">{{detail.totaligst|number:2}}</td>
+                  </tr>
+                  <!-- <tr>
+                    <td>rate</td>
+                    <td>tax</td>
+                  </tr>
+                  <tr>
+                  <td>rate</td>
+                  <td>tax</td>
+                </tr> -->
+              </table>
+              </th>
+              <th colspan="2">
+                <table>
+                  <tr style="text-align:right" ng-repeat="cess in detail.cess" >
+                    <td>{{cess.cess}}%</td>
+                    <td>{{cess.singlecess|number:2}}</td>
+                  </tr>
+                  <tr>
+                    <td>Total</td>
+                    <td style="text-align:right">{{detail.totalcess|number:2}}</td>
+                  </tr>
+                  <!-- <tr>
+                    <td>rate</td>
+                    <td>tax</td>
+                  </tr>
+                  <tr>
+                  <td>rate</td>
+                  <td>tax</td>
+                </tr> -->
+              </table>
+              </th>
+              <th>
+                <table>
+                  <tr style="text-align:right" ng-repeat="rowp in detail.salep">
+                    <td>{{rowp.totaltax|number:2}}</td>
+                  </tr>
+                  <tr style="text-align:right" ng-if="detail.salep.length>1">
+                    <td>{{detail.maintotal|number:2}}</td>
+                  </tr>
+                  </table>
+              </th>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+      <style>
+        @media print{
+          div{
+            font-size: 10pt;
+          }
+          table{
+            font-size: 8pt;
+            width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;
+            border-collapse: collapse;
+          }
+          *, ::after, ::before {
+            box-sizing: inherit;
+          }
+
+          table, th, td {
+            border: 1px solid #e9ecef;
+          }
+
+        }
+      </style>
+    </md-content>
+
+  </div>
+</section>

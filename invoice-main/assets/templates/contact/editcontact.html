@@ -1,0 +1,193 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools" style="height:50px">
+            Edit Contact
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="md-content__body">
+            <form name="editcontact" ng-submit="updatecontact(contact.id)&&contact.$valid">
+              <div layout="row">
+                <p flex="10">Contact Type : </p>
+                <p>
+                  <md-radio-group ng-model="contact.type" required>
+                    <md-radio-button ng-if="contact.type == 'Customer'" flex="10" class="md-primary" value="Customer">Customer</md-radio-button>
+                    <md-radio-button ng-if="contact.type == 'Vendor'" flex="10" class="md-primary" value="Vendor">Vendor</md-radio-button>
+                  </md-radio-group>
+                </p>
+              </div>
+              <div layout="row">
+                <md-input-container flex="15">
+                  <label>Salutation</label>
+                  <md-select ng-model="contact.salutation" required>
+                    <md-option value="Mr">Mr.</md-option>
+                    <md-option value="Mrs">Mrs.</md-option>
+                    <md-option value="Ms">Ms.</md-option>
+                    <md-option value="Miss">Miss.</md-option>
+                    <md-option value="Dr">Dr.</md-option>
+                  </md-select>
+                </md-input-container>
+                <md-input-container flex="42">
+                  <label>First Name</label>
+                  <input required ng-model="contact.firstname">
+                </md-input-container>
+                <md-input-container flex="42">
+                  <label>Last Name</label>
+                  <input ng-model="contact.lastname">
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <md-input-container flex="100">
+                  <label>Company Name</label>
+                  <input  ng-model="contact.company">
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <md-input-container flex="33">
+                  <label>Contact Email</label>
+                  <input  ng-model="contact.email">
+                </md-input-container>
+                <md-input-container flex="33">
+                  <label>Contact Phone</label>
+                  <input  type="number" ng-model="contact.phonenumber" required>
+                </md-input-container>
+                <md-input-container flex="33">
+                  <label>Mobile</label>
+                  <input  type="number" ng-model="contact.mobilenumber">
+                </md-input-container>
+              </div>
+              <div layout="row">
+                  <p flex="20">
+                    <b>Billing Address</b>
+                  </p>
+                  <!-- <md-button flex="10" class="btn-width-medium md-raised md-primary" ng-click="shipping=!shipping">{{shipping?'Hide':'Show'}}</md-button>                 -->
+                  <md-checkbox flex="30" ng-checked="shipping" ng-click="shippingAddress={};shipping=!shipping" aria-label="Checkbox 1" style="color:blue">{{shipping?'Hide':'Show'}} shipping address</md-checkbox>
+                  <div ng-if="shipping">
+                  <p flex="30">
+                    <b>Shipping Address</b>
+                  </p>
+                  <a href="" ng-click="copyAddress()">Copy Billing Address</a>
+                  </div>
+                </div>
+                  <div class="row">
+                  <div flex>
+                    <md-input-container flex="100">
+                      <label>Address 1</label>
+                      <textarea rows="2" ng-model="address.address1"></textarea>
+                    </md-input-container>
+                    <md-input-container flex="100">
+                      <label>Address 2</label>
+                      <textarea rows="2" ng-model="address.address2"></textarea>
+                    </md-input-container>
+                    <md-input-container flex="100">
+                      <label>City</label>
+                      <input type="text" ng-model="address.city">
+                    </md-input-container>
+                    <md-input-container flex="60">
+                      <label>State</label>
+                      <input type="text" ng-model="address.state">
+                    </md-input-container>
+                    <md-input-container flex="40">
+                      <label>Zip Code</label>
+                      <input type="number" ng-model="address.zipcode">
+                    </md-input-container>
+                    <md-input-container flex="100">
+                      <label>Country</label>
+                      <md-select required ng-model="address.country" name="findus">
+                        <md-option ng-repeat="c in country | orderBy:'id' track by c.id" value="{{c.name}}">{{c.name}}</md-option>
+                      </md-select>
+                    </md-input-container>
+                  </div>
+                  <div flex ng-if="shipping">
+                      <md-input-container flex="100">
+                        <label>Address 1</label>
+                        <textarea rows="2" ng-model="shippingAddress.address1"></textarea>
+                      </md-input-container>
+                      <md-input-container flex="100">
+                        <label>Address 2</label>
+                        <textarea rows="2" ng-model="shippingAddress.address2"></textarea>
+                      </md-input-container>
+                      <md-input-container flex="100">
+                        <label>City</label>
+                        <input type="text" ng-model="shippingAddress.city">
+                      </md-input-container>
+                      <md-input-container flex="60">
+                        <label>State</label>
+                        <input type="text" ng-model="shippingAddress.state">
+                      </md-input-container>
+                      <md-input-container flex="40">
+                        <label>Zip Code</label>
+                        <input type="number" ng-model="shippingAddress.zipcode">
+                      </md-input-container>
+                      <md-input-container flex="100">
+                        <label>Country</label>
+                        <md-select required ng-model="shippingAddress.country" name="findus">
+                          <md-option ng-repeat="c in country | orderBy:'id' track by c.id" value="{{c.name}}">{{c.name}}</md-option>
+                        </md-select>
+                      </md-input-container>
+                    </div>
+
+
+                </div>
+              <div layout="row" >
+                <p><b>Other Details :</b></p>
+              </div>
+              <div layout="row" >
+                <md-input-container flex="100">
+                  <label>Select a GST Treatment</label>
+                  <md-select ng-model="contact.gsttype" required>
+                    <md-option value="Registered business">Registered Business</md-option>
+                    <md-option value="Unregistered business">Unregistered Business</md-option>
+                    <md-option value="Consumer">Consumer</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
+              <div layout="row" ng-if="contact.gsttype == 'Registered business'">
+                <md-input-container flex="100">
+                  <label>GST Identification Number (GSTIN)</label>
+                  <input  ng-model="$parent.contact.gstin" required>
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <p flex="15"><b>Select Tax Rates :</b></p>
+                <p>
+                <md-radio-group ng-model="contact.taxtype" required>
+                  <md-radio-button flex="20" class="md-primary" value="Intra State Tax Rate">Intra State Tax Rate</md-radio-button>
+                  <md-radio-button flex="20" class="md-primary" value="Inter State Tax Rate">Inter State Tax Rate</md-radio-button>
+                </md-radio-group>
+              </p>
+              </div>
+              <div layout="row">
+                <md-input-container flex="33" ng-if="contact.type == 'Customer'">
+                  <label >Place of Supply</label>
+                  <input  ng-model="$parent.contact.plos">
+                </md-input-container>
+                <md-input-container flex="33" ng-if="contact.type == 'Vendor'">
+                  <label >Source of Supply</label>
+                  <input  ng-model="$parent.contact.sos">
+                </md-input-container>
+                <md-input-container flex="33">
+                  <label>State Code</label>
+                  <input  type="number" ng-model="contact.statecode">
+                </md-input-container>
+                <md-input-container flex="33">
+                  <label>PAN Number</label>
+                  <input  ng-model="contact.pannumber" maxlength="10">
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="float:right">Save</md-button>
+                <md-button ui-sref="singlecontact({id:contact.id})" class="btn-width-medium md-raised md-primary" style="float:right">Cancel</md-button>
+              </div>
+            </form>
+          </div>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>
+

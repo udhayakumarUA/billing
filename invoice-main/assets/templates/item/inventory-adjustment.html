@@ -1,0 +1,92 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools" style="height:50px">
+            Inventory Adjustments
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="md-content__body">
+            <form name="inventoryForm" ng-submit="saveInventory() && inventoryForm.$valid" >
+              <div layout="row">
+                <div flex="50">
+                  <md-input-container flex="95">
+                    <label>Reference Number</label>
+                    <input type="number" ng-model="referenceno" ng-change="err='';checkid(referenceno)" required>
+                  <p style="color:red" ng-if="err">{{err}}</p>
+                  </md-input-container>
+                </div>
+                <div flex="50" style="margin-top: 10px">
+                  <md-autocomplete required 
+                        ng-keyup="enterkey($event)" 
+                        ng-disabled="isDisabled" 
+                        md-input-name="autocompleteField1" 
+                        md-input-id="autoCompleteId1"
+                        md-no-cache="noCache" 
+                        md-selected-item="product.selectedItem" 
+                        md-selected-item-change="fectchdata(product.selectedItem,$index)"
+                        md-search-text="searchText" 
+                        md-items="item in searchproducts(searchText)" 
+                        md-item-text="item.productname"
+                        md-min-length="0" 
+                        md-require-match
+                        placeholder="Item Name">
+                    <md-item-template>
+                      <span md-highlight-text="searchtexts" md-highlight-flags="^i">{{item.productname}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                      No states matching "{{searchText}}" were found.
+                    </md-not-found>
+                  </md-autocomplete>
+                  <p ng-if="product.selectedItem">Quantity Available : {{product.selectedItem.stockinhand}}</p>
+                </div>
+
+              </div>
+              <div layout="row">
+                <md-input-container flex="20">
+                  <label>Quantity Adjustment</label>
+                  <input type="number" ng-model="quantity" type="text" required>
+                </md-input-container>
+                <md-input-container flex="30">
+                  <md-datepicker flex ng-model="date" md-placeholder="Payment Date" required></md-datepicker>
+                </md-input-container>
+                <md-input-container flex="30">
+                  <label>Reason</label>
+                  <md-select ng-model="reason" required>
+                    <md-option value="Stock on fire" ng-selected="true">Stock on fire</md-option>
+                    <md-option value="Stolen Goods">Stolen Goods</md-option>
+                    <md-option value="Damaged Goods">Damaged Goods</md-option>
+                    <md-option value="Stock written off">Stock written off</md-option>
+                    <md-option value="Stocktaking results">Stock taking results</md-option>
+                    <md-option value="Inventory Revaluation">Inventory Revaluation</md-option>
+                    <md-option ng-repeat="reason in reasons track by reason.reason" value={{reason.reason}} ng-mouseenter="options=true" ng-mouseleave="options=false">{{reason.reason}}
+                       <md-icon ng-if="!reason.used" ng-click="deletereason(reason.id)" ng-show="options" style="float:right" md-svg-src="/img/icons/ic_delete_24px.svg"></md-icon>
+                    </md-option>
+                  </md-select>
+                </md-input-container>
+                <div flex="20" style="margin-top: 15px;color: #4caf50;">
+                  <md-button ng-click="add($event)" style="width: 200px;" class="md-icon-button" aria-label="More">
+                    + Add New Reason
+                  </md-button>
+                </div>
+              </div>
+              <div layout="row">
+                <md-input-container flex="50">
+                  <label>Description</label>
+                  <input ng-model="description" type="text">
+                </md-input-container>
+              </div>
+              <div layout="row">
+                <md-button class="btn-width-medium md-raised md-primary" type="submit" style="float:right">Save</md-button>
+                <md-button class="btn-width-medium md-raised md-primary" ui-sref="inventory" style="float:right">Cancel</md-button>
+              </div>
+            </form>
+          </div>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>

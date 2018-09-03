@@ -1,0 +1,28 @@
+<section class="page-padding">
+<div class="col-md-12">
+   <md-content>
+       <div class="md-content__body">
+         <form name="editexe" ng-submit="updateexe()&&editexe.$valid">
+           <h3 style="margin-bottom:15px;color:#D81B60">Edit Tax Exemption</h3>
+           <div class="form-group">
+             <md-input-container style="width:100%">
+                  <label>Exemption Reason</label>
+                  <input type="text" class="form-control" required data-ng-model="exedata.reason">
+             </md-input-container>
+              <md-input-container style="width:100%">
+                  <label>Description</label>
+                  <textarea ng-model="exedata.paragraph" md-maxlength="50" rows="2" md-select-on-focus required></textarea>
+            </md-input-container>
+              <h4 style="margin-bottom:10px">Type</h4>
+              <md-radio-group ng-model="exedata.type">
+               <md-radio-button value="Customer" class="md-primary">Customer</md-radio-button>
+               <md-radio-button value="Item"> Item </md-radio-button>
+              </md-radio-group>
+              <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="float:right">Submit</md-button>
+                <md-button class="btn-width-medium md-raised md-primary" ng-click="cancel()" style="float:right">Cancel</md-button>
+              </div>
+           </form>
+        </div>
+     </md-content>
+ </div>
+</section>

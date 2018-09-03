@@ -1,0 +1,71 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent" style="background-color: white;">
+          <div class="md-toolbar-tools" style="height:50px;padding: 0px 45px;">
+            <md-button aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="inventory" style="margin-right:20px">
+              <md-icon class="md-primary" md-svg-src="/img/icons/ic_keyboard_arrow_left_24px.svg"></md-icon>back</md-button>
+            <span class="flex"></span>
+            <md-button class="md-fab md-mini" ng-click="PrintDiv()" aria-label="create"><md-icon md-svg-src="/img/icons/ic_print_24px.svg"></md-icon></md-button>
+            <md-button ng-disabled="disable" class="md-fab md-mini" aria-label="create"><a ui-sref="editinventoryadjustment({id:inventory.referenceNumber})"><md-icon md-svg-src="/img/icons/ic_create_24px.svg"></md-icon></a></md-button>
+            <md-button class="md-fab md-mini" ng-click="delete(exp.id)" aria-label="create"><md-icon md-svg-src="/img/icons/ic_delete_24px.svg"></md-icon></md-button>
+          </div>
+        </md-toolbar>
+
+        <md-content id="dvContents">
+          <div style="padding:0 35px;">
+
+
+            <div style="padding:35px 0 50px;text-align:center">
+              <span style="border-bottom:1px solid #eee;" class="pcs-entity-title">Adjustment Details</span>
+            </div>
+
+            <div style="width: 70%;float: left;">
+
+              <div style="width: 100%;padding: 11px 0;">
+                <div style="width:35%;float:left;" class="pcs-label">Date</div>
+                <div style="width:65%;border-bottom:1px solid #eee;float:right;"><b>{{inventory.date|date:'dd/MM/yyyy'}}</b></div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <div style="width: 100%;padding: 10px 0;">
+                <div style="width:35%;float:left;" class="pcs-label">Adjusted Item</div>
+                <div style="width:65%;border-bottom:1px solid #eee;float:right;min-height:22px"><b>{{inventory.item.productname}}</b></div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <div style="width: 100%;padding: 10px 0;">
+                <div style="width:35%;float:left;" class="pcs-label">Stock Adjusted</div>
+                <div style="width:65%;border-bottom:1px solid #eee;float:right;min-height:22px"><b>{{inventory.quantity}}</b></div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <div style="width: 100%;padding: 11px 0;">
+                <div style="width:35%;float:left;" class="pcs-label">Reference Number</div>
+                <div style="width:65%;border-bottom:1px solid #eee;float:right;"><b>{{inventory.referenceNumber}}</b></div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <div style="width: 100%;padding: 11px 0;">
+                <div style="width:35%;float:left;" class="pcs-label">Reason</div>
+                <div style="width:65%;border-bottom:1px solid #eee;float:right;"><b>{{inventory.reason}}</b></div>
+                <div style="clear:both;"></div>
+              </div>
+              <div style="width: 100%;padding: 11px 0;">
+                <div style="width:35%;float:left;" class="pcs-label">Description</div>
+                <div style="width:65%;border-bottom:1px solid #eee;float:right;"><b>{{inventory.description}}</b></div>
+                <div style="clear:both;"></div>
+              </div>
+              <div style="width: 100%;padding: 11px 0;">
+                <div style="width:35%;float:left;" class="pcs-label">Adjusted By</div>
+                <div style="width:65%;border-bottom:1px solid #eee;float:right;"><b>{{inventory.username}}</b></div>
+                <div style="clear:both;"></div>
+              </div>
+            </div>
+          </div>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>

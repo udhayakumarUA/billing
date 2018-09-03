@@ -1,0 +1,29 @@
+<section class="page-padding">
+<div class="col-md-12">
+   <md-content>
+       <div class="md-content__body">
+         <form ng-submit="add?addcategory():updatecollection(collection.id)">
+           <h3 style="margin-bottom:15px;color:#D81B60">{{add?'Add':'Edit'}} Category</h3>
+           <div class="form-group">
+             <md-input-container style="width:100%">
+                  <label>Category Title</label>
+                   <input ng-model="collection.collectiontitle" type="text" Name="title" required >
+             </md-input-container>
+             <md-input-container class="md-accent"    md-no-float style="width:100%">
+             <label>Description</label>
+             <textarea  ng-model="collection.description" md-maxlength="150" rows="3" md-select-on-focus>
+             </textarea>
+             </md-input-container>
+             <md-input-container style="width:100%">
+             <label>Category Code {{add?'':'(readonly)'}}</label>
+             <input ng-readonly="add?false:true" ng-model="collection.collectioncode" type="text"  Name="code" required>
+             <p ng-if="data" style="color:red">Category code already exists try different category code</p>
+            </md-input-container>
+              <md-button class="btn-width-medium md-raised md-primary" type="submit" style="float:right">Submit</md-button>
+              <md-button class="btn-width-medium md-raised md-primary" ng-click="cancel()" style="float:right">Cancel</md-button>
+             </div>
+           </form>
+        </div>
+     </md-content>
+ </div>
+</section>

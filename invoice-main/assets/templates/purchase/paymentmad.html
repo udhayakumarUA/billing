@@ -1,0 +1,80 @@
+<section class="page-padding">
+  <div>
+    <div class="md-whiteframe-z1">
+      <md-toolbar style="background:white;color:#D81B60">
+        <div class="md-toolbar-tools">
+          <h3>Payment made List</h3>
+          <span class="flex"></span>
+          <md-button aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="paymentmade" style="margin-right:20px"><md-icon class="md-primary" md-svg-src="/img/icons/ic_add_24px.svg"></md-icon>New Payment</md-button>
+        </div>
+      </md-toolbar>
+      <md-content>
+        <div class="md-content__body">
+          <div class="row">
+            <div class="col-md-6">
+           <span>Show
+             <md-input-container>
+                <md-select ng-change="changevalue()" ng-model="rows">
+                  <md-option value="10">10</md-option>
+                  <md-option value="20">20</md-option>
+                  <md-option value="30">30</md-option>
+                  <md-option value="50">50</md-option>
+                </md-select>
+              </md-input-container>
+              entries per page</span>
+            </div>
+            <div class="col-md-6">
+              <div class="table-filters">
+                <md-input-container class="md-accent" style="width:100%">
+                  <label>Search Payment Received</label>
+                  <input type="text"
+                         placeholder="Enter Payment Id, Bill No or Vendor Name"
+                         class="form-control"
+                         data-ng-model="searchtext"
+                         ng-change="search(searchtext)">
+                </md-input-container>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered" align="center">
+              <thead>
+              <tr>
+                <th>Date</th>
+                <th>Payment ID</th>
+                <th>Vendor Name</th>
+                <th>Company Name</th>
+                <th>Reference No</th>
+                <th>Mode</th>
+                <th>Notes</th>
+                <th>Total Amount</th>
+                <th>Amount Received</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="payment in payments">
+                <td>{{payment.paymentdate|date:'dd/MM/yyyy'}}</td>
+                <td><a ui-sref="singlepaymade({id:payment.paymentid})">{{payment.paymentid}}</a></td>
+                <td><a ui-sref="singlecontact({id:payment.user.id})">{{payment.username}}</a></td>
+                <td>{{payment.user.company}}</td>
+                <td>{{payment.billid}}</td>
+                <td>{{payment.paymentmode}}</td>
+                <td>{{payment.notes}}</td>
+                <td style="text-align: right;">₹ {{payment.totalamount|number:2}}</td>
+                <td style="text-align: right;">₹ {{payment.amount|number:2}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <footer class="table-footer">
+              <div class="row">
+                <div class="col-md-12 text-right pagination-container">
+                  <cl-paging flex cl-pages="totalpages" , cl-steps="6" , cl-page-changed="more()" , cl-align="center center" , cl-current-page="currentpage"></cl-paging>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </md-content>
+    </div>
+  </div>
+</section>

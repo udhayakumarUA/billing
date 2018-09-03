@@ -1,0 +1,125 @@
+<md-toolbar class="header-toolbar" layout="row" ng-controller="NavigationCtrl">
+  <div class="md-toolbar-tools">
+    <md-button class="header-toggle mfb-component md-icon-button" aria-label="Settings" ng-click="navigationController.toggleLeft()">
+      <span class="md-toggle-icon header__menu-button" style="">
+        <md-icon class="mfb-component__main-icon--resting" md-svg-icon="/img/icons/ic_menu_24px.svg"></md-icon>
+        <md-icon class="mfb-component__main-icon--active" md-svg-icon="/img/icons/ic_arrow_back_24px.svg"></md-icon>
+      </span>
+    </md-button>
+    <h1 flex="10" flex-gt-md="15" style="color: #ffffff;text-decoration: none;">{{user.company}}</h1>
+   <!-- <div ng-if="user.role!='B'"> -->
+    <div flex="5" ng-hide="$root.role=='B'">
+      <md-button ui-sref="addcontact" class="md-icon-button" aria-label="More">
+        <md-tooltip>
+          Add Contact
+        </md-tooltip>
+        <md-icon ui-sref="addcontact" md-svg-icon="/img/icons/ic_person_add_24px.svg"></md-icon>
+      </md-button>
+    </div>
+
+     <div flex="5" ng-hide="$root.role=='B'">
+      <md-button ui-sref="additem" class="md-icon-button" aria-label="More">
+        <md-tooltip>
+          Add Item
+        </md-tooltip>
+        <md-icon ui-sref="additem" md-svg-icon="/img/icons/ic_shopping_basket_24px.svg"></md-icon>
+      </md-button>
+    </div>
+
+    <div flex="5">
+      <md-button ui-sref="pos" class="md-icon-button" aria-label="More">
+        <md-tooltip>
+          Quick Sale
+        </md-tooltip>
+        <md-icon ui-sref="pos" md-svg-icon="/img/icons/ic_shopping_cart_24px.svg"></md-icon>
+      </md-button>
+    </div>
+
+     <div flex="5" >
+      <md-button ui-sref="invoice" class="md-icon-button" aria-label="More">
+        <md-tooltip>
+          New Invoice
+        </md-tooltip>
+        <md-icon ui-sref="invoice" md-svg-icon="/img/icons/ic_assignment_24px.svg"></md-icon>
+      </md-button>
+    </div>
+
+    <div flex="5" ng-hide="$root.role=='B'">
+      <md-button ui-sref="paymentreceived" class="md-icon-button" aria-label="More">
+        <md-tooltip>
+          Payment Received
+        </md-tooltip>
+        <md-icon ui-sref="paymentreceived" md-svg-icon="/img/icons/ic_file_download_24px.svg"></md-icon>
+      </md-button>
+    </div>
+
+    <div flex="5" ng-hide="$root.role=='B'">
+      <md-button ui-sref="newpurchasebill" class="md-icon-button" aria-label="More">
+        <md-tooltip>
+          New Purchase Bill
+        </md-tooltip>
+        <md-icon ui-sref="newpurchasebill" md-svg-icon="/img/icons/ic_play_shopping_bag_24px.svg"></md-icon>
+      </md-button>
+    </div>
+
+    <div flex="5" ng-hide="$root.role=='B'">
+      <md-button ui-sref="paymentmade" class="md-icon-button" aria-label="More">
+        <md-tooltip>
+          Payment Made
+        </md-tooltip>
+        <md-icon ui-sref="paymentmade" md-svg-icon="/img/icons/ic_file_upload_24px.svg"></md-icon>
+      </md-button>
+    </div>
+
+    <div flex="5" ng-hide="$root.role=='B'">
+      <md-button ui-sref="newexpenses" class="md-icon-button" aria-label="More">
+        <md-tooltip>
+          New Expense
+        </md-tooltip>
+        <md-icon ui-sref="newexpenses" md-svg-icon="/img/icons/ic_attach_money_24px.svg"></md-icon>
+      </md-button>
+    </div>
+
+     <div flex="5" ng-hide="$root.role=='S' || $root.role=='B'">
+      <md-button ui-sref="reportpage" class="md-icon-button" aria-label="More">
+        <md-tooltip>
+          Reports
+        </md-tooltip>
+        <md-icon ui-sref="reportpage" md-svg-icon="/img/icons/ic_assessment_24px.svg"></md-icon>
+      </md-button>
+    </div>
+
+
+    <span flex="80"></span>
+    <!--<md-switch flex="5" hide-sm ng-click="toggleLeft()" aria-label="Switch 1"></md-switch>-->
+    <div flex="10" style="font-size: 15px;">
+      <div>{{date | date:'dd-MM-yyyy'}}  {{clock | date:'h:mm:ss a'}}</div>
+    </div>
+    <div flex="5">
+      <md-button ui-sref="help" class="md-icon-button" aria-label="More">
+        <md-tooltip>
+          Help
+        </md-tooltip>
+        <md-icon ui-sref="help" md-svg-icon="/img/icons/ic_help_24px.svg"></md-icon>
+      </md-button>
+    </div>
+     <a flex="5">
+      <md-menu md-position-mode="target-right target" md-offset="0 48">
+       <img class="header__user-picture" alt="user-picture" src="/images/person-flat.png" ng-click="$mdMenu.open()"/>
+       <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+        <md-menu-item ng-hide="$root.role=='A'||$root.role=='S'">
+          <md-button ui-sref="change">
+            <h4 style="color:#D81B60"><md-icon md-svg-src="/img/icons/ic_lock_24px.svg" style="color:#D81B60"></md-icon>Change Password</h4>
+          </md-button>
+        </md-menu-item>
+         <md-menu-item >
+          <md-button ng-click="logout()">
+            <h4 style="color:#D81B60"><md-icon md-svg-src="/img/icons/ic_launch_24px.svg" style="color:#D81B60"></md-icon>Sign Out</h4>
+          </md-button>
+        </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+  </a>
+
+  </div>
+</md-toolbar>

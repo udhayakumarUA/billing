@@ -1,0 +1,163 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent" style="background-color: white;">
+          <div class="md-toolbar-tools" style="height:50px;padding: 0px 45px;">
+            <md-button aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="estimatepage" style="margin-right:20px">
+              <md-icon class="md-primary" md-svg-src="/img/icons/ic_keyboard_arrow_left_24px.svg"></md-icon>back</md-button>
+            <span class="flex"></span>
+            <md-button aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="invoice({id:details.id})" style="margin-right:20px">CONVERT TO INVOICE</md-button>
+            <a ui-sref="editestimate({key:'edit',id:details.id})"><md-button class="md-fab md-mini" aria-label="create"><md-icon md-svg-src="/img/icons/ic_create_24px.svg"></md-icon></md-button></a>
+            <md-button ng-click="print()" class="md-fab md-mini" aria-label="create"><md-icon md-svg-src="/img/icons/ic_print_24px.svg"></md-icon></md-button>
+            <!--<md-button class="md-fab md-mini" aria-label="create"><md-icon md-svg-src="/img/icons/ic_file_download_24px.svg"></md-icon></md-button>-->
+            <md-button ng-click="delete(details.id)" class="md-fab md-mini" aria-label="create"><md-icon md-svg-src="/img/icons/ic_delete_24px.svg"></md-icon></md-button>
+          </div>
+        </md-toolbar>
+
+        <md-content>
+          <div class="card-content">
+            <div class="card" style="padding:30px 15px; margin:30px;position: relative;">
+              <div class="card-content">
+                <div ng-if="details.status=='Draft'" class="ribbon ribbon-top-left"><span style="background-color:orange;color: white">Draft</span></div>
+                <div ng-if="details.status=='Approved'" class="ribbon ribbon-top-left"><span style="background-color:green;color: white">Approved</span></div>
+                <div ng-if="details.status=='Rejected'" class="ribbon ribbon-top-left"><span style="background-color:red;color: white">Rejected</span></div>
+                <div ng-if="details.status=='Cancelled'" class="ribbon ribbon-top-left"><span style="background-color:grey;color: white">Cancelled</span></div>
+                <div class="row" style="margin: 0px 0px 20px;">
+                  <div class="card-title col-md-8 col-sm-6">
+                    <!-- <img src="assets/images/gst.png" style="width:200px; height: 200px"> -->
+                  </div>
+                  <div class="right-align top col-md-4 col-sm-6">
+                    <h3>ESTIMATE</h3>
+                    <p>{{details.estimateid}}</p>
+                    <p style="margin-top:10px;color: green">Total Amount</p>
+                    <p style="color: green">₹ {{details.maintotal|number:2}}</p>
+                  </div>
+                </div>
+                <div class="row" style="margin: 0px 0px 20px;">
+                  <div class="col-md-4 col-sm-4">
+                    <p style="color: black"><b>{{user.company}}</b></p>
+                    <p><b>{{user.firstname}} {{user.lastname}}</b></p>
+                    <p>{{user.address}}</p>
+                    <p ng-if="user.address1">{{user.address1}}</p>
+                    <p>{{user.city}} {{user.postalcode}}</p>
+                    <p>{{user.country}}</p>
+                    <p>{{user.phoneno}} {{user.mobileno}}</p>
+                    <p ng-if="user.gstin">GSTIN - {{user.gstin}}</p>
+                  </div>
+                </div>
+
+                <div class="row" style="margin: 0px 0px 20px;">
+                  <div class="col-md-4 col-sm-4">
+                    <p style="color: black"><b>Bill To</b></p>
+                    <p><b>{{details.user.firstname}} {{details.user.lastname}}</b></p>
+                    <p>{{details.user.company}}</p>
+                    <p>{{details.user.address}}</p>
+                    <p>{{details.user.phonenumber}}</p>
+                    <p ng-if="details.user.gstin">GSTIN - {{details.user.gstin}}</p>
+
+                  </div>
+                  <div class="col-md-8 col-sm-8">
+                    <div class="right">
+                      <table>
+                        <tbody>
+                        <tr>
+                          <td style="text-align:right;padding:5px 50px 5px 0px;">Estimate Date :</td>
+                          <td style="text-align:right;">{{details.startdate |date}}</td>
+                        </tr>
+
+                        <tr>
+                          <td style="text-align:right;padding:5px 50px 5px 0px;">Expiry Date :</td>
+                          <td style="text-align:right;">{{details.enddate|date}}</td>
+                        </tr>
+                         <tr>
+                          <td style="text-align:right;padding:5px 50px 5px 0px;" ng-if="details.placeofsuply">Place of Supply :</td>
+                          <td style="text-align:left;">{{details.placeofsuply}}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="margin: 0px 0px 20px;">
+                  <div class="col-md-12 col-sm-12">
+                    <table class="table table-striped table-bordered" align="center">
+                      <thead>
+                      <tr style="background:#2e3033;color: white">
+                        <th data-field="sno">#</th>
+                        <th data-field="item">Item</th>
+                        <th data-field="hsn">HSN/SAC</th>
+                        <th data-field="qty">Qty</th>
+                        <th data-field="rate">Rate</th>
+                        <th data-field="cgst">CGST</th>
+                        <th data-field="sgst">SGST</th>
+                        <th data-field="sgst">IGST</th>
+                        <th data-field="sgst">CESS</th>
+                        <th data-field="amount">Amount</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="estimate in details.estimate">
+                        <td>{{$index+1}}</td>
+                        <td>{{estimate.selectedItem.productname}}</td>
+                        <td>{{estimate.selectedItem.hsn}}</td>
+                        <td>{{estimate.quantity}} {{estimate.unit}}</td>
+                        <td>{{estimate.rate|number:2}}</td>
+                        <td>{{estimate.cgst}}%</td>
+                        <td>{{estimate.sgst}}%</td>
+                        <td>{{estimate.igst}}%</td>
+                        <td>{{estimate.cess}}%</td>
+                        <td style="text-align: right;">{{estimate.subtotal|number:2}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <hr>
+                <div class="row" style="margin: 0px 0px 20px;">
+                  <div class="col-md-8 col-sm-8">
+                      <p><span><b>Notes</b></span></p>
+                      <p>{{details.notes}}</p>
+                  </div>
+                  <div class="col-md-4 col-sm-4">
+                    <table class="right" style="color: rgba(0,0,0,.6);">
+                      <tbody>
+                      <tr>
+                        <td style="text-align:right;padding:5px 50px 5px 0px;color:#2e3033">Subtotal </td>
+                        <td style="text-align:right;color:#2e3033">{{details.subtotal|number:2}}</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:right;padding:5px 50px 5px 0px;">CGST </td>
+                        <td style="text-align:right;">{{details.cgstprice|number:2}}</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:right;padding:5px 50px 5px 0px;">SGST </td>
+                        <td style="text-align:right;">{{details.sgstprice|number:2}}</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:right;padding:5px 50px 5px 0px;">IGST </td>
+                        <td style="text-align:right;">{{details.igstprice|number:2}}</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:right;padding:5px 50px 5px 0px;">CESS </td>
+                        <td style="text-align:right;">{{details.cessprice|number:2}}</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:right;padding:5px 50px 5px 0px;color:#2e3033; font-size: 18px;"><b>Grand Total</b></td>
+                        <td style="text-align:right;color:#2e3033; font-size: 18px;"><b>₹ {{details.maintotal|number:2}}</b></td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>
+

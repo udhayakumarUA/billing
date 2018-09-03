@@ -1,0 +1,23 @@
+{
+  "name": "pos",
+  "version": "1.0.0",
+  "description": "A pos Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main"
+  },
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "~1.7.5",
+    "electron-installer-debian": "^0.5.2",
+    "electron-packager": "^9.0.1"
+  }
+}

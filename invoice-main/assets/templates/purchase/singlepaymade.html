@@ -1,0 +1,113 @@
+<section class="page-padding">
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent" style="background-color: white;">
+          <div class="md-toolbar-tools" style="height:50px;padding: 0px 45px;">
+            <md-button aria-label="Button" class="btn-width-sm md-raised md-accent" ui-sref="paymade" style="margin-right:20px">
+              <md-icon class="md-primary" md-svg-src="/img/icons/ic_keyboard_arrow_left_24px.svg"></md-icon>back</md-button>
+            <span class="flex"></span>
+            <md-button ng-click="PrintDiv()" class="md-fab md-mini" aria-label="create"><md-icon md-svg-src="/img/icons/ic_print_24px.svg"></md-icon></md-button>
+            <!-- <md-button class="md-fab md-mini" aria-label="create"><md-icon md-svg-src="/img/icons/ic_file_download_24px.svg"></md-icon></md-button> -->
+            <md-button class="md-fab md-mini" ng-click="delete()" aria-label="create"><md-icon md-svg-src="/img/icons/ic_delete_24px.svg"></md-icon></md-button>
+          </div>
+        </md-toolbar>
+
+        <md-content id="dvContents">
+          <div style="padding:0 35px;">
+
+            <div style="padding-bottom:35px;border-bottom:1px solid #eee;width:100%;display: flex;">
+              <table style="width: 50%">
+                <tbody>
+                <tr>
+                  <td style="vertical-align:top;padding-left:30px">
+                    <p><span class="pcs-orgname"><b>{{user.company}}</b><br></span></p>
+                    <p><b>{{user.fistname}} {{user.lastname}}</b></p>
+                    <p>{{user.address}},</p>
+                    <p ng-if="user.address1">{{user.address1}}</p>
+                    <p>{{user.city}} {{user.postalcode}}</p>
+                    <p>{{user.country}}</p>
+                    <p>{{user.phoneno}} {{user.mobileno}}</p>
+                    <p ng-if="user.gstin">GST- {{user.gstin}}</p>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <table>
+                <tbody>
+                <tr>
+                  <td>
+                    <div><p class="pcs-label" id="tmp_billing_address_label" style="font-weight:600">Payment made to</p>
+                      <p><b>{{payment.user.company}}</b></p>
+                      <p><b>{{payment.user.firstname}} {{payment.user.lastname}}</b></p>
+                      <address class="address-color">
+                          <span ng-if="payment.user.address.address1">{{payment.user.address.address1}}</span>
+                          <span ng-if="!payment.user.address.address1">{{payment.user.address}}</span>
+                            {{payment.user.address.address2}}<br>
+                            {{payment.user.address.city}}  {{payment.user.address.zipcode}}<br>
+                            {{payment.user.address.state}}
+                            {{payment.user.address.country}}
+                        </address>
+                      <p ng-if="payment.user.gstin">GSTIN : {{payment.user.gstin}}</p>
+                      <p  ng-if="payment.user.phonenumber" style="font-size:14">Phone no:<small style="font-size:88%">{{payment .user.phonenumber}}</small></p>
+                    </div>
+                  </td>
+                  <td style="text-align: right;vertical-align:top">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div style="padding:35px 0 50px;text-align:center">
+              <span style="border-bottom:1px solid #eee;" class="pcs-entity-title">PAYMENT RECEIPT</span>
+            </div>
+
+            <div style="width: 70%;float: left;">
+
+              <div style="width: 100%;padding: 11px 0;">
+                <div style="width:35%;float:left;" class="pcs-label">Payment Date</div>
+                <div style="width:65%;border-bottom:1px solid #eee;float:right;"><b>{{payment.paymentdate |date:'dd/MM/yyyy'}}</b></div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <div style="width: 100%;padding: 10px 0;">
+                <div style="width:35%;float:left;" class="pcs-label">Reference Number</div>
+                <div style="width:65%;border-bottom:1px solid #eee;float:right;min-height:22px"><b>{{payment.paymentid}}</b></div>
+                <div style="clear:both;"></div>
+              </div>
+              <div style="width: 100%;padding: 11px 0;">
+                <div style="width:35%;float:left;" class="pcs-label">Bill Number</div>
+                <div style="width:65%;border-bottom:1px solid #eee;float:right;"><b>{{payment.billid}}</b></div>
+                <div style="clear:both;"></div>
+              </div>
+
+              <div style="width: 100%;padding: 11px 0;">
+                <div style="width:35%;float:left;" class="pcs-label">Payment Mode</div>
+                <div style="width:65%;border-bottom:1px solid #eee;float:right;"><b>{{payment.paymentmode}}</b></div>
+                <div style="clear:both;"></div>
+              </div>
+              <div style="width: 100%;padding: 11px 0;">
+                <div style="width:35%;float:left;" class="pcs-label">Notes</div>
+                <div style="width:65%;border-bottom:1px solid #eee;float:right;"><b>{{payment.notes}}</b></div>
+                <div style="clear:both;"></div>
+              </div>
+
+
+            </div>
+
+            <div style="text-align:center;color:#ffffff;float:right;background:#78ae54;width: 25%; padding: 34px 5px;">
+              <span> Amount Received</span><br>
+              <span class="pcs-total">
+               ₹ {{payment.amount|number:2}}
+              </span>
+            </div><div style="clear:both;">
+          </div>
+            <div style="margin-top:50px">
+
+            </div>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>

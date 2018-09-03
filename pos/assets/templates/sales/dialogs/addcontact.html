@@ -1,0 +1,49 @@
+<section class="page-padding" style="width: 450px;">
+  <div class="col-md-12">
+    <md-content>
+      <div class="md-content__body">
+        <div align="center">
+          <h3 style="margin-bottom:15px;color:#D81B60">Add Contact</h3>
+        </div>
+
+        <form ng-submit="addcontact()">
+          <div class="form-group">
+            <div layout="row">
+            <md-input-container flex="100" style="margin:5px 0px">
+              <label>First Name</label>
+              <input required ng-model="firstname">
+            </md-input-container>
+            <md-input-container flex="100" style="margin:5px 0px">
+              <label>Contact Phone</label>
+              <input  ng-model="mobile" required>
+            </md-input-container>
+            <md-input-container flex="100" style="margin:5px 0px">
+              <label>Select a GST Treatment</label>
+              <md-select ng-model="gsttype" required>
+                <md-option value="Registered business">Registered Business</md-option>
+                <md-option value="Unregistered business">Unregistered Business</md-option>
+                <md-option value="Consumer" ng-selected="true">Consumer</md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container flex="100" ng-if="gsttype == 'Registered business'" style="margin:18px 0px 0px">
+              <label>GST Identification Number (GSTIN)</label>
+              <input  ng-model="$parent.gstin" required>
+            </md-input-container>
+            </div>
+            <div layout="row">
+              <p flex="30"><b>Select Tax Rates :</b></p>
+              <p>
+                <md-radio-group ng-model="taxrate.taxtype" required>
+                  <md-radio-button flex="35" class="md-primary" value="Intra State Tax Rate"><md-tooltip md-direction="top" style="height:auto;">Intra state tax rate can be used<br/>transaction raised for contacts<br/> within your home state</md-tooltip>Intra State</md-radio-button>
+                  <md-radio-button flex="35" class="md-primary" value="Inter State Tax Rate"><md-tooltip md-direction="top" style="height:auto;">Inter state tax rate can be used<br/>transaction raised for contacts<br/> outside your home state</md-tooltip>Inter State</md-radio-button>
+                </md-radio-group>
+              </p>
+            </div>
+            <md-button class="btn-width-medium md-raised md-primary" type="submit" style="float:right">Submit</md-button>
+            <md-button class="btn-width-medium md-raised md-primary" ng-click="cancel()" style="float:right">Cancel</md-button>
+          </div>
+        </form>
+      </div>
+    </md-content>
+  </div>
+</section>

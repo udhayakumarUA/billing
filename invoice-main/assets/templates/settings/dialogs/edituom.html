@@ -1,0 +1,23 @@
+<section class="page-padding">
+<div class="col-md-12">
+   <md-content>
+       <div class="md-content__body">
+         <form ng-submit="updateuom(uom.id)">
+           <h3 style="margin-bottom:15px;color:#D81B60">Edit UOM</h3>
+           <div class="form-group">
+             <md-input-container style="width:100%">
+                  <label>UOM Name</label>
+                  <input type="text" class="form-control" required ng-model="uom.uomname">
+             </md-input-container>
+             <md-input-container style="width:100%">
+                  <label>UOM Code</label>
+                  <input type="text" class="form-control" required data-ng-model="uom.uomcode">
+             </md-input-container>
+              <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="float:right">Submit</md-button>
+                <md-button class="btn-width-medium md-raised md-primary" ng-click="cancel()" style="float:right">Cancel</md-button>
+           </div>
+           </form>
+        </div>
+     </md-content>
+ </div>
+</section>

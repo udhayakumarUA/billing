@@ -1,0 +1,81 @@
+<section class="page-padding row" style="margin:0px" >
+  <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+          <div class="md-toolbar-tools" style="height:50px">
+            Bank Details
+          </div>
+        </md-toolbar>
+        <md-content>
+          <div class="md-content__body">
+            <form ng-submit="updatebank()">
+              <div layout="row">
+                <div flex="50">
+                  <md-input-container style="width:100%">
+                    <label>Bank Name</label>
+                    <input type="text" class="form-control" name="bankname" ng-model="bank.bankname" required>
+                  </md-input-container>
+                </div>
+                <div flex="50">
+                  <md-input-container style="width:100%">
+                    <label>Branch</label>
+                    <input type="text" class="form-control" name="branchname" ng-model="bank.branchname" required>
+                  </md-input-container>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top:10px">
+                <md-input-container style="width:100%">
+                  <label>Account Number</label>
+                  <input type="text"  class="form-control" required ng-model="bank.accountno">
+                </md-input-container>
+              </div>
+              <div class="form-group" style="margin-top:10px">
+                <md-input-container style="width:100%">
+                  <label>Account Name</label>
+                  <input type="text"  class="form-control" required ng-model="bank.accountname">
+                </md-input-container>
+              </div>
+              <div class="form-group" style="margin-top:10px">
+                <md-input-container style="width:100%">
+                  <label>IFSC Code</label>
+                  <input type="text"  class="form-control" required ng-model="bank.ifsccode">
+                </md-input-container>
+              </div>
+              <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="float:right">Save</md-button>
+            </form>
+          </div>
+        </md-content>
+      </div>
+    </section>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

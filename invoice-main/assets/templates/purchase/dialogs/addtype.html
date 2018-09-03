@@ -1,0 +1,25 @@
+<section class="page-padding" style="width: 500px;">
+  <div class="col-md-12">
+    <md-content>
+      <div class="md-content__body">
+        <div align="center">
+          <h3 style="margin-bottom:15px;color:#D81B60">Add Expense Type</h3>
+        </div>
+
+        <form name="newexp" ng-submit="addnew()&&newexp.$valid">
+          <div class="form-group">
+            <div layout="row">
+              <md-input-container flex="100" style="margin: 0px;">
+                <label>Expense Type</label>
+                <input required ng-click="data=''" name="newtype" ng-model="type">
+                <p ng-if="data" style="color:red">Expense Type already exists</p>                
+              </md-input-container>
+            </div>
+            <md-button class="btn-width-medium md-raised md-primary" type="submit" style="float:right">Submit</md-button>
+            <md-button class="btn-width-medium md-raised md-primary" ng-click="cancel()" style="float:right">Cancel</md-button>
+          </div>
+        </form>
+      </div>
+    </md-content>
+  </div>
+</section>

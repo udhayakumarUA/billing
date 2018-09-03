@@ -1,0 +1,41 @@
+<section class="page-padding">
+  <div>
+    <div class="md-whiteframe-z1">
+      <md-toolbar class="md-accent">
+        <div class="md-toolbar-tools">
+          <h3>New Category</h3>
+          <span class="flex"></span>
+        </div>
+      </md-toolbar>
+      <md-content>
+        <div class="md-content__body">
+         <form name="collectionForm" class="form-horizontal" ng-submit="addcollection()">
+            <div class="form-group">
+              <md-input-container class="md-accent"    md-no-float style="width:100%">
+               <input ng-model="collectiontitle" type="text" placeholder="Category Title" Name="title" required >
+             </md-input-container>
+            </div>
+            <div class="form-group">
+             <md-input-container class="md-accent"    md-no-float style="width:100%">
+             <textarea  ng-model="description" md-maxlength="150" rows="3" placeholder="Description" md-select-on-focus>
+             </textarea>
+             </md-input-container>
+             </div>
+             <div class="form-group">
+              <md-input-container class="md-accent"    md-no-float style="width:100%">
+              <input ng-model="collectioncode" type="text" placeholder="Category Code" Name="code" required>
+              <p ng-if="data" style="color:red">Category code already exists try different category code</p>
+             </md-input-container>
+             </div>
+             <div style="text-align:right">
+              <div layout="row">
+                <md-button class="btn-width-medium md-raised md-primary" type="Submit">Save</md-button>
+                <md-button class="btn-width-medium md-raised md-primary" ui-sref="collections">Cancel</md-button>
+             </div>
+             </div>
+          </form>
+        </div>
+      </md-content>
+    </div>
+   </div>
+ </section>

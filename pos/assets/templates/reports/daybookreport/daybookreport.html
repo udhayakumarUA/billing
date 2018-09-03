@@ -1,0 +1,102 @@
+<section class="page-padding">
+  <div>
+    <md-card style="padding:10px">
+      <div class="col-md-12">
+        <div layout="row">
+          <div class="col-md-1 col-lg-1" style="display:inline-flex;">
+            <h4>Custom Date:</h4>
+          </div>
+          <div class="col-md-2 col-lg-2" style="display:inline-flex;">
+            <md-datepicker flex ng-model="startdate"  md-placeholder="From" required>
+            </md-datepicker>
+          </div>
+          <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+            <md-datepicker flex ng-model="enddate" md-placeholder="To" required>
+            </md-datepicker>
+          </div>
+          <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+            <md-button ng-click="getdaybookreport()" aria-label="Button" class="btn-width-sm md-raised md-accent" style="float:right"><md-icon class="md-primary" md-svg-src="/img/icons/ic_autorenew_24px.svg" style="margin-right:5px" ></md-icon>Run Report</md-button>
+          </div>
+          <div class="col-md-1 col-lg-1" style="display:inline-flex;">
+            <md-button aria-label="Button" ng-click="PrintDiv()" class="btn-width-sm md-raised md-accent"><md-icon class="md-primary" md-svg-src="/img/icons/ic_print_24px.svg" style="margin-right:5px"></md-icon>Print</md-button>
+          </div>
+          <div class="col-md-3 col-lg-3" style="display:inline-flex;">
+            <md-select ng-model="exporrval" ng-change="exportAction(exporrval)" placeholder="Export as" style="width:100%">
+              <md-option value="pdf">PDF</md-option>
+              <md-option value="excel">XLS(Microsoft Excel)</md-option>
+              <md-option value="csv">CSV (Comma Seperated Value)</md-option>
+            </md-select>
+          </div>
+        </div>
+      </div>
+    </md-card>
+
+    <md-content style="margin-top:25px" id="dvContents">
+      <div class="md-content__body">
+        <div style="text-align:center;">
+          <h3>{{company}}</h3>
+          <h2>Day Book Report</h2>
+          <p ng-hide="showdate" ng-init="showdate=true">From {{startdate|date}} - {{enddate|date}}</p>
+        </div>
+        <div class="row" style="margin-top: 15px;width: 100%">
+          <div style="width: 50%">
+            <h3><b><u>SALE</u></b></h3>
+            <div style="margin-top: 23px;margin-bottom: 23px">
+              <h6 style="margin-bottom: 0.2rem;">Total Sale : {{totalsale|number:2}}</h6>
+              <h6 style="margin-bottom: 0.2rem;">Amount Received : {{received|number:2}}</h6>
+              <h6 style="margin-bottom: 0.2rem;">Balance : {{salebalance|number:2}}</h6>
+            </div>
+            <h3><b><u>TOTAL SALE COLLECTION</u></b></h3>
+            <div style="margin-top: 23px;margin-bottom: 23px">
+              <h6 style="margin-bottom: 0.2rem;" ng-repeat="sale in saledata">{{sale.name[0].type}} : {{sale.amount|number:2}}</h6>
+
+              <h6 style="margin-bottom: 0.2rem;">Total : {{received|number:2}}</h6>
+            </div>
+            <h3><b><u>SALE RETURN</u></b></h3>
+            <div style="margin-top: 23px;margin-bottom: 23px">
+              <h6 style="margin-bottom: 0.2rem;">Total Amount : {{salereturn|number:2}}</h6>
+            </div>
+          </div>
+          <div style="width: 50%">
+            <h3><b><u>PURCHASE</u></b></h3>
+            <div style="margin-top: 23px;margin-bottom: 23px">
+              <h6 style="margin-bottom: 0.2rem;">Total Sale : {{totalpurchase|number:2}}</h6>
+              <h6 style="margin-bottom: 0.2rem;">Amount Received : {{paid|number:2}}</h6>
+              <h6 style="margin-bottom: 0.2rem;">Balance : {{puchasebalance|number:2}}</h6>
+            </div>
+            <h3><b><u>TOTAL PURCHASE COLLECTION</u></b></h3>
+            <div style="margin-top: 23px;margin-bottom: 23px">
+              <h6 style="margin-bottom: 0.2rem;" ng-repeat="purchase in purchasedata">{{purchase.name[0].type}} : {{purchase.amount|number:2}}</h6>
+
+              <h6 style="margin-bottom: 0.2rem;">Total : {{paid|number:2}}</h6>
+            </div>
+            <h3><b><u>PURCHASE RETURN</u></b></h3>
+            <div style="margin-top: 23px;margin-bottom: 23px">
+              <h6 style="margin-bottom: 0.2rem;">Total Amount : {{purchasereturn|number:2}}</h6>
+            </div>
+          </div>
+          <div style="width: 50%">
+            <h3><b><u>EXPENSES</u></b></h3>
+            <div style="margin-top: 23px;margin-bottom: 23px">
+              <h6 style="margin-bottom: 0.2rem;">Total Amount : {{expense |number:2}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <style>
+        @media print{
+          div{
+            font-size: 10pt;
+          }
+
+          *, ::after, ::before {
+            box-sizing: inherit;
+          }
+
+
+        }
+      </style>
+    </md-content>
+
+  </div>
+</section>

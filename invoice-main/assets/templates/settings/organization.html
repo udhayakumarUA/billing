@@ -1,0 +1,175 @@
+<section class="page-padding row" style="margin:0px" >
+ <div class="col-md-12">
+    <section class="md-content-section">
+      <div class="md-whiteframe-z1">
+        <md-toolbar class="md-accent">
+         <div class="md-toolbar-tools" style="height:50px">
+          Organization Profile Page
+          </div>
+          <p style="font-size:14px;margin:0px 15px">ID: 85445345</p>
+      </md-toolbar>
+
+        <md-content>
+          <div class="md-content__body">
+            <form ng-submit="updateuser(img,user.id)">
+             <div class="form-group" style="margin-top:15px">
+              <p style="margin:0px;">Choose your Logo</p>
+               <input type="file" ngf-select ngf-accept="'image/*'" ng-model="img" />
+               <p style="font-size:11px;color:#D81B60;margin-top:1px">Imge size: 240 X 240 px</p>
+               <p style="font-size:13px;text-decoration:underline;"><b>Note:</b> This logo will appear on the documents that are created.</p>
+               <div ng-if="img[0]">
+               <img  class="img-responsive" ngf-src="img[0]" style="width:140px;height:140px" />
+               </div>
+               <div ng-if="user.imageurl&&!img[0]">
+               <img  class="img-responsive" ng-src="{{user.imageurl}}" style="width:140px;height:140px" />
+               </div>
+             </div>
+             <div layout="row">
+              <div flex="50">
+               <md-input-container style="width:100%">
+                  <label>First Name</label>
+                  <input type="text" class="form-control" name="firstname" ng-model="user.fistname">
+                </md-input-container>
+              </div>
+              <div flex="50">
+                <md-input-container style="width:100%">
+                  <label>Last Name</label>
+                 <input type="text" class="form-control" name="lastname" ng-model="user.lastname">
+                </md-input-container>
+              </div>
+            </div>
+             <div class="form-group" style="margin-top:10px">
+                <md-input-container style="width:100%">
+                  <label>Organization Name</label>
+                  <input type="text"  class="form-control" required ng-model="user.company">
+                </md-input-container>
+               </div>
+              <h4 style="margin-top:50px;font-weight:bold;margin-bottom:10px">Company Address</h4>
+              <div layout="row">
+                <div flex="50">
+                 <md-input-container style="width:100%">
+                    <label>Street line 1</label>
+                    <input type="text"
+                           class="form-control"
+                           required
+                           name="street_line1" ng-model="user.address">
+                  </md-input-container>
+                </div>
+                <div flex="50">
+                  <md-input-container style="width:100%">
+                    <label>Street line 2</label>
+                   <input type="text" class="form-control" name="street_line2" ng-model="user.address1">
+                  </md-input-container>
+                </div>
+              </div>
+              <div layout="row">
+                <div flex="50">
+                 <md-input-container style="width:100%">
+                    <label>City</label>
+                    <input type="text" class="form-control" required name="city" ng-model="user.city">
+                  </md-input-container>
+                </div>
+                <div flex="50">
+                  <md-input-container style="width:100%">
+                    <label>Country</label>
+                   <input type="text" class="form-control" required name="state" ng-model="user.country">
+                  </md-input-container>
+                </div>
+              </div>
+              <div layout="row">
+                <div flex="50">
+                 <md-input-container style="width:100%">
+                    <label>Zip / Postal Code</label>
+                    <input type="Number" class="form-control" required name="zipcode" ng-model="user.postalcode">
+                  </md-input-container>
+                </div>
+                <div flex="50">
+                  <md-input-container style="width:100%">
+                    <label>State Code</label>
+                   <input type="Number" class="form-control" name="statecode" ng-model="user.statecode">
+                  </md-input-container>
+                </div>
+              </div>
+
+              <h4 style="font-weight:bold;margin-bottom:10px">Contact Details</h4>
+              <div layout-gt-sm="row">
+                <div flex="50">
+                 <md-input-container style="width:100%">
+                    <label>Phone Number</label>
+                    <input type="Number" class="form-control" required name="phonenumber" ng-model="user.phoneno">
+                  </md-input-container>
+                </div>
+                <div flex="50">
+                  <md-input-container style="width:100%">
+                    <label>Mobile Number</label>
+                   <input type="Number" class="form-control" name="mobile" ng-model="user.mobileno">
+                  </md-input-container>
+                </div>
+              </div>
+              <div layout="row">
+                <div>
+                 <md-input-container style="width:100%">
+                  <label>Email</label>
+                  <input type="email" class="form-control" ng-model="user.email">
+                </md-input-container>
+                </div>
+               </div>
+              <div layout="row">
+                <div flex="50">
+                 <md-input-container style="width:100%">
+                    <label>Website</label>
+                    <input type="Url" class="form-control" name="website" ng-model="user.website">
+                  </md-input-container>
+                </div>
+                <div flex="50">
+                  <md-input-container style="width:100%">
+                    <label>Fax</label>
+                   <input type="text" class="form-control" name="fax" maxlength="13" ng-model="user.fax">
+                  </md-input-container>
+                </div>
+              </div>
+               <div layout="row">
+                <div class="form-group">
+                 <md-input-container style="width:100%">
+                  <label>GSTIN</label>
+                  <input type="text" class="form-control" maxlength="15" ng-model="user.gstin">
+                </md-input-container>
+                </div>
+               </div>
+              <md-button class="btn-width-medium md-raised md-primary" type="Submit" style="float:right">Save</md-button>
+              </form>
+          </div>
+        </md-content>
+      </div>
+    </section>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

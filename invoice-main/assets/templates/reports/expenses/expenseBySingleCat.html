@@ -1,0 +1,134 @@
+<section class="page-padding">
+    <div>
+      <md-card style="padding:10px">
+       <div class="col-md-12">
+        <div layout="row">
+         <div class="col-md-1 col-lg-1" style="display:inline-flex;">
+         <h4>Custom Date:</h4>
+         </div>
+         <div class="col-md-2 col-lg-2" style="display:inline-flex;">
+         <md-datepicker flex ng-model="startdate" md-placeholder="From" required>
+         </md-datepicker>
+         </div>
+         <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+         <md-datepicker flex ng-model="enddate" md-placeholder="To" required>
+         </md-datepicker>
+         </div>
+          <div class="col-md-3 col-lg-3" style="display: inline-flex;">
+            <md-input-container flex="80">
+                <label>Expense Type</label>
+                <md-select ng-model="expensetypes" required>
+                  <md-option value="Advance Tax" ng-selected="true">Advance Tax</md-option>
+                  <md-option value="Employee Advance">Employee Advance</md-option>
+                  <md-option value="Sales to Customers(Cash)">Sales to Customers(Cash)</md-option>
+                  <md-option value="Furniture and Equipment">Furniture and Equipment</md-option>
+                  <md-option value="GST payable">GST payable</md-option>
+                  <md-option value="Employee Reimbursements">Employee Reimbursements</md-option>
+                  <md-option value="IGST payable">IGST payable</md-option>
+                  <md-option value="SGST payable">SGST payable</md-option>
+                  <md-option value="Tax Payable">Tax Payable</md-option>
+                  <md-option value="Advertising And Marketing">Advertising And Marketing</md-option>
+                  <md-option value="Automobile Expense">Automobile Expense</md-option>
+                  <md-option value="Bank Fees and Charges">Bank Fees and Charges</md-option>
+                  <md-option value="Consultant Expense">Consultant Expense</md-option>
+                  <md-option value="Credit Card Charges">Credit Card Charges</md-option>
+                  <md-option value="IT and Internet Expenses">IT and Internet Expenses</md-option>
+                  <md-option value="Meals and Entertainment">Meals and Entertainment</md-option>
+                  <md-option value="office Supplies">Office Supplies</md-option>
+                  <md-option value="Cost of Goods Sold">Cost of Goods Sold</md-option>
+                  <md-option ng-repeat="exp in expensetype track by exp.type" value={{exp.type}}>{{exp.type}}</md-option>
+                </md-select>
+              </md-input-container>
+         </div>
+         <div class="col-md-2 col-lg-2" style="display: inline-flex;">
+         <md-button aria-label="Button" ng-click="getSingleExpenseReport(startdate,enddate,expensetypes)" class="btn-width-sm md-raised md-accent" style="float:right"><md-icon class="md-primary" md-svg-src="/img/icons/ic_autorenew_24px.svg" style="margin-right:5px" ></md-icon>Run Report</md-button>
+         </div>
+         <div class="col-md-1 col-lg-1" style="display:inline-flex;">
+           <md-button aria-label="Button" ng-click="PrintDiv()" class="btn-width-sm md-raised md-accent"><md-icon class="md-primary" md-svg-src="/img/icons/ic_print_24px.svg" style="margin-right:5px"></md-icon>Print</md-button>
+         </div>
+          <div class="col-md-3 col-lg-3" style="display:inline-flex;">
+              <md-select ng-model="exporrval" ng-change="exportAction(exporrval)" placeholder="Export as" style="width:100%">
+                    <md-option value="pdf">PDF</md-option>
+                    <md-option value="excel">XLS(Microsoft Excel)</md-option>
+                    <md-option value="csv">CSV (Comma Seperated Value)</md-option>
+               </md-select>
+           </div>
+         </div>
+        </div>
+       </md-card>
+
+        <md-content style="margin-top:25px" id="dvContents">
+          <div class="md-content__body">
+            <div style="text-align:center;">
+              <h3><b>{{user.company}}</b></h3>
+              <h6>{{user.address}}</h6>
+              <h6>{{user.address1}}</h6>
+              <h6 ng-if="user.gstin">GST ID :{{user.gstin}}</h6>
+             <h2>Expense Summary by Single Category</h2>
+             <h3 ng-if="expensetypes">{{expensetypes}}</h3>
+             <p ng-hide="showdates">From {{startdate|date:'dd/MM/yyyy'}} - {{enddate|date:'dd/MM/yyyy'}}</p>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table export-table" align="center">
+                <thead>
+                <tr>
+                <th>Date</th>
+                <th>Expense ID</th>
+                <th>Vendor Name</th>
+                <th>Payment Mode</th>
+                <th>Amount</th>
+                <th>Amount with Tax</th>
+                 </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="expense in sigleexpenses">
+                  <td>{{expense.date|date:'dd/MM/yyyy'}}</td>
+                  <td>{{expense.expensesid}}</td>
+                  <td>{{expense.name.firstname}} {{expense.name.lastname}}</td>
+
+                  <td>{{expense.paymentmode}}</td>
+                  <td style="text-align: right" ng-if="expense.amount" >{{expense.amount |number:2}}</td>
+                  <td style="text-align: right" ng-if="expense.tax">{{expense.tax |number:2}}</td>
+                  <td style="text-align: right" ng-if="!expense.amount|number:2"> 0</td>
+                  <td style="text-align: right" ng-if="!expense.tax|number:2"> 0</td>
+                </tr>
+                <tr>
+                  <td ><b ng-if="totalamount || totaltax">Total Amount</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right"><b ng-if="totalamount">₹ {{totalamount|number:2}}</b></td>
+                <td style="text-align: right"><b ng-if="totaltax">₹ {{totaltax|number:2}}</b></td>
+
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <style>
+            @media print{
+              div{
+                font-size: 10pt;
+              }
+              table{
+                font-size: 8pt;
+                width: 100%;
+                margin-bottom: 1rem;
+                background-color: transparent;
+                border-collapse: collapse;
+              }
+              *, ::after, ::before {
+                box-sizing: inherit;
+              }
+
+              table, th, td {
+                border: 1px solid #e9ecef;
+              }
+
+            }
+          </style>
+        </md-content>
+
+    </div>
+  </section>

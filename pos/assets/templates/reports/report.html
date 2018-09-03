@@ -1,0 +1,97 @@
+<section class="page-padding" style="background:white">
+ <div class="col-md-12">
+   <section class="md-content-section">
+    <div class="row">
+     <md-toolbar class="md-accent">
+        <div class="md-toolbar-tools">
+          <h3>Reports</h3>
+          <span class="flex"></span>
+         </div>
+      </md-toolbar>
+     </div>
+     <div class="row" style="padding:0px;margin-top:15px">
+     <div class="col-md-4" style="padding-left:0px">
+     <md-card class="padd">
+       <h2 style="color:#D81B60;margin-top:0px"><md-icon class="md-primary" md-svg-src="/img/icons/ic_shopping_cart_24px.svg" style="margin-bottom:6px;margin-right:5px"></md-icon>Sale</h2>
+        <hr>
+     	<h4><a ui-sref="salebycustomer">Sale by Customer</a></h4>
+        <hr style="margin-top:10px;margin-bottom:10px">
+     	<h4><a ui-sref="salebyitem">Sale by Item</a></h4>
+     	<hr style="margin-top:10px;margin-bottom:10px">
+     	<h4><a ui-sref="salebysinglecus">GST Sales Report</a></h4>
+     	<hr style="margin-top:10px;margin-bottom:10px">
+       <h4><a ui-sref="retailgst">Retail GST Sale Report</a></h4>
+      <hr style="margin-top:10px;margin-bottom:10px">       
+       <h4><a ui-sref="salereturn">Sale Return by Item</a></h4> 
+      <hr style="margin-top:10px;margin-bottom:10px">       
+       <h4><a ui-sref="salereturnreport">Sale Return Report</a></h4>
+       <hr style="margin-top:10px;margin-bottom:10px">       
+       <h4><a ui-sref="saleuserreport">Sale Report by User</a></h4>
+     </md-card>
+     </div>
+     <div class="col-md-4" style="padding-left:0px;">
+      <md-card class="padd">
+     	<h2 style="color:#D81B60;margin-top:0px"><md-icon class="md-primary" md-svg-src="/img/icons/ic_shop_24px.svg" style="margin-bottom:6px;margin-right:5px"></md-icon>Purchase</h2>
+       <hr>
+     	<h4><a ui-sref="purchasebyvendor">Purchase by vendors</a></h4>
+        <hr style="margin-top:10px;margin-bottom:10px">
+     	<h4><a ui-sref="purchasebyitem">Purchase by Item</a></h4>
+     	<hr style="margin-top:10px;margin-bottom:10px">
+      <h4><a ui-sref="gstpurreport">GST Purchase report</a></h4>
+      <hr style="margin-top:10px;margin-bottom:10px"> 
+      <h4><a ui-sref="returnbyitem">Return by Item</a></h4>
+      <hr style="margin-top:10px;margin-bottom:10px">      
+      <h4><a ui-sref="purchasereturnreport">Purchase Return Report</a></h4> 
+     </md-card>
+     </div>
+     <div class="col-md-4" style="padding-left:0px;">
+     <md-card class="padd">
+     	<h2 style="color:#D81B60;margin-top:0px"><md-icon class="md-primary" md-svg-src="/img/icons/ic_account_balance_wallet_24px.svg" style="margin-bottom:6px;margin-right:5px"></md-icon>Expense</h2>
+       <hr>
+     	<h4><a ui-sref="expensebydet">Expense Details</a></h4>
+      <hr style="margin-top:10px;margin-bottom:10px">
+     	<h4><a ui-sref="expensebycat">Expense by Category</a></h4>
+       </md-card>
+       <md-card class="padd">
+        <h2 style="color:#D81B60;margin-top:0px"><md-icon class="md-primary" md-svg-src="/img/icons/ic_account_balance_wallet_24px.svg" style="margin-bottom:6px;margin-right:5px"></md-icon>Day Book Report</h2>
+        <hr>
+        <h4><a ui-sref="daybookreport">Day Book Report</a></h4>
+       <hr style="margin-top:10px;margin-bottom:10px">
+        </md-card>
+      </div>
+     </div>
+     <div class="row" style="margin-top:50px">
+      <div class="col-md-4" style="padding-left:0px;margin-top:10">
+      <md-card class="padd">
+     	<h2 style="color:#D81B60;margin-top:0px"><md-icon class="md-primary" md-svg-src="/img/icons/ic_assignment_returned_24px.svg" style="margin-bottom:6px;margin-right:5px"></md-icon>Receivables</h2>
+       <hr>
+     	<h4><a ui-sref="customerbal">Customer Balance</a></h4>
+      <hr style="margin-top:10px;margin-bottom:10px">
+      <h4><a ui-sref="billdetails">Bill Details</a></h4>
+      <hr style="margin-top:10px;margin-bottom:10px">
+     	<h4><a ui-sref="paymentrec">Payment Recieved</a></h4>
+     	</md-card>
+     </div>
+     <div class="col-md-4"  style="padding-left:0px;">
+      <md-card class="padd">
+     	<h2 style="color:#D81B60;margin-top:0px"><md-icon class="md-primary" md-svg-src="/img/icons/ic_credit_card_24px.svg" style="margin-bottom:6px;margin-right:5px"></md-icon>Payables</h2>
+       <hr>
+     	<h4><a ui-sref="vendorbal">Vendor Balance</a></h4>
+      <hr style="margin-top:10px;margin-bottom:10px">
+      <h4><a ui-sref="purchasebilld">Purchase Bill Details</a></h4>
+      <hr style="margin-top:10px;margin-bottom:10px">
+     	<h4><a ui-sref="paymemade">Payment made</a></h4>
+      </md-card>
+     </div>
+     <div class="col-md-4" style="padding-left:0px;">
+      <md-card class="padd">
+     	<h2 style="color:#D81B60;margin-top:0px"><md-icon class="md-primary" md-svg-src="/img/icons/ic_store_mall_directory_24px.svg" style="margin-bottom:6px;margin-right:5px"></md-icon>Inventory</h2>
+       <hr>
+     	<h4><a ui-sref="inventorysummary">Inventory Summary</a></h4>
+       </md-card>
+     </div>
+     </div>
+
+   </section>
+  </div>
+</section>
