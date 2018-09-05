@@ -1,0 +1,247 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header" data-background-color="green">
+            <h4 class="title">CREATE NEW OFFLINE CLIENT FORM</h4>
+            <p class="category">Complete this form to create a new offline client</p>
+          </div>
+          <div class="card-content">
+
+            <form ng-submit="adduser()">
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Company Name</label>
+                    <input type="text" class="form-control" ng-model="company" required>
+                  </div>
+                </div>
+
+              <div class="col-md-6">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Store Id</label>
+                    <input ng-blur="checkstoreid()" ng-focus="clearstoreid()" type="text" class="form-control" ng-model="storeid" required>
+                    <span class="storeidvalid" ng-if="usermessage=='true'" >storeid is already exists</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Fist Name</label>
+                    <input type="text" class="form-control" ng-model="fistname" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Last Name</label>
+                    <input type="text" class="form-control" ng-model="lastname">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Email address</label>
+                    <input type="email" class="form-control" ng-model="email">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Username</label>
+                    <input type="text" class="form-control" ng-model="username" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Password</label>
+                    <input type="password" class="form-control" ng-model="password" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Phone Number</label>
+                    <input type="number" class="form-control" ng-model="phoneno" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Mobile Number</label>
+                    <input type="number" class="form-control" ng-model="mobileno">
+                  </div>
+                </div>
+                <div class="col-md-4" style="height: 86px;padding: 0px;">
+                  <md-input-container style="margin: 0px;">
+                    <label>Expire Date</label>
+                    <md-datepicker ng-model="expiredate" required></md-datepicker>
+                  </md-input-container>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Address</label>
+                    <input type="text" class="form-control" ng-model="address" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">City</label>
+                    <input type="text" class="form-control" ng-model="city" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Country</label>
+                    <input type="text" class="form-control" ng-model="country" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Postal Code</label>
+                    <input type="text" class="form-control" ng-model="postalcode" required>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-success pull-right">CREATE OFFLINE CLIENT</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header" data-background-color="orange">
+            <h4 class="title">CREATE NEW ONLINE CLIENT FORM</h4>
+            <p class="category">Complete this form to create a new online client</p>
+          </div>
+          <div class="card-content">
+
+            <form ng-submit="adduser1()">
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Company Name</label>
+                    <input type="text" class="form-control" ng-model="company1" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Store Id</label>
+                    <input ng-blur="checkstoreid1()" ng-focus="clearstoreid1()" type="text" class="form-control" ng-model="storeid1" required>
+                    <span class="storeidvalid" ng-if="usermessage1=='true'" >Username is already taken</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Fist Name</label>
+                    <input type="text" class="form-control" ng-model="fistname1" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Last Name</label>
+                    <input type="text" class="form-control" ng-model="lastname1">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Email address</label>
+                    <input type="email" class="form-control" ng-model="email1">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Username</label>
+                    <input type="text" class="form-control" ng-model="username1" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Password</label>
+                    <input type="password" class="form-control" ng-model="password1" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Phone Number</label>
+                    <input type="number" class="form-control" ng-model="phoneno1" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Mobile Number</label>
+                    <input type="number" class="form-control" ng-model="mobileno1">
+                  </div>
+                </div>
+                <div class="col-md-4" style="height: 86px;padding: 0px;">
+                  <md-input-container style="margin: 0px;">
+                    <label>Expire Date</label>
+                    <md-datepicker ng-model="expiredate1" required></md-datepicker>
+                  </md-input-container>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Address</label>
+                    <input type="text" class="form-control" ng-model="address1" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">City</label>
+                    <input type="text" class="form-control" ng-model="city1" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Country</label>
+                    <input type="text" class="form-control" ng-model="country1" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Postal Code</label>
+                    <input type="text" class="form-control" ng-model="postalcode1" required>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-danger pull-right">CREATE ONLINE CLIENT</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

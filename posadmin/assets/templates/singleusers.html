@@ -1,0 +1,68 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header" data-background-color="green">
+            <h4 class="title">SINGLE USER DETAILS</h4>
+            <!--<p class="category">Complete this form to create a new offline client</p>-->
+          </div>
+          <div class="card-content">
+            <div class="tim-typo" style="margin-bottom: 20px;">
+              <h6 style="text-transform:none;"><span class="tim-note">Company Name</span>: {{suser.company}}</h6>
+            </div>
+            <div class="tim-typo" style="margin-bottom: 20px;">
+              <h6 style="text-transform:none;"><span class="tim-note">Customer ID</span>: {{suser.storeid}}</h6>
+            </div>
+            <div class="tim-typo" style="margin-bottom: 20px;">
+              <h6 style="text-transform:none;"><span class="tim-note">User Name </span>: {{suser.username}}</h6>
+            </div>
+            <div class="tim-typo" style="margin-bottom: 20px;">
+              <h6 style="text-transform:none;"><span class="tim-note">Name </span>: {{suser.fistname}} {{suser.lastname}}</h6>
+            </div>
+            <div class="tim-typo" style="margin-bottom: 20px;">
+              <h6 style="text-transform:none;"><span class="tim-note">Email </span>: {{suser.email}}</h6>
+            </div>
+            <div class="tim-typo" style="margin-bottom: 20px;">
+              <h6 style="text-transform:none;"><span class="tim-note">Phone Number </span>: {{suser.phoneno}}</h6>
+            </div>
+            <div class="tim-typo" style="margin-bottom: 20px;">
+              <h6 style="text-transform:none;"><span class="tim-note">Moblie Number </span>: {{suser.mobileno}}</h6>
+            </div>
+            <div class="tim-typo" style="margin-bottom: 20px;">
+              <h6 style="text-transform:none;"><span class="tim-note">Expire Date </span>: {{suser.expiredate | date}}</h6>
+            </div>
+            <div class="tim-typo" style="margin-bottom: 20px;">
+              <h6 style="text-transform:none;"><span class="tim-note">Address </span>: {{suser.address}},{{suser.city}},{{suser.country}} - {{suser.postalcode}}</h6>
+            </div>
+            <div class="tim-typo" style="margin-bottom: 20px;">
+              <h6 style="text-transform:none;"><span class="tim-note">Key </span>: {{suser.key}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-profile">
+          <div class="content">
+            <h6 class="category text-gray">Expire Date</h6>
+            <h4 class="card-title">{{suser.expiredate | date}}</h4>
+            <form ng-submit="updata()">
+              <div class="col-md-12">
+                <md-input-container style="margin: 0px;">
+                  <label>Extend date</label>
+                  <md-datepicker ng-model="extend"></md-datepicker>
+                </md-input-container>
+              </div>
+              <button type="submit" class="btn btn-primary btn-round">Submit<div class="ripple-container"></div></button>
+            </form>
+          </div>
+          </div>
+          <div ng-if="$root.me.role=='SA'" class="card card-profile">
+           <div class="content" style="padding:20px">
+             <button type="submit" class="btn btn-round" ng-click="showConfirm($event,suser.type)" style="background:#E73E3A">Delete<div class="ripple-container"></div></button>
+           </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

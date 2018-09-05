@@ -1,0 +1,42 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="green">
+            <h4 class="title">Offline Users</h4>
+            <p class="category">The following table has all offline user details</p>
+          </div>
+          <div class="card-content table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+              <th>Company Name</th>
+              <th>Store Id</th>
+              <th>Name</th>
+              <th>City</th>
+              <th>Phone Number</th>
+              <th>Email</th>
+              <th>Date of Purchase</th>
+              <th>Expire Date</th>
+              </thead>
+              <tbody>
+              <tr ng-repeat="offline in offline">
+                <td>{{offline.company}}</td>
+                <td>{{offline.storeid}}</td>
+                <td><a ui-sref="pos.singleusers({id:offline.id})">{{offline.fistname}} {{offline.lastname}}</a></td>
+                <td>{{offline.city}}</td>
+                <td>{{offline.phoneno}}</td>
+                <td>{{offline.email}}</td>
+                <td class="text-primary">{{offline.createdAt | date}} </td>
+                <td class="text-danger">{{offline.expiredate | date}}</td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

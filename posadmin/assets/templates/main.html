@@ -1,0 +1,220 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header" data-background-color="orange">
+            <i class="material-icons">language</i>
+          </div>
+          <div class="card-content">
+            <p class="category">Online Clients</p>
+            <h3 class="title">{{usercount.online}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons text-accent">language</i> Total Online Clients
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header" data-background-color="green">
+            <i class="material-icons">store</i>
+          </div>
+          <div class="card-content">
+            <p class="category">Offline Clients</p>
+            <h3 class="title">{{usercount.offline}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">store</i> Total Offline Clients
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header" data-background-color="red">
+            <i class="material-icons">info_outline</i>
+          </div>
+          <div class="card-content">
+            <p class="category">Expired</p>
+            <h3 class="title">{{usercount.expired}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">info_outline</i> Expired Clients
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header" data-background-color="blue">
+            <i class="fa fa-user"></i>
+          </div>
+          <div class="card-content">
+            <p class="category">Total Users</p>
+            <h3 class="title">{{usercount.total}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">person</i> Total Users
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header card-chart" data-background-color="green">
+            <div class="ct-chart" id="dailySalesChart"></div>
+          </div>
+          <div class="card-content">
+            <h4 class="title">Daily Sales</h4>
+            <p class="category"><span class="text-success"><i class="fa fa-long-arrow-up"></i> 55%  </span> increase in today sales.</p>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">access_time</i> updated 4 minutes ago
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header card-chart" data-background-color="orange">
+            <div class="ct-chart" id="emailsSubscriptionChart"></div>
+          </div>
+          <div class="card-content">
+            <h4 class="title">Email Subscriptions</h4>
+            <p class="category">Last Campaign Performance</p>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">access_time</i> campaign sent 2 days ago
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header card-chart" data-background-color="red">
+            <div class="ct-chart" id="completedTasksChart"></div>
+          </div>
+          <div class="card-content">
+            <h4 class="title">Completed Tasks</h4>
+            <p class="category">Last Campaign Performance</p>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">access_time</i> campaign sent 2 days ago
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="orange">
+            <h4 class="title">Latest Online Clients</h4>
+          </div>
+          <div class="card-content table-responsive">
+            <table class="table table-hover">
+              <thead class="text-warning">
+              <th>Company Name</th>
+              <th>Name</th>
+              <th>Phone Number</th>
+              <th>Date Of Purchase</th>
+              </thead>
+              <tbody>
+              <tr ng-repeat="user in online" ng-if="$index < 5">
+                <td>{{user.company}}</td>
+                <td><a ui-sref="pos.singleusers({id:user.id})">{{user.username}}</a></td>
+                <td>{{user.mobileno}}</td>
+                <td>{{user.createdAt|date:'dd/MM/yyyy'}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="green">
+            <h4 class="title">Latest Offline Clients</h4>
+          </div>
+          <div class="card-content table-responsive">
+            <table class="table table-hover">
+              <thead class="text-success">
+              <th>Company Name</th>
+              <th>Name</th>
+              <th>Phone Number</th>
+              <th>Date Of Purchase</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="user in offline" ng-if="$index < 5">
+                  <td>{{user.company}}</td>
+                  <td><a ui-sref="pos.singleusers({id:user.id})">{{user.username}}</a></td>
+                  <td>{{user.mobileno}}</td>
+                  <td>{{user.createdAt|date:'dd/MM/yyyy'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="red">
+            <h4 class="title">Upcoming Renewals</h4>
+          </div>
+          <div class="card-content table-responsive">
+            <table class="table table-hover">
+              <thead class="text-danger">
+              <th>Company Name</th>
+              <th>Name</th>
+              <th>City</th>
+              <th>Phone Number</th>
+              <th>Mobile Number</th>
+              <th>Email</th>
+              <th>Date Of Purchase</th>
+              <th>Date Expired</th>
+              </thead>
+              <tbody>
+              <tr ng-repeat="user in renewals" >
+                <td>{{user.company}}</td>
+                <td><a ui-sref="pos.singleusers({id:user.id})">{{user.username}}</a></td>
+                <td>{{user.city}}</td>
+                <td>{{user.phoneno}}</td>
+                <td>{{user.mobileno}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.createdAt|date:'dd/MM/yyyy'}}</td>
+                <td>{{user.expiredate|date:'dd/MM/yyyy'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <button align='center' style="background-color:#e53935;text-align:center;margin-left:43%" class="btn btn-success">Load More</button> -->
+        </div>
+        <p ng-hide="noMore" style="text-align:center" ng-click="more()"><u>Load More</u></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

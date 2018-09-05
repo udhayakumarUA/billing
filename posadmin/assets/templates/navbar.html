@@ -1,0 +1,57 @@
+<nav class="navbar navbar-transparent navbar-absolute">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Dashboard</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right desktop">
+        <li ui-sref-active="active">
+          <a ui-sref="pos.index" >
+            <i class="material-icons">dashboard</i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="pos.newclient">
+            <i class="material-icons">person</i>
+            <p>New Client</p>
+          </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="pos.offlineusers">
+            <i class="material-icons">store</i>
+            <p>Offline Users</p>
+          </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="pos.onlineusers">
+            <i class="material-icons">language</i>
+            <p>Online Users</p>
+          </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ng-controller="MainCtrl" ng-click="logout()">
+            <i class="material-icons">info_outline</i>
+            <p>Logout</p>
+          </a>
+        </li>
+      </ul>
+
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group  is-empty">
+          <input type="text" class="form-control" placeholder="Search">
+          <span class="material-input"></span>
+        </div>
+        <button type="submit" class="btn btn-white btn-round btn-just-icon">
+          <i class="material-icons">search</i><div class="ripple-container"></div>
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>

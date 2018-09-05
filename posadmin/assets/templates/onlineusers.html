@@ -1,0 +1,41 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="orange">
+            <h4 class="title">Online Users</h4>
+            <p class="category">The following table has all online user details</p>
+          </div>
+          <div class="card-content table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+              <th>Company Name</th>
+              <th>Store id</th>
+              <th>Name</th>
+              <th>City</th>
+              <th>Phone Number</th>
+              <th>Email</th>
+              <th>Date of Purchase</th>
+              <th>Expire Date</th>
+              </thead>
+              <tbody>
+              <tr ng-repeat="online in online">
+                <td>{{online.company}}</td>
+                <td>{{online.storeid}}</td>
+                <td><a ui-sref="pos.singleusers({id:online.id})">{{online.fistname}} {{online.lastname}}</a></td>
+                <td>{{online.city}}</td>
+                <td>{{online.phoneno}}</td>
+                <td>{{online.email}}</td>
+                <td class="text-primary">{{online.createdAt | date}} </td>
+                <td class="text-danger">{{online.expiredate | date}}</td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" style="background-color:purple">
+                        <center>
+                            <h4 class="title">ADD NEW SUB ADMIN</h4>
+                        </center>
+                    </div>
+                    <div class="card-content">
+                        <form ng-submit="addsubadmin()">
+                            <div class="row">
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">User Name</label>
+                                        <input ng-disabled="edit" type="text" class="form-control" ng-change="check()" ng-model="username" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-click="edit=false;username=undefined;password=undefined" style="margin-top:20px">
+                                        <i ng-if="edit" class="material-icons" style="color:red;">close</i>
+                                    </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-md-3" >
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Password</label>
+                                        <input type="password" class="form-control" ng-change="check()" ng-model="password" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="text-align:center">
+                                <button style="align-content:center" type="submit" class="btn btn-success">{{edit?'Update':'Submit'}}</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="orange">
+                        <h4 class="title">SUB ADMIN LIST</h4>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th>User Name</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="admin in subadmins">
+                                    <td>{{admin.username}}</td>
+                                    <td><a href="" ng-click="editadmin(admin.id,admin.username)" ><i class="material-icons" style="color:purple">create</i></a></td>
+                                    <td><a href="" ng-click="deletesubadmin(admin.id)"> <i class="material-icons" style="color:purple">delete</i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

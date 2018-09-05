@@ -1,0 +1,37 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row" style="margin-top: 13%">
+      <div class="col-md-6 col-sm-8 col-md-offset-2">
+        <div class="card" >
+          <div class="card-header" data-background-color="purple" align="center">
+            <h4 class="title">ADMIN LOGIN</h4>
+            <!--<p class="category">Complete this form to create a new offline client</p>-->
+          </div>
+          <div class="card-content">
+            <form ng-submit="login()">
+              <div class="row">
+                <div class="col-sm-8 col-md-offset-2">
+                  <div class="form-group label-floating">
+                    <label class="control-label">User Name</label>
+                    <input type="text" ng-model="username" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-8 col-md-offset-2">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Password</label>
+                    <input type="password" ng-model="password" class="form-control" >
+                  </div>
+                </div>
+              </div>
+              <div class="row" align="center">
+                <button type="submit" class="btn btn-primary btn-round">Login<div class="ripple-container"></div></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
